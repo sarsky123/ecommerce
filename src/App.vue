@@ -23,12 +23,7 @@
         <div id="scroll"></div>
         <div class="hero-image-overlay"></div>
       </div>
-      <div class="homepage-collection homepage-white">
-        <div class="wrapper">
-          <h4 class="home_subtitle">Featured Products</h4>
-          <div class="grid-uniform clearfix"></div>
-        </div>
-      </div>
+      <productInfo></productInfo>
       <div class="homepage-custom">
         <div class="homepage-custom_parallax clearfix">
           <div class="text-center">
@@ -283,32 +278,15 @@
   </div>
 </template>
 <script>
-import Nav from "@/components/Nav.vue";
+import Nav from "./components/Nav.vue";
+import productInfo from "./views/productInfo.vue";
+
 export default {
   components: {
-    Nav
+    Nav,
+    productInfo
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style></style>
