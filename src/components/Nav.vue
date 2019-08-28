@@ -39,15 +39,11 @@
               </h1>
             </div>
             <a
-              href="#"
+              href="javascript:return false"
               class="menuToggle header-hamburger"
-              @click="toggleMenu"
             ></a>
           </div>
-          <div
-            class="header-menu nav-wrapper"
-            v-bind:class="{ noShowMeWhatUGot: isActive }"
-          >
+          <div class="header-menu nav-wrapper">
             <ul class="main-menu accessibleNav">
               <li class="main-menu-active">
                 <a href="/" class="link">Shop</a>
@@ -70,18 +66,7 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      isActive: false
-    };
-  },
-  methods: {
-    toggleMenu: function() {
-      this.isActive = !this.isActive;
-    }
-  }
-};
+export default {};
 </script>
 
 <style lang="scss" scoped></style>
