@@ -25,6 +25,7 @@
               <a
                 href="javascript:void(0)"
                 class="cart__remove uppercase lighten ajaxcart__remove"
+                @click="remove(index)"
               >
                 <small>Remove</small>
               </a>
@@ -43,7 +44,7 @@
                 <button
                   type="button"
                   class="ajaxcart__qty-adjust minus"
-                  @click="decrementAmount(item.id)"
+                  @click="decrementAmount(item.id, index)"
                 >
                   −
                 </button>
@@ -91,7 +92,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   props: {},
   methods: {
-    ...mapActions(["showOrHiddenPopupCart"]),
+    ...mapActions("cart", ["showOrHiddenPopupCart", "removeProduct"]),
     hasProduct() {
       return this.getProductsInCart.length > 0;
     },
@@ -108,18 +109,22 @@ export default {
       this.total(product);
     },
 
+    remove(index) {
+      this.removeProduct(index);
+    },
+
     incrementAmount(id) {
       const vm = this;
       var product = vm.getProductById(id);
       product.amount++;
     },
-    decrementAmount(id) {
+    decrementAmount(id, index) {
       const vm = this;
       var product = vm.getProductById(id);
-      if (product.amount > 0) {
+      if (product.amount > 1) {
         product.amount--;
       } else {
-        product.amount == 0;
+        vm.remove(index);
       }
     }
   },

@@ -30,17 +30,23 @@
 
 <script>
 import bagBtn from "./bagBtn.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions, mapState } from "vuex";
 
 export default {
   data: function() {
     return {
       btnStat: "add to cart",
-      disabled: "false"
+      disabled: "false",
+      cart: []
     };
   },
   computed: {
-    ...mapGetters("cart", ["getProductsInCart", "getProductById"])
+    ...mapGetters("cart", ["getProductsInCart", "getProductById"]),
+    ...mapState("cart", ["cartProducts"])
+  },
+  mounted() {
+    //binding store data to local scale so that we could apply watch into it
+    this.cart = this.getProductsInCart;
   },
   methods: {
     ...mapActions("cart", ["addProduct"]),
@@ -49,10 +55,6 @@ export default {
       vm.ifProductInCart(product);
       if (vm.disabled == "false") {
         vm.addProduct(product);
-        vm.disabled = "true";
-        vm.btnStat = "In Cart";
-      } else {
-        console.log(product);
       }
     },
 
@@ -60,11 +62,11 @@ export default {
       var vm = this;
       let id = product.id;
       if (vm.getProductById(id)) {
-        vm.disabled = "true";
-        vm.btnStat = "In Cart";
+        vm.$set(vm, "disabled", "true");
+        vm.$set(vm, "btnStat", "In Cart");
       } else {
-        vm.disabled = "false";
-        vm.btnStat = "Add to Cart";
+        vm.$set(vm, "disabled", "false");
+        vm.$set(vm, "btnStat", "Add to cart");
       }
     }
   },
@@ -73,6 +75,15 @@ export default {
   },
   props: {
     product: Object
+  },
+  //listening any change of the cart in data and response to it
+  watch: {
+    cart: {
+      immediate: true,
+      handler: function() {
+        this.ifProductInCart(this.product);
+      }
+    }
   }
 };
 </script>

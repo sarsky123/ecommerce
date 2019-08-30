@@ -33,6 +33,9 @@ export const mutations = {
   },
   SHOW_POPUP_CART: state => {
     state.showPopupCart = !state.showPopupCart;
+  },
+  PURGE_THE_CART: state => {
+    state.cartProducts.splice("deleteCount");
   }
 };
 export const actions = {
@@ -50,5 +53,8 @@ export const actions = {
   },
   showOrHiddenPopupCart: context => {
     context.commit("SHOW_POPUP_CART");
+  },
+  clearCart: context => {
+    context.commit("PURGE_THE_CART");
   }
 };

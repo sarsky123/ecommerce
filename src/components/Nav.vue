@@ -24,7 +24,12 @@
                 class="cartToggle header-cart"
                 @click.prevent="showPopupCart()"
               ></a>
-              <span class="header-cart_bubble cartCount hidden-count"></span>
+              <span
+                v-if="hasProduct()"
+                class="header-cart_bubble cartCount hidden-count"
+              >
+                {{ getProductsInCartLength() }}
+              </span>
             </div>
             <div class="logo-wrapper">
               <h1
@@ -99,6 +104,9 @@ export default {
     },
     showPopupCart() {
       this.showOrHiddenPopupCart();
+    },
+    getProductsInCartLength() {
+      return this.getProductsInCart.length;
     }
   },
   computed: {

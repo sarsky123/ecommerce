@@ -31,6 +31,7 @@
                     <a
                       href="javascript:return false"
                       class="clear-btn banner-btn"
+                      @click.prevent="clearTheCart()"
                       >Clear cart</a
                     >
                   </p>
@@ -61,7 +62,7 @@ export default {
     cart
   },
   methods: {
-    ...mapActions("cart", ["showOrHiddenPopupCart"]),
+    ...mapActions("cart", ["showOrHiddenPopupCart", "clearCart"]),
     hasProduct() {
       return this.getProductsInCart.length > 0;
     },
@@ -81,6 +82,9 @@ export default {
       const vm = this;
       var product = vm.getProductById(id);
       product.amount++;
+    },
+    clearTheCart() {
+      this.clearCart();
     }
   },
   computed: {
