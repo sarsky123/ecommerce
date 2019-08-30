@@ -5,11 +5,9 @@
     <router-link to="/" class="grid__image">
       <img :src="product.image" alt="Atmosphere Pant" />
     </router-link>
-    <button class="bag-btn" :data-id="product.id">
-      <i class="fas fa-shopping-cart"></i>
-
-      add to cart
-    </button>
+    <bagBtn @click.native="addProductToCart(product, product.id)"
+      ><i class="fas fa-shopping-cart"></i>{{ btnStat }}</bagBtn
+    >
     <div class="figcaption under">
       <a href="javascript:void(0)"> </a>
       <p class="uppercase vendor__link">
@@ -31,7 +29,48 @@
 </template>
 
 <script>
+import bagBtn from "./bagBtn.vue";
+import { mapGetters, mapActions } from "vuex";
+
 export default {
+  data: function() {
+    return {
+      btnStat: "add to cart",
+      disabled: "false"
+    };
+  },
+  computed: {
+    ...mapGetters("cart", ["getProductsInCart", "getProductById"])
+  },
+  methods: {
+    ...mapActions("cart", ["addProduct"]),
+    addProductToCart(product) {
+      var vm = this;
+      vm.ifProductInCart(product);
+      if (vm.disabled == "false") {
+        vm.addProduct(product);
+        vm.disabled = "true";
+        vm.btnStat = "In Cart";
+      } else {
+        console.log(product);
+      }
+    },
+
+    ifProductInCart(product) {
+      var vm = this;
+      let id = product.id;
+      if (vm.getProductById(id)) {
+        vm.disabled = "true";
+        vm.btnStat = "In Cart";
+      } else {
+        vm.disabled = "false";
+        vm.btnStat = "Add to Cart";
+      }
+    }
+  },
+  components: {
+    bagBtn
+  },
   props: {
     product: Object
   }

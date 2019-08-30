@@ -210,6 +210,12 @@ class UI {
               <div class="grid--full cart__row--table-large">
 
                 <div class="grid__item one-third">
+                  <a href="javascript:void(0)" class="cart_ <div class="cart__row" data-id=${item.id}>
+          <div class="grid--full cart__row--table-large cart-content">
+            <div class="grid__item large--one-half">
+              <div class="grid--full cart__row--table-large">
+
+                <div class="grid__item one-third">
                   <a href="javascript:void(0)" class="cart__image">
                     <img src="${item.image}" alt="${item.name}">
                   </a>
@@ -280,14 +286,14 @@ class UI {
 /* local storage */
 class Storage {
   static saveProduct(products) {
-    localStorage.setItem("products", JSON.stringify(products));
+    window.localStorage.setItem("products", JSON.stringify(products));
   }
   static getProducts(id) {
-    let products = JSON.parse(localStorage.getItem("products"));
+    let products = JSON.parse(window.localStorage.getItem("products"));
     return products.find(products => products.id === id);
   }
   static saveCart(cart) {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    window.localStorage.setItem("cart", JSON.stringify(cart));
   }
 }
 

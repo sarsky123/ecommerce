@@ -280,14 +280,14 @@ class UI {
 /* local storage */
 class Storage {
   static saveProduct(products) {
-    localStorage.setItem("products", JSON.stringify(products));
+    window.localStorage.setItem("products", JSON.stringify(products));
   }
   static getProducts(id) {
-    let products = JSON.parse(localStorage.getItem("products"));
+    let products = JSON.parse(window.localStorage.getItem("products"));
     return products.find(products => products.id === id);
   }
   static saveCart(cart) {
-    localStorage.setItem("cart", JSON.stringify(cart));
+    window.localStorage.setItem("cart", JSON.stringify(cart));
   }
 }
 

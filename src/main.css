@@ -676,7 +676,6 @@ footer {
 
 .cartoverlay {
   overflow-y: scroll;
-  visibility: hidden;
   position: fixed;
   top: 0;
   right: 0;

@@ -19,7 +19,11 @@
         <div class="nav-desktop">
           <div class="mobile-wrapper">
             <div class="header-cart_wrapper">
-              <a href="#" class="cartToggle header-cart"></a>
+              <a
+                href="#"
+                class="cartToggle header-cart"
+                @click.prevent="showPopupCart()"
+              ></a>
               <span class="header-cart_bubble cartCount hidden-count"></span>
             </div>
             <div class="logo-wrapper">
@@ -39,11 +43,18 @@
               </h1>
             </div>
             <a
-              href="javascript:return false"
+              href="#"
               class="menuToggle header-hamburger"
+              @click.prevent="toggleMenu"
             ></a>
           </div>
-          <div class="header-menu nav-wrapper">
+          <div
+            :class="
+              this.isActive
+                ? 'wrapper header-menu nav-wrapper noShowMeWhatUGot'
+                : 'wrapper header-menu nav-wrapper '
+            "
+          >
             <ul class="main-menu accessibleNav">
               <li class="main-menu-active">
                 <a href="/" class="link">Shop</a>
@@ -52,7 +63,11 @@
               <li><a href="#">Safe Edit</a></li>
               <li><a href="#">CONTACT</a></li>
               <li class="cart-text-link">
-                <a href="javascript:void(0)" class="cartToggle menuCart">
+                <a
+                  href="javascript:void(0)"
+                  class="cartToggle menuCart"
+                  @click.prevent="showPopupCart()"
+                >
                   cart
                 </a>
               </li>
@@ -66,7 +81,30 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapActions } from "vuex";
+export default {
+  data() {
+    return {
+      isActive: true
+    };
+  },
+  methods: {
+    ...mapActions("cart", ["showOrHiddenPopupCart"]),
+    toggleMenu: function() {
+      this.isActive = !this.isActive;
+    },
+
+    hasProduct() {
+      return this.getProductsInCart.length > 0;
+    },
+    showPopupCart() {
+      this.showOrHiddenPopupCart();
+    }
+  },
+  computed: {
+    ...mapGetters("cart", ["getProductsInCart", "getPopupCart"])
+  }
+};
 </script>
 
 <style lang="scss" scoped></style>
