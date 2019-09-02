@@ -5,7 +5,7 @@
 
       <div class="grid-uniform clearfix">
         <catalog
-          v-for="(product, index) in product.products"
+          v-for="(product, index) in this.getProducts"
           :key="index"
           :product="product"
         ></catalog>
@@ -17,16 +17,21 @@
 <script>
 import catalog from "@/components/catalog.vue";
 
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
+  data() {
+    return {};
+  },
   components: {
     catalog
   },
   created() {
     this.$store.dispatch("product/fetchProducts");
   },
+
   computed: {
-    ...mapState(["product"])
+    ...mapState(["product"]),
+    ...mapGetters("product", ["getProducts"])
   }
 };
 </script>

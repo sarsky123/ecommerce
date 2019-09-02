@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import App from "./App.vue";
-import cartCheckout from "./views/cartCheckout.vue";
-import productInfo from "./views/productInfo.vue";
+import home from "@/views/Home.vue";
+import productDetail from "@/views/productDetail.vue";
+
 Vue.use(Router);
 
 export default new Router({
@@ -12,7 +12,14 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: App
+      component: home,
+      props: true
+    },
+    {
+      path: "/:id",
+      name: "product-detail",
+      component: productDetail,
+      props: true
     }
   ]
 });

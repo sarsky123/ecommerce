@@ -2,7 +2,13 @@
   <div
     class="grid__item small--one-half medium--one-third large--one-third  product-grid-item"
   >
-    <router-link to="/" class="grid__image">
+    <router-link
+      :to="{
+        name: 'product-detail',
+        params: { id: product.id }
+      }"
+      class="grid__image"
+    >
       <img :src="product.image" alt="Atmosphere Pant" />
     </router-link>
     <bagBtn @click.native="addProductToCart(product, product.id)"

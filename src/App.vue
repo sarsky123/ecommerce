@@ -2,39 +2,9 @@
   <div id="app">
     <main class="main-content">
       <Nav></Nav>
-      <div class="homepage-hero" id="homepageHero">
-        <div class="Hero-Image"></div>
-        <div class="homepage-hero-content wrapper clearfix">
-          <div class="text-left">
-            <h1 class="homepage-hero-content_title">New Season</h1>
-            <p class="homepage-hero-content_block">Saben</p>
-            <a href="#" class="btn btn-large btn-splash uppercase">Shop Now</a>
-          </div>
-        </div>
-        <div class="scroll-icon-wrap">
-          <a
-            href="javascript:void(0)"
-            class="scroll_icon icon icon-arrow-down icon-fallback-text"
-          >
-            <span class="icon icon-arrow-down"></span>
-            <span class="fallback-text">Down</span>
-          </a>
-        </div>
-        <div id="scroll"></div>
-        <div class="hero-image-overlay"></div>
-      </div>
-      <productInfo></productInfo>
-      <div class="homepage-custom">
-        <div class="homepage-custom_parallax clearfix">
-          <div class="text-center">
-            <div class="mega-button">
-              <div class="mega-button-content">
-                <h4>Lorem ipsum dolor sit amet.</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <router-view :key="$route.fullPath"></router-view>
+
       <footer class="site-footer-wrapper" role="contentinfo">
         <div class="wrapper site-footer">
           <div id="instafeed">
@@ -229,16 +199,42 @@
 </template>
 <script>
 import Nav from "./components/Nav.vue";
-import productInfo from "./views/productInfo.vue";
-import cartCheckout from "./views/cartCheckout.vue";
-
+import cartCheckout from "./components/cartCheckout.vue";
 export default {
   components: {
-    cartCheckout,
     Nav,
-    productInfo
+    cartCheckout
   }
 };
 </script>
 
-<style></style>
+<style>
+.leave-enter-active,
+.leave-leave-active {
+  transition: all 1.2s;
+}
+.leave-enter,
+.leave-leave-to {
+  opacity: 0;
+  transform: translateX(-50%);
+}
+
+.appear-enter-active {
+  animation: appear-animation 0.5s;
+}
+
+.appear-leave-active {
+  animation: appear-animation 0.5s reverse;
+}
+
+@keyframes appear-animation {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+</style>

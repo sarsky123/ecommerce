@@ -1,4 +1,5 @@
 import axios from "axios";
+import { log } from "util";
 
 const contentful = require("contentful");
 
@@ -22,7 +23,6 @@ export default {
         const image = "https:" + item.fields.image.fields.file.url;
         return { title, price, id, image, name };
       });
-      console.log(products);
 
       return products;
     } catch (error) {

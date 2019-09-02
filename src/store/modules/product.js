@@ -20,22 +20,21 @@ export const mutations = {
   },
   SET_PRODUCTS(state, products) {
     state.products = products;
-
-    console.log(state.products);
   }
 };
 
 export const actions = {
   fetchProducts({ commit }) {
-    productService
-      .getProducts()
-      .then(products => {
-        console.log(products);
-        commit("SET_PRODUCTS", products);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    if (this.getProducts === undefined || this.getProducts.length == 0) {
+      productService
+        .getProducts()
+        .then(products => {
+          commit("SET_PRODUCTS", products);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   },
 
   fetchProduct({ commit, getters }, id) {
@@ -57,6 +56,8 @@ export const actions = {
 };
 export const getters = {
   getProductById: state => id => {
-    return state.products.find(product => product.id === id);
-  }
+    return state.products.find(product => product.id == id);
+  },
+
+  getProducts: state => state.products
 };
