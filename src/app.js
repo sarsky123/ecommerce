@@ -12,8 +12,8 @@ const cartTotal = document.querySelector(".subtotal-money");
 const cartContent = document.querySelector(".cart__body");
 const menuCart = document.querySelector(".menuCart");
 const cartItemTotal = document.querySelector(".iteMoney");
-const body = document.querySelector('body')
-const modal = document.querySelector('.cart-modal')
+const body = document.querySelector("body");
+const modal = document.querySelector(".cart-modal");
 //cart
 let cart = [];
 //buttonDOM
@@ -68,9 +68,7 @@ class UI {
             </button>
   <div class="figcaption under">
     <a href="javascript:void(0)">
-      </a><p class="uppercase vendor__link"><a href="javascript:void(0)"><b></b></a><b><a href="javascript:void(0)" title="${
-        product.title
-      }">${product.title}</a></b></p>
+      </a><p class="uppercase vendor__link"><a href="javascript:void(0)"><b></b></a><b><a href="javascript:void(0)" title="${product.title}">${product.title}</a></b></p>
       <p class="h6 name_wrapper">
         ${product.name}
       </p>
@@ -147,14 +145,14 @@ class UI {
   //cart
   showCart() {
     cartOverlay.classList.add("is-visable");
-    body.classList.add('noscroll')
+    body.classList.add("noscroll");
     cartDOM.classList.add("is-visable");
-    cartDOM.classList.remove('noscroll')
+    cartDOM.classList.remove("noscroll");
   }
   hideCart() {
     cartOverlay.classList.remove("is-visable");
     cartDOM.classList.remove("is-visable");
-    body.classList.remove('noscroll');
+    body.classList.remove("noscroll");
   }
   setupAPP() {
     this.mediaMenu();
@@ -164,21 +162,20 @@ class UI {
     }
     closeCartBtn.addEventListener("click", this.hideCart);
     //overlay hiding
-    document.addEventListener('click', function(event) {
-      var specifiedElement = modal
-      var overlayClicked = cartOverlay.contains(event.target)
+    document.addEventListener("click", function(event) {
+      var specifiedElement = modal;
+      var overlayClicked = cartOverlay.contains(event.target);
       var isClickInside = specifiedElement.contains(event.target);
-      if (!isClickInside && overlayClicked ) {
-
+      if (!isClickInside && overlayClicked) {
         cartOverlay.classList.remove("is-visable");
         cartDOM.classList.remove("is-visable");
-        body.classList.remove('noscroll');
+        body.classList.remove("noscroll");
       }
-    })
+    });
   }
   cartLogic() {
     //overlay clear
-    
+
     //clear cart btn
     clearCartBtn.addEventListener("click", () => {
       this.clearCart();
@@ -265,8 +262,6 @@ class UI {
   addCartItem(item) {
     const div = document.createElement("div");
 
-    let total = parseFloat(item.amount * item.price).toFixed(2);
-
     div.innerHTML += `
     <div class="cart__row" data-id=${item.id}>
           <div class="grid--full cart__row--table-large cart-content">
@@ -293,9 +288,7 @@ class UI {
                   
                   
 
-                  <a href="javascript:void(0)" class="cart__remove uppercase lighten ajaxcart__remove" data-id=${
-                    item.id
-                  }>
+                  <a href="javascript:void(0)" class="cart__remove uppercase lighten ajaxcart__remove" data-id=${item.id}>
                     <small>Remove</small>
                   </a>
                 </div>
@@ -316,15 +309,9 @@ class UI {
                     
   
     <div class="ajaxcart__qty">
-      <button type="button" class="ajaxcart__qty-adjust minus" data-id=${
-        item.id
-      } >−</button>
-      <input type="text" class="ajaxcart__qty-num" value="${
-        item.amount
-      }" min="0" data-id=${item.id} aria-label="quantity" pattern="[0-9]*">
-      <button type="button" class="ajaxcart__qty-adjust plus" data-id=${
-        item.id
-      } >+</button>
+      <button type="button" class="ajaxcart__qty-adjust minus" data-id=${item.id} >−</button>
+      <input type="text" class="ajaxcart__qty-num" value="${item.amount}" min="0" data-id=${item.id} aria-label="quantity" pattern="[0-9]*">
+      <button type="button" class="ajaxcart__qty-adjust plus" data-id=${item.id} >+</button>
     </div>
   
   
