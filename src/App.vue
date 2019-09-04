@@ -33,23 +33,22 @@
               <h5>Customer Care</h5>
               <hr class="hr--underline" />
               <ul class="footer-quicklinks">
-                <li><a href="/pages/contact-us">Contact Us</a></li>
+                <li>
+                  <router-link
+                    :to="{
+                      name: 'customer-service'
+                    }"
+                    >Contact Us</router-link
+                  >
+                </li>
 
                 <li><a href="/pages/faq">FAQs</a></li>
 
-                <li><a href="/pages/faqs">The Story</a></li>
-
                 <li><a href="/pages/store-location">Store Location</a></li>
-
-                <li><a href="/blogs/blog">Blog</a></li>
-
-                <li><a href="/pages/careers">Careers</a></li>
 
                 <li><a href="/pages/terms-of-use">Terms of Use</a></li>
 
                 <li><a href="/pages/shipping">Shipping</a></li>
-
-                <li><a href="/pages/returns">Returns</a></li>
 
                 <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
               </ul>
@@ -192,6 +191,34 @@
           </div>
         </div>
       </footer>
+      <div class="mobile-footer">
+        <b-card no-body header="Card with flush list group">
+          <b-list-group flush>
+            <b-list-group-item
+              ><div :focus="(this.contactIsFocused = true)">
+                CONTACT US
+                <span class="float-right">+</span>
+              </div>
+              <b-list-group v-if="contactIsFocused">
+                <b-list-group-item>Customer Services</b-list-group-item>
+                <b-list-group-item>Our Store</b-list-group-item>
+                <b-list-group-item>Term Of Use</b-list-group-item>
+                <b-list-group-item>Policy</b-list-group-item>
+              </b-list-group>
+            </b-list-group-item>
+            <b-list-group-item href="#"
+              >Dapibus ac facilisis in<span class="float-right"
+                >+</span
+              ></b-list-group-item
+            >
+            <b-list-group-item href="#"
+              >Vestibulum at eros<span class="float-right"
+                >+</span
+              ></b-list-group-item
+            >
+          </b-list-group>
+        </b-card>
+      </div>
       <!--cart & overlay-->
       <cartCheckout></cartCheckout>
     </main>
@@ -204,10 +231,23 @@ export default {
   components: {
     Nav,
     cartCheckout
+  },
+  data() {
+    return {
+      contactIsFocused: false
+    };
+  },
+  directives: {
+    focus: {
+      // directive definition
+      inserted: function(el) {
+        el.focus();
+      }
+    }
   }
 };
 </script>
-
+<style src="./main.css" />
 <style>
 .leave-enter-active,
 .leave-leave-active {

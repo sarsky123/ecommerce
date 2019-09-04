@@ -4,10 +4,14 @@ import router from "./router";
 import store from "./store/store";
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
+import BootstrapVue from "bootstrap-vue";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "./custom.scss";
+
+Vue.use(BootstrapVue);
 
 //bootstrap
-
-import "bootstrap";
 
 Vue.config.productionTip = false;
 

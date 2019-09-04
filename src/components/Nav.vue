@@ -56,8 +56,8 @@
           <div
             :class="
               this.isActive
-                ? 'wrapper header-menu nav-wrapper noShowMeWhatUGot'
-                : 'wrapper header-menu nav-wrapper '
+                ? 'wrapper header-menu nav-wrapper '
+                : 'wrapper header-menu nav-wrapper noShowMeWhatUGot'
             "
           >
             <ul class="main-menu accessibleNav">
@@ -66,7 +66,14 @@
               </li>
               <li><a href="#">MY BOYFRIEND BACK</a></li>
               <li><a href="#">Safe Edit</a></li>
-              <li><a href="#">CONTACT</a></li>
+              <li>
+                <router-link
+                  :to="{
+                    name: 'customer-service'
+                  }"
+                  >CONTACT</router-link
+                >
+              </li>
               <li class="cart-text-link">
                 <a
                   href="javascript:void(0)"
