@@ -14,8 +14,7 @@
           href="javascript:void(0)"
           class="scroll_icon icon icon-arrow-down icon-fallback-text"
         >
-          <span class="icon icon-arrow-down"></span>
-          <span class="fallback-text">Down</span>
+          <div class="arrow"></div>
         </a>
       </div>
       <div id="scroll"></div>
@@ -33,17 +32,81 @@
         </div>
       </div>
     </div>
+    <div>
+      <div class="w-100 bg-white">
+        <carousel
+          perPage="3"
+          hide-controls
+          class="bg-white col-10 mx-auto"
+          centerMode
+          navigationEnabled
+          navigationNextLabel=""
+        >
+          <slide v-for="(product, index) in this.getProducts">
+            <router-link
+              :to="{
+                name: 'product-detail',
+                params: { id: product.id }
+              }"
+              class="grid__image"
+            >
+              <img
+                :src="product.image"
+                alt="'Product#' + product.id"
+                class="w-100"
+              />
+            </router-link>
+
+            <div class="figcaption under">
+              <p class="uppercase vendor__link">
+                <b
+                  ><a href="javascript:void(0)">{{ product.title }}</a></b
+                >
+              </p>
+              <p class="h6 name_wrapper">
+                {{ product.name }}
+              </p>
+              <p class="price_wrapper">
+                <span class="price">
+                  <span class="money">$ {{ product.price }}</span>
+                </span>
+              </p>
+            </div>
+          </slide>
+        </carousel>
+        <div class="row w-100"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import productInfo from "@/components/productInfo.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     productInfo
+  },
+  created() {
+    this.$store.dispatch("product/fetchProducts");
+  },
+  computed: {
+    ...mapGetters("product", ["getProducts"])
   }
 };
 </script>
 
-<style lang="css"></style>
+<style lang="scss">
+@media screen and (max-width: 576px) {
+  .homepage-custom {
+    display: none;
+  }
+}
+.VueCarousel-navigation-button
+  .VueCarousel-navigation-prev
+  .VueCarousel-navigation-next {
+}
+
+//arrow
+</style>

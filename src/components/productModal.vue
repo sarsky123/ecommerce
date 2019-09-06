@@ -1,5 +1,5 @@
 <template>
-  <div class="row product-detail bg-white pt-sm-5 mb-3">
+  <div class="row product-detail bg-white pt-sm-5 mb-3 w-100">
     <div class="col-10 mx-auto col-sm-7 p-lg-5 ">
       <img
         :src="product.image"

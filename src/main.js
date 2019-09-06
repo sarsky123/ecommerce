@@ -8,9 +8,32 @@ import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./custom.scss";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import VueWindowSize from "vue-window-size";
+import VueCarousel from "vue-carousel";
 
+// fontawesome
+import {
+  FontAwesomeIcon,
+  FontAwesomeLayers,
+  FontAwesomeLayersText
+} from "@fortawesome/vue-fontawesome";
+
+import vuetify from "./plugins/vuetify";
+
+library.add(fas, far, fab);
+
+Vue.component("font-awesome-icon", FontAwesomeIcon);
+Vue.component("font-awesome-layers", FontAwesomeLayers);
+Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
+
+//plugin
 Vue.use(BootstrapVue);
-
+Vue.use(VueWindowSize);
+Vue.use(VueCarousel);
 //bootstrap
 
 Vue.config.productionTip = false;
@@ -35,5 +58,6 @@ requireComponent.keys().forEach(fileName => {
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount("#app");

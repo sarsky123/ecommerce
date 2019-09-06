@@ -56,8 +56,8 @@
           <div
             :class="
               this.isActive
-                ? 'wrapper header-menu nav-wrapper '
-                : 'wrapper header-menu nav-wrapper noShowMeWhatUGot'
+                ? 'wrapper header-menu mobile-menu nav-wrapper '
+                : 'wrapper header-menu mobile-menu nav-wrapper noShowMeWhatUGot'
             "
           >
             <ul class="main-menu accessibleNav">
@@ -85,8 +85,39 @@
               </li>
             </ul>
           </div>
+          <div class="desktop-menu">
+            <div
+              class="
+              'wrapper header-menu nav-wrapper 
+            "
+            >
+              <ul class="main-menu accessibleNav">
+                <li class="main-menu-active">
+                  <a href="/" class="link">Shop</a>
+                </li>
+                <li><a href="#">MY BOYFRIEND BACK</a></li>
+                <li><a href="#">Safe Edit</a></li>
+                <li>
+                  <router-link
+                    :to="{
+                      name: 'customer-service'
+                    }"
+                    >CONTACT</router-link
+                  >
+                </li>
+                <li class="cart-text-link">
+                  <a
+                    href="javascript:void(0)"
+                    class="cartToggle menuCart"
+                    @click.prevent="showPopupCart()"
+                  >
+                    cart
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="nav-mobile"></div>
       </div>
     </div>
   </div>
@@ -94,10 +125,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { vueWindowSizeMixin } from "vue-window-size";
 export default {
   data() {
     return {
-      isActive: true
+      isActive: false
     };
   },
   methods: {
@@ -118,6 +150,22 @@ export default {
   },
   computed: {
     ...mapGetters("cart", ["getProductsInCart", "getPopupCart"])
+  },
+  mixins: [vueWindowSizeMixin],
+
+  watch: {
+    isActive: function() {},
+    windowWidth: function() {
+      if (this.windowWidth > 960) {
+        this.isActive = false;
+      } else if (this.windowWidth < 576 && this.isActive == true) {
+        document.documentElement.style.overflow = "hidden";
+        return;
+      } else {
+        document.documentElement.style.overflow = "auto";
+        return;
+      }
+    }
   }
 };
 </script>

@@ -33,6 +33,7 @@ h3 {
   display: block;
   line-height: 1.4;
 }
+
 .h4--body:hover {
   text-decoration: none;
   color: #777
@@ -241,12 +242,7 @@ ul {
 /*Show & Hidden*/
 .noShowMeWhatUGot {
   right: -150% !important;
-  background-color: transparent;
-  -webkit-transition: all 0.5s linear;
-  -moz-transition: all 0.5s linear;
-  -o-transition: all 0.5s linear;
-  -ms-transition: all 0.5s linear;
-  transition: all 0.5s linear;
+
 }
 
 .is-visable {
@@ -294,6 +290,7 @@ ul {
 }
 
 @media screen and (max-width: 960px) {
+
   .logo-wrapper {
     margin: 0 auto;
   }
@@ -362,6 +359,26 @@ ul {
   }
 }
 
+@media screen and (max-width:576px) {
+  .header-wrapper .site-header .nav-desktop .header-menu {
+    width: 100vw;
+    height: 100vh;
+    border-left: none !important;
+  }
+}
+
+@media screen and (max-width:960px) {
+  .desktop-menu {
+    display: none;
+  }
+}
+
+@media screen and (min-width:960px) {
+  .mobile-menu {
+    display: none !important;
+  }
+}
+
 /*btn*/
 .bag-btn {
   position: absolute;
@@ -409,7 +426,7 @@ ul {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 15;
   background-color: #fff;
 }
 
@@ -518,6 +535,7 @@ ul {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    height: 100%;
   }
 
   .header-wrapper .site-header .nav-desktop .header-menu .main-menu li {
@@ -567,6 +585,10 @@ ul {
   .header-wrapper .site-header .header-cart_bubble {
     display: none;
   }
+
+  .noShowMeWhatUGot {
+    right: 0 !important;
+  }
 }
 
 /*main-content*/
@@ -577,7 +599,7 @@ ul {
 }
 
 .main-content .homepage-hero {
-  height: 1150px;
+  height: 125vh;
   position: relative;
   overflow: hidden;
   background-color: #fff;
@@ -587,7 +609,7 @@ ul {
   background-image: url("https://cdn.shopify.com/s/files/1/1132/3440/t/3/assets/homepage_hero_image.jpg?105");
   display: block;
   background-size: cover;
-  background-position: center;
+  background-position-y: 20%;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -597,10 +619,10 @@ ul {
 }
 
 .main-content .homepage-hero-content {
-  margin-top: 511.5px;
+  top: 60%;
   position: relative;
   position: relative;
-  z-index: 500;
+  z-index: 10;
   color: #fff;
 }
 
@@ -632,7 +654,7 @@ ul {
   left: 0;
   right: 0;
   bottom: 30px;
-  z-index: 400;
+  z-index: 4;
 }
 
 .main-content .scroll-icon-wrap .scroll_icon {
