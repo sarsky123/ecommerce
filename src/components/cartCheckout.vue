@@ -1,6 +1,6 @@
 <template>
   <div class="cartoverlay" v-if="cartOpend()" @click.self="showPopupCart()">
-    <div class="whole-cart">
+    <div class="whole-cart" @click.self="showPopupCart()">
       <div class="cart-modal">
         <button class="closeCart" @click.prevent="showPopupCart()"></button>
         <div class="cart__content">

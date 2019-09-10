@@ -1,6 +1,3 @@
-import axios from "axios";
-import { log } from "util";
-
 const contentful = require("contentful");
 
 const apiClient = contentful.createClient({

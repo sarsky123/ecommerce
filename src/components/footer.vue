@@ -2,27 +2,6 @@
   <div>
     <footer class="site-footer-wrapper" role="contentinfo">
       <div class="wrapper site-footer">
-        <div id="instafeed">
-          <a href="https://www.instagram.com/p/B04sd3kJaCl/"
-            ><img
-              src="//scontent.cdninstagram.com/vp/bda87c9a6c041f3cef3409fde1e38295/5DEDF7AA/t51.2885-15/sh0.08/e35/s640x640/66109136_350827199172319_843804642294756938_n.jpg?_nc_ht=scontent.cdninstagram.com"/></a
-          ><a href="https://www.instagram.com/p/B01qk3FJLWP/"
-            ><img
-              src="//scontent.cdninstagram.com/vp/fba44c64a8ca27920e975590c4229e73/5DE7A836/t51.2885-15/sh0.08/e35/s640x640/66817921_627356497753805_7464552853654524716_n.jpg?_nc_ht=scontent.cdninstagram.com"/></a
-          ><a href="https://www.instagram.com/p/B0zlV1hJFHy/"
-            ><img
-              src="//scontent.cdninstagram.com/vp/2f0f1561121747fae096173c882cc683/5DDFAB9A/t51.2885-15/sh0.08/e35/s640x640/67097161_153576035826628_4730412649226417192_n.jpg?_nc_ht=scontent.cdninstagram.com"/></a
-          ><a href="https://www.instagram.com/p/B0zEFSPpjnG/"
-            ><img
-              src="//scontent.cdninstagram.com/vp/108239a14a7a27fbf2d3ab330fe51b7d/5DE9B586/t51.2885-15/sh0.08/e35/s640x640/66130874_177751573250761_5546930353979721715_n.jpg?_nc_ht=scontent.cdninstagram.com"/></a
-          ><a href="https://www.instagram.com/p/B0wVAv_JQwJ/"
-            ><img
-              src="//scontent.cdninstagram.com/vp/d0190fea7585c620360e5846fdf47964/5DD4FCDB/t51.2885-15/sh0.08/e35/s640x640/66708476_368924150437286_2538849928653473572_n.jpg?_nc_ht=scontent.cdninstagram.com"/></a
-          ><a href="https://www.instagram.com/p/B0pBY0SppK-/"
-            ><img
-              src="//scontent.cdninstagram.com/vp/688139a146e6c278811359c743df7e71/5DE4A9AA/t51.2885-15/sh0.08/e35/s640x640/65885236_648963498846847_8331349160918562698_n.jpg?_nc_ht=scontent.cdninstagram.com"
-          /></a>
-        </div>
         <div class="grid-uniform">
           <div class="grid__item large--one-third">
             <h5>Customer Care</h5>
@@ -54,16 +33,9 @@
             <hr class="hr--underline" />
             <div class="rte clearfix">
               <meta charset="utf-8" /><span
-                >Hebe is a destination for local style seekers and shoppers from
-                abroad. Located in Masterton's boutique Kuripuni Village, Hebe
-                is lovingly and carefully curated by Owner and Buyer Dani
-                Burkhart. For all women, all sizes, Hebe is the go-to boutique
-                in the Wairarapa with a balanced mix of iconic fashion labels,
-                luxe&nbsp;casual wear and lifestyle accessories. Once a small
-                store in Kuripuni, Hebe has&nbsp;grown and expanded in to a
-                new,&nbsp;refined space in Kuripuni with
-                Dani&nbsp;designing&nbsp;in-house label My Boyfriends Back in
-                addition.</span
+                >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Assumenda quibusdam eveniet saepe deserunt odit, recusandae unde
+                minus doloremque numquam dolorum.</span
               >
             </div>
           </div>
@@ -344,6 +316,27 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
+.collapsed > .when-opened,
+:not(.collapsed) > .when-closed {
+  display: none;
+}
+.link-fa {
+  color: #000 !important;
+  font-size: 24px !important;
+  margin-right: 20px;
+}
+
+@media screen and (max-width: 576px) {
+  footer {
+    display: none;
+  }
+}
+@media screen and (min-width: 576px) {
+  .mobile-footer {
+    display: none;
+  }
+}
+
 .event-item {
   margin-right: -50px;
   text-shadow: 0 0 0.5px #000;

@@ -14,6 +14,25 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import VueWindowSize from "vue-window-size";
 import VueCarousel from "vue-carousel";
+import axios from "axios";
+import {
+  ValidationProvider,
+  ValidationObserver,
+  extend,
+  configure
+} from "vee-validate";
+import * as rules from "vee-validate/dist/rules";
+
+// vee-validate
+for (let rule in rules) {
+  // add the rule
+  extend(rule, rules[rule]);
+}
+configure({ bails: false });
+
+// Register it globally
+Vue.component("ValidationProvider", ValidationProvider);
+Vue.component("ValidationObserver", ValidationObserver);
 
 // fontawesome
 import {
@@ -21,8 +40,6 @@ import {
   FontAwesomeLayers,
   FontAwesomeLayersText
 } from "@fortawesome/vue-fontawesome";
-
-import vuetify from "./plugins/vuetify";
 
 library.add(fas, far, fab);
 
@@ -34,7 +51,9 @@ Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
 Vue.use(BootstrapVue);
 Vue.use(VueWindowSize);
 Vue.use(VueCarousel);
+
 //bootstrap
+Vue.use(BootstrapVue);
 
 Vue.config.productionTip = false;
 
@@ -58,6 +77,21 @@ requireComponent.keys().forEach(fileName => {
 new Vue({
   router,
   store,
-  vuetify,
+  created() {
+    const userString = localStorage.getItem("user");
+    if (userString) {
+      const userData = JSON.parse(userString);
+      this.$store.commit("authentication/SET_USER_DATA", userData);
+    }
+    axios.interceptors.response.use(
+      response => response,
+      error => {
+        if (error.response.status === 401) {
+          this.$store.dispatch("logout");
+        }
+        return Promise.reject(error);
+      }
+    );
+  },
   render: h => h(App)
 }).$mount("#app");
