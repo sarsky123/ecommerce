@@ -53,7 +53,7 @@ h3 {
 
 .grid__item {
   float: left;
-  min-height: 1px;
+  height: auto;
   padding-left: 30px;
   vertical-align: top;
   width: 100%;
@@ -253,6 +253,16 @@ ul {
 }
 
 /*media class*/
+@media screen and (max-width:375px) {
+  .site-header>.wrapper {
+    padding: 0 !important;
+  }
+
+  .mobile-wrapper>.header-cart_wrapper {
+    left: 5%;
+  }
+}
+
 @media screen and (min-width: 480px) {
   .mega-button {
     margin: 240px auto;
@@ -306,6 +316,7 @@ ul {
 
   .logo-image {
     margin: 0 auto;
+    line-height: 60px;
   }
 
   .header-menu {
@@ -335,12 +346,12 @@ ul {
 
   .header-cart {
     background: url(//cdn.shopify.com/s/files/1/1132/3440/t/3/assets/cart.svg?91) no-repeat left 0 center;
-    left: 42px;
-    position: absolute;
-    top: 50%;
+    margin-right: 10px;
+    position: relative;
+    display: inline-block;
     width: 25px;
     height: 25px;
-    margin: -12px;
+
   }
 
   .header-cart_bubble {
@@ -448,8 +459,6 @@ ul {
 }
 
 .header-wrapper .info-bar .textLinks {
-  margin-right: 15px;
-  margin-bottom: 10px;
 }
 
 .header-wrapper .info-bar .textLinks a {
@@ -475,6 +484,13 @@ ul {
   width: 250px;
 }
 
+.header-cart_wrapper {
+  top: 50%;
+  left: 42px;
+  margin: -12px;
+  position: absolute;
+}
+
 @media screen and (max-width: 960px) {
   .header-wrapper .site-header .nav-desktop .mobile-wrapper {
     display: block;
@@ -496,7 +512,6 @@ ul {
   max-height: 60px;
   display: block;
   border: 0 none;
-  margin-right: 0;
 }
 
 @media screen and (min-width: 480px) and (max-width: 960px) {
@@ -708,6 +723,8 @@ ul {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-column-gap: 1.5em;
   grid-row-gap: 2em;
+  overflow: hidden;
+  
 }
 
 .homepage-collection .grid-uniform .grid__item {

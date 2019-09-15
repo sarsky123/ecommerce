@@ -7,9 +7,12 @@
         name: 'product-detail',
         params: { id: product.id }
       }"
-      class="grid__image"
     >
-      <img :src="product.image" alt="Atmosphere Pant" />
+      <img
+        :src="product.image"
+        class="grid__image"
+        alt="product.name + '#' + product.id"
+      />
     </router-link>
     <bagBtn @click.native="addProductToCart(product, product.id)"
       ><i class="fas fa-shopping-cart"></i>{{ btnStat }}</bagBtn

@@ -10,7 +10,7 @@
     <div class="col-12 col-sm-5 px-5 pt-4">
       <h3 class="border-bottom pb-2 border-dark">{{ product.name }}</h3>
       <p class="p_detail_title">{{ product.title }}</p>
-      <p class="p_detail_price">$ {{ product.price.toFixed(2) }}</p>
+      <p class="p_detail_price">$ {{ product.price }}</p>
       <div class="detail-description ">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,

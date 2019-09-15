@@ -15,10 +15,11 @@ export default {
       let products = contentful.items;
 
       products = products.map(item => {
-        const { title, price, name } = item.fields;
+        const { title, name, category, onsale, gender } = item.fields;
         const { id } = item.sys;
-        const image = "https:" + item.fields.image.fields.file.url;
-        return { title, price, id, image, name };
+        const image = "https:" + item.fields.image.fields.file.url + "?w=500";
+        const price = item.fields.price.toFixed(2);
+        return { title, price, id, image, name, category, onsale, gender };
       });
 
       return products;

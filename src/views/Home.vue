@@ -73,7 +73,7 @@
         >
           <slide
             class="p-3"
-            v-for="product in this.getProducts"
+            v-for="product in this.getProducts.slice(0, 12)"
             :key="product.index"
           >
             <router-link
@@ -100,7 +100,7 @@
               </p>
               <p class="pt-3">
                 <span>
-                  <span>NT${{ product.price }}</span>
+                  <span>NT${{ product.price, }}</span>
                 </span>
               </p>
             </div>
@@ -130,7 +130,7 @@
         >
           <slide
             class="p-3"
-            v-for="product in this.getProducts"
+            v-for="product in this.getProducts.slice(13, 25)"
             :key="product.index"
           >
             <router-link

@@ -6,9 +6,19 @@
         <div class="clearfix">
           <div>
             <p class="float-right textLinks uppercase">
-              <a href="#">Login</a>
+              <router-link
+                :to="{
+                  name: 'userLogin'
+                }"
+                >Login In</router-link
+              >
               &nbsp; · &nbsp;
-              <a href="#">CREATE Account</a>
+              <router-link
+                :to="{
+                  name: 'userRegister'
+                }"
+                >Register In</router-link
+              >
             </p>
           </div>
         </div>
@@ -18,7 +28,7 @@
       <div class="wrapper clearfix">
         <div class="nav-desktop">
           <div class="mobile-wrapper">
-            <div class="header-cart_wrapper">
+            <div class="header-cart_wrapper d-flex flex-row">
               <a
                 href="#"
                 class="cartToggle header-cart"
@@ -30,7 +40,11 @@
               >
                 {{ getProductsInCartLength() }}
               </span>
+              <a class="search d-inline-block" @click.prevent="toggleSearch()">
+                <font-awesome-icon :icon="['fas', 'search']" />
+              </a>
             </div>
+
             <div class="logo-wrapper">
               <h1
                 class="header-logo"
@@ -47,6 +61,7 @@
                 </a>
               </h1>
             </div>
+
             <a
               href="#"
               class="menuToggle header-hamburger"
@@ -88,9 +103,11 @@
               </div>
             </div>
             <ul class="main-menu accessibleNav">
-              <li class="main-menu-active">
-                <a href="/" class="link">Shop</a>
-              </li>
+              <router-link :to="{ name: 'shop' }">
+                <li class="main-menu-active">
+                  <a href="/" class="link">Shop</a>
+                </li>
+              </router-link>
               <li><a href="#">MY BOYFRIEND BACK</a></li>
               <li><a href="#">Safe Edit</a></li>
               <li>
@@ -120,8 +137,11 @@
             >
               <ul class="main-menu accessibleNav">
                 <li class="main-menu-active">
-                  <a href="/" class="link">Shop</a>
+                  <router-link :to="{ name: 'shop' }">
+                    <p class="link">Shop</p>
+                  </router-link>
                 </li>
+
                 <li><a href="#">MY BOYFRIEND BACK</a></li>
                 <li><a href="#">Safe Edit</a></li>
                 <li>
@@ -147,20 +167,37 @@
         </div>
       </div>
     </div>
+    <div class="search-bar w-100 bg-white" v-if="searchOn">
+      <div class="row">
+        <div class="col d-flex">
+          <div class="d-inline-block"></div>
+          <label
+            for="search-input"
+            class="w-100 mx-auto py-2 text-center text-secondary mt-3 mb-0 border-none search-bar-label text-uppercase"
+            name="search"
+            id="search"
+          >
+            <font-awesome-icon :icon="['fas', 'search']" />
+            search
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { vueWindowSizeMixin } from "vue-window-size";
-import login from "@/components/Login.vue";
+import login from "@/components/login.vue";
 import register from "@/components/register.vue";
 export default {
   data() {
     return {
       isActive: false,
       isLogin: false,
-      isRegister: false
+      isRegister: false,
+      searchOn: false
     };
   },
   components: {
@@ -173,6 +210,9 @@ export default {
       this.isLogin = false;
       this.isRegister = false;
       this.isActive = !this.isActive;
+    },
+    toggleSearch() {
+      this.searchOn = !this.searchOn;
     },
 
     hasProduct() {
@@ -220,6 +260,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.link {
+  margin-bottom: 0;
+}
+.search {
+  line-height: 1;
+  margin: auto;
+  font-size: 18px;
+}
 .mobile-menu {
   ul {
     :hover {
@@ -230,7 +278,7 @@ export default {
       }
     }
   }
-  > ul > li {
+  ul > li {
     font-size: 18px;
     position: relative;
     ::after {
@@ -244,6 +292,14 @@ export default {
       top: calc(50% - 3.5px);
       right: 5%;
     }
+  }
+}
+.search-bar {
+  padding: 0;
+  .search-bar-label {
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
   }
 }
 </style>

@@ -7,6 +7,11 @@ import privacy from "@/components/privacy.vue";
 import customerService from "@/components/customerService.vue";
 import ourstore from "@/components/ourstore.vue";
 import termOfUse from "@/components/termOfUse.vue";
+import login_register from "@/views/login.vue";
+import userLogin from "@/components/login.vue";
+import userRegister from "@/components/register.vue";
+import shop from "@/views/shop.vue";
+import search from "@/views/search.vue";
 
 Vue.use(Router);
 
@@ -21,7 +26,7 @@ const router = new Router({
       props: true
     },
     {
-      path: "/:id",
+      path: "/product-detail/:id",
       name: "product-detail",
       component: productDetail,
       props: true
@@ -56,6 +61,37 @@ const router = new Router({
           props: true
         }
       ]
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: login_register,
+      children: [
+        {
+          path: "/login/login",
+          name: "userLogin",
+          component: userLogin,
+          props: true
+        },
+        {
+          path: "/login/register",
+          name: "userRegister",
+          component: userRegister,
+          props: true
+        }
+      ]
+    },
+    {
+      path: "/shop",
+      name: "shop",
+      component: shop,
+      props: true
+    },
+    {
+      path: "/search",
+      name: "search",
+      component: search,
+      props: true
     }
   ]
 });
