@@ -18,10 +18,8 @@
       ><i class="fas fa-shopping-cart"></i>{{ btnStat }}</bagBtn
     >
     <div class="figcaption under">
-      <a href="javascript:void(0)"> </a>
       <p class="uppercase vendor__link">
-        <a href="javascript:void(0)"><b></b></a
-        ><b
+        <b
           ><a href="javascript:void(0)">{{ product.title }}</a></b
         >
       </p>

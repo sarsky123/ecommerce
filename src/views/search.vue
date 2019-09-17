@@ -3,8 +3,8 @@
     <div class="search-page-header">
       <div class="search-info">
         <div class="row">
-          <div class="col pb-3 text-center">
-            <p>Search results for:</p>
+          <div class="col pb-3 text-center" v-if="searchContent">
+            <p>Search results for: {{ searchContent }}</p>
           </div>
         </div>
         <div class="row mb-4 mx-3">
@@ -22,8 +22,7 @@
                 <font-awesome-icon
                   :icon="['fab', 'instagram']"
                   @click.native="clearFilter(index)"
-                  >X</font-awesome-icon
-                >
+                ></font-awesome-icon>
               </div>
             </div>
           </div>
@@ -34,7 +33,7 @@
       <div class="row border mb-3">
         <b-dropdown id="dropdown-1" text="Refine" class="col px-0">
           <b-dropdown-item
-            class="w-100"
+            class="w-100 text-capitalize"
             v-for="(categories, index) in category"
             :key="index"
             @click.native="setCategoryFilter(categories)"
@@ -101,20 +100,31 @@ export default {
       ],
       products: [],
       catFilter: [],
-      orderFilter: ""
+      orderFilter: "",
+      searchCondition: ["category"]
     };
+  },
+  props: {
+    searchContent: {
+      type: String
+    }
   },
   components: {
     catalog
   },
-  created() {
-    this.$store.dispatch("product/fetchProducts");
-    this.products = this.getProducts;
-  },
+  created() {},
 
   computed: {
     ...mapState(["product"]),
-    ...mapGetters("product", ["getProducts"])
+    ...mapGetters("product", ["getProducts"]),
+    searchFilter() {
+      return this.products.filter(product => {
+        return this.searchContent
+          .toLowerCase()
+          .split(" ")
+          .every(kw => product.name.toLowerCase().includes(kw));
+      });
+    }
   },
   methods: {
     groupBy: function(xs, key) {
@@ -136,17 +146,55 @@ export default {
     },
     clearFilter(i) {
       this.catFilter.splice(i, 1);
+      console.log("closer is clicked");
+    },
+    consoleTest() {
+      console.log("event is triggered");
     }
   },
+
   watch: {
     catFilter: {
       immediate: true,
       handler: function() {
         var vm = this;
+
         for (var i = 0; i < vm.catFilter.length; i++) {
           vm.products = vm.products.filter(
             product => product.category == vm.catFilter[i]
           );
+        }
+      }
+    },
+    "$route.params.searchContent": {
+      handler: function() {
+        var vm = this;
+        vm.$store.dispatch("product/fetchProducts");
+        vm.products = vm.getProducts;
+        vm.products = vm.searchFilter;
+
+        console.log("search is inserted");
+      },
+      immediate: true,
+      deep: true
+    },
+    orderFilter: {
+      immediate: true,
+      handler: function() {
+        var vm = this;
+        if (vm.orderFilter) {
+          switch (vm.orderFilter) {
+            case "Price (Low to High)":
+              vm.products.sort((a, b) => a.price - b.price);
+              break;
+
+            case "Price (High to Low)":
+              vm.products.sort((a, b) => b.price - a.price);
+              break;
+            case "On Sale":
+              vm.products.sort((a, b) => b.onsale - a.onsale);
+              break;
+          }
         }
       }
     }

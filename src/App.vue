@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main class="main-content">
-      <Nav></Nav>
+      <Nav v-if="!searchIsOn" @searchOverlayIsOn="toggleSearch"></Nav>
 
       <router-view :key="$route.fullPath"></router-view>
 
@@ -11,6 +11,11 @@
       <!--cart & overlay-->
       <cartCheckout></cartCheckout>
       <!--login layout-->
+      <!--searching overlay-->
+      <searchingOverlay
+        v-if="searchIsOn"
+        @closeSearch="toggleSearch"
+      ></searchingOverlay>
     </main>
   </div>
 </template>
@@ -18,14 +23,23 @@
 import Nav from "./components/Nav.vue";
 import cartCheckout from "./components/cartCheckout.vue";
 import foot from "@/components/footer.vue";
+import searchingOverlay from "@/components/searchingOverlay.vue";
 export default {
   components: {
     Nav,
     cartCheckout,
-    foot
+    foot,
+    searchingOverlay
   },
   data() {
-    return {};
+    return {
+      searchIsOn: false
+    };
+  },
+  methods: {
+    toggleSearch() {
+      this.searchIsOn = !this.searchIsOn;
+    }
   }
 };
 </script>

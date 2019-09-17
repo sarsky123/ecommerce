@@ -239,6 +239,12 @@ ul {
   overflow: hidden;
 }
 
+/*utility*/
+.centralized {
+  line-height: 1;
+  margin: auto;
+}
+
 /*Show & Hidden*/
 .noShowMeWhatUGot {
   right: -150% !important;
@@ -372,7 +378,7 @@ ul {
 
 @media screen and (max-width:576px) {
   .header-wrapper .site-header .nav-desktop .header-menu {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     border-left: none !important;
   }
@@ -458,8 +464,7 @@ ul {
   background-color: #000;
 }
 
-.header-wrapper .info-bar .textLinks {
-}
+.header-wrapper .info-bar .textLinks {}
 
 .header-wrapper .info-bar .textLinks a {
   text-transform: uppercase;
@@ -724,7 +729,7 @@ ul {
   grid-column-gap: 1.5em;
   grid-row-gap: 2em;
   overflow: hidden;
-  
+
 }
 
 .homepage-collection .grid-uniform .grid__item {

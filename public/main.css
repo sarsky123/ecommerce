@@ -442,7 +442,7 @@ ul {
   float: none;
   display: table-cell;
   vertical-align: middle;
-  width: 250px;
+  
 }
 
 @media screen and (max-width: 960px) {
@@ -883,7 +883,6 @@ footer .payment-icons li {
 
 .cartoverlay {
   overflow-y: scroll;
-
   position: fixed;
   top: 0;
   right: 0;

@@ -45,7 +45,7 @@
 
 <script>
 import productModal from "@/components/productModal.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   components: {
     productModal

@@ -132,9 +132,23 @@
           <div class="desktop-menu">
             <div
               class="
-              'wrapper header-menu nav-wrapper 
+              'wrapper header-menu nav-wrapper
             "
             >
+              <div
+                class="search d-inline-block clearfix centralize mr-3"
+                @click="openSearchOverlay"
+              >
+                <font-awesome-icon
+                  class="float-left  mr-3"
+                  :icon="['fas', 'search']"
+                />
+                <div
+                  class="search-onNav border-bottom border-black pr-5 text-capitalize float-right"
+                >
+                  Search
+                </div>
+              </div>
               <ul class="main-menu accessibleNav">
                 <li class="main-menu-active">
                   <router-link :to="{ name: 'shop' }">
@@ -159,6 +173,9 @@
                     @click.prevent="showPopupCart()"
                   >
                     cart
+                    <span v-if="getProductsInCart.length > 0"
+                      >({{ getProductsInCart.length }})</span
+                    >
                   </a>
                 </li>
               </ul>
@@ -176,6 +193,7 @@
             class="w-100 mx-auto py-2 text-center text-secondary mt-3 mb-0 border-none search-bar-label text-uppercase"
             name="search"
             id="search"
+            @click.prevent="openSearchOverlay"
           >
             <font-awesome-icon :icon="['fas', 'search']" />
             search
@@ -235,6 +253,9 @@ export default {
       this.isLogin = false;
       this.isActive = false;
       this.isRegister = false;
+    },
+    openSearchOverlay() {
+      this.$emit("searchOverlayIsOn");
     }
   },
   computed: {
@@ -247,6 +268,7 @@ export default {
     windowWidth: function() {
       if (this.windowWidth > 960) {
         this.isActive = false;
+        this.searchOn = false;
       } else if (this.windowWidth < 576 && this.isActive == true) {
         document.documentElement.style.overflow = "hidden";
         return;
@@ -267,6 +289,16 @@ export default {
   line-height: 1;
   margin: auto;
   font-size: 18px;
+  display: block;
+  :hover > :first-child {
+    color: #666 !important;
+  }
+  :hover > .search-onNav {
+    color: #666;
+  }
+}
+.search-onNav {
+  margin-bottom: -6px;
 }
 .mobile-menu {
   ul {
@@ -296,8 +328,9 @@ export default {
 }
 .search-bar {
   padding: 0;
+
   .search-bar-label {
-    border: 1px solid black;
+    border: 1px solid #ccc;
     border-left: none;
     border-right: none;
   }
