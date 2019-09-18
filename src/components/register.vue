@@ -15,7 +15,7 @@
         <ValidationObserver
           ref="observer"
           tag="form"
-          @submit.prevent="register()"
+          @submit.prevent="register"
           v-slot="{ invalid }"
         >
           <div class="row flex-column">
@@ -59,10 +59,10 @@
                 <span class="text-danger">{{ errors[0] }}</span>
               </validation-provider>
               <validation-provider
-                name="password"
-                rules="required|min:6|max:15"
+                rules="required|min:6|max:15|confirmed:confirmation"
                 :bails="false"
                 v-slot="{ errors }"
+                name="password"
               >
                 <label class="custom-label" for="password">
                   Password
@@ -70,17 +70,18 @@
                 <input
                   class="loginInput"
                   v-model="password"
+                  ref="password"
                   placeholder="Six or more characters"
                   type="password"
-                  name="password"
                   vid="password"
                   value
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
               </validation-provider>
               <validation-provider
-                name="password-confirmed"
-                rules="required|confirmed:password"
+                name="confirmation"
+                rules="required"
+                vid="confirmation"
                 :bails="false"
                 v-slot="{ errors }"
               >
@@ -91,7 +92,7 @@
                   class="loginInput"
                   placeholder="Enter password again to confirm"
                   type="password"
-                  name="confirm_password"
+                  v-model="confirmation"
                   value
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
@@ -128,27 +129,39 @@ export default {
     return {
       email: "",
       password: "",
-      name: ""
+      name: "",
+      confirmation: ""
     };
   },
   methods: {
     ...mapActions("authentication", ["loginAction"]),
+
     toggleLogin() {
       this.$emit("registerToggleRegister");
     },
     toggleMenu() {
       this.$emit("toggleRegister");
     },
-    register() {
-      this.$store
-        .dispatch("authentication/register", {
-          name: this.name,
-          email: this.email,
-          password: this.password
-        })
-        .then(() => {
-          this.toggleMenu();
-        });
+    async register() {
+      const isValid = await this.$refs.observer.validate();
+      if (!isValid) {
+        const notification = {
+          type: "danger",
+          message: "Your information is not valid, please do it again!"
+        };
+        this.$store.dispatch("notification/add", notification);
+      } else {
+        this.$store
+          .dispatch("authentication/register", {
+            name: this.name,
+            email: this.email,
+            password: this.password
+          })
+          .then(() => {
+            this.toggleMenu();
+            window.location.reload();
+          });
+      }
     }
   }
 };

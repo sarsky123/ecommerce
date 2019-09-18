@@ -16,6 +16,8 @@
         v-if="searchIsOn"
         @closeSearch="toggleSearch"
       ></searchingOverlay>
+      <!--notification-->
+      <notificationContainer />
     </main>
   </div>
 </template>
@@ -24,12 +26,14 @@ import Nav from "./components/Nav.vue";
 import cartCheckout from "./components/cartCheckout.vue";
 import foot from "@/components/footer.vue";
 import searchingOverlay from "@/components/searchingOverlay.vue";
+import notificationContainer from "@/components/notificationContainer.vue";
 export default {
   components: {
     Nav,
     cartCheckout,
     foot,
-    searchingOverlay
+    searchingOverlay,
+    notificationContainer
   },
   data() {
     return {
@@ -72,5 +76,13 @@ export default {
     transform: translateY(0%);
     opacity: 1;
   }
+}
+button:focus {
+  outline: 0 !important;
+}
+:focus {
+  outline: 0 !important;
+  outline-style: none !important;
+  outline-width: 0 !important;
 }
 </style>

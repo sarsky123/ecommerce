@@ -24,6 +24,7 @@
                 name="email"
                 rules="required|email"
                 :bails="false"
+                :persist="true"
                 v-slot="{ errors }"
               >
                 <label class="custom-label" for="email">
@@ -114,8 +115,11 @@ export default {
     async submit() {
       const isValid = await this.$refs.observer.validate();
       if (!isValid) {
-        // ABORT!!
-        console.log("oh nono");
+        const notification = {
+          type: "error",
+          message: "Your information is not valid, please do it again!"
+        };
+        this.$store.dispatch("notification/add", notification);
       } else {
         this.loginMethod();
       }
@@ -126,6 +130,7 @@ export default {
         password: this.password
       }).then(() => {
         this.toggleMenu();
+        window.location.reload();
       });
     },
     toggleRegister() {

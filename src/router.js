@@ -88,10 +88,18 @@ const router = new Router({
       props: true
     },
     {
-      path: "/search/:searchContent",
+      path: "/search",
       name: "search",
       component: search,
-      props: true
+      props: true,
+      children: [
+        {
+          path: "/search/:searchContent",
+          name: "search",
+          component: search,
+          props: true
+        }
+      ]
     }
   ]
 });

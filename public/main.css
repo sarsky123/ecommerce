@@ -696,11 +696,11 @@ ul {
 
 .homepage-collection .grid-uniform .grid__item img {
   display: block;
-  max-height: 100%;
+  
   max-width: 300px;
   margin: 0 auto;
   width: 100%;
-  min-height: 250px;
+  max-height: 250px !important;
 }
 
 .homepage-collection .grid-uniform .grid__item .figcaption {

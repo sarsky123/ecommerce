@@ -39,11 +39,49 @@ export const mutations = {
   }
 };
 export const actions = {
-  addProduct: (context, product) => {
-    context.commit("ADD_PRODUCT", product);
+  addProduct(context, product) {
+    async function add() {
+      await context.commit("ADD_PRODUCT", product);
+      return;
+    }
+    add()
+      .then(() => {
+        const notification = {
+          type: "success",
+          message: "Your product is in the cart!"
+        };
+        context.dispatch("notification/add", notification, { root: true });
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "There are some problem when you were adding product"
+        };
+        context.dispatch("notification/add", notification, { root: true });
+        throw error;
+      });
   },
   removeProduct: (context, index) => {
-    context.commit("REMOVE_PRODUCT", index);
+    async function remove() {
+      await context.commit("REMOVE_PRODUCT", index);
+      return;
+    }
+    remove()
+      .then(() => {
+        const notification = {
+          type: "warning",
+          message: "Selected Product has been removed"
+        };
+        context.dispatch("notification/add", notification, { root: true });
+      })
+      .catch(error => {
+        const notification = {
+          type: "error",
+          message: "There are some problem when you were removing the product"
+        };
+        context.dispatch("notification/add", notification, { root: true });
+        throw error;
+      });
   },
   currentProduct: (context, product) => {
     context.commit("CURRENT_PRODUCT", product);
