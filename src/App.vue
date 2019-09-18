@@ -3,8 +3,17 @@
     <main class="main-content">
       <Nav v-if="!searchIsOn" @searchOverlayIsOn="toggleSearch"></Nav>
 
-      <router-view :key="$route.fullPath"></router-view>
-
+      <transition
+        :enter-active-class="
+          transition ? 'animated fadeInDown' : 'animated fadeInRight'
+        "
+        :leave-active-class="
+          transition ? 'animated fadeOut' : 'animated fadeOut'
+        "
+        mode="out-in"
+      >
+        <router-view :key="$route.fullPath"></router-view>
+      </transition>
       <div class="mobile-footer">
         <foot />
       </div>
@@ -37,12 +46,22 @@ export default {
   },
   data() {
     return {
-      searchIsOn: false
+      searchIsOn: false,
+      transition: true
     };
   },
   methods: {
     toggleSearch() {
       this.searchIsOn = !this.searchIsOn;
+    }
+  },
+  watch: {
+    $route(to) {
+      if (to.path.includes("contact-us")) {
+        this.transition = false;
+      } else {
+        this.transition = true;
+      }
     }
   }
 };
@@ -85,4 +104,5 @@ button:focus {
   outline-style: none !important;
   outline-width: 0 !important;
 }
+/* Pure Css Loader for spinner purpose*/
 </style>

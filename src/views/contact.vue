@@ -13,7 +13,7 @@
         <b-nav-item
           ><router-link
             :to="{
-              name: 'customer-service'
+              path: '/contact-us'
             }"
             >CUSTOMER SERVICES</router-link
           ></b-nav-item
@@ -21,7 +21,7 @@
         <b-nav-item
           ><router-link
             :to="{
-              name: 'ourstore'
+              path: '/contact-us/ourstore'
             }"
             >OUR STORE</router-link
           ></b-nav-item
@@ -29,7 +29,7 @@
         <b-nav-item
           ><router-link
             :to="{
-              name: 'term-of-use'
+              path: '/contact-us/term-of-use'
             }"
             >TERMS OF USE</router-link
           ></b-nav-item
@@ -37,7 +37,7 @@
         <b-nav-item
           ><router-link
             :to="{
-              name: 'privacy'
+              path: '/contact-us/privacy'
             }"
             >PRIVACY POLICY</router-link
           ></b-nav-item

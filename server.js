@@ -9,6 +9,10 @@ const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  setTimeout(next, 2000);
+  setTimeout(res, 2000);
+});
 
 app.get("/", (req, res) => {
   res.json({

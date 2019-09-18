@@ -105,7 +105,8 @@
                 :class="invalid ? 'bg-secondary' : 'bg-dark'"
                 :disabled="invalid"
               >
-                Register
+                <spinner v-if="loading === true"> </spinner>
+                <span v-else>Register</span>
               </button>
 
               <div>
@@ -122,9 +123,13 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
+import Spinner from "./Spinner.vue";
 
 export default {
+  components: {
+    Spinner
+  },
   data() {
     return {
       email: "",
@@ -132,6 +137,9 @@ export default {
       name: "",
       confirmation: ""
     };
+  },
+  computed: {
+    ...mapState("authentication", ["loading"])
   },
   methods: {
     ...mapActions("authentication", ["loginAction"]),

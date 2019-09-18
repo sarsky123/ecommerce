@@ -5,6 +5,7 @@ import store from "./store/store";
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
 import BootstrapVue from "bootstrap-vue";
+import animate from "animate.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "./custom.scss";
@@ -23,6 +24,23 @@ import {
   configure
 } from "vee-validate";
 import * as rules from "vee-validate/dist/rules";
+
+//register all of the components globally
+const requireComponent = require.context(
+  "./components",
+  false,
+  /Base[A-Z]\w+\.(vue|js)$/
+);
+
+requireComponent.keys().forEach(fileName => {
+  const componentConfig = requireComponent(fileName);
+
+  const componentName = upperFirst(
+    camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, "$1"))
+  );
+
+  Vue.component(componentName, componentConfig.default || componentConfig);
+});
 
 // vee-validate
 for (let rule in rules) {
@@ -55,25 +73,9 @@ Vue.use(VueCarousel);
 
 //bootstrap
 Vue.use(BootstrapVue);
+Vue.use(animate);
 
 Vue.config.productionTip = false;
-
-//register all of the components globally
-const requireComponent = require.context(
-  "./components",
-  false,
-  /Base[A-Z]\w+\.(vue|js)$/
-);
-
-requireComponent.keys().forEach(fileName => {
-  const componentConfig = requireComponent(fileName);
-
-  const componentName = upperFirst(
-    camelCase(fileName.replace(/^\.\/(.*)\.\w+$/, "$1"))
-  );
-
-  Vue.component(componentName, componentConfig.default || componentConfig);
-});
 
 new Vue({
   router,

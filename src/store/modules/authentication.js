@@ -2,7 +2,8 @@ import axios from "axios";
 export const namespaced = true;
 
 export const state = {
-  user: null
+  user: null,
+  loading: false
 };
 export const mutations = {
   SET_USER_DATA(state, userData) {
@@ -13,10 +14,17 @@ export const mutations = {
   CLEAR_USER_DATA() {
     localStorage.removeItem("user");
     location.reload();
+  },
+  SET_LOADING(state) {
+    state.loading = true;
+  },
+  SET_LOADING_DONE(state) {
+    state.loading = false;
   }
 };
 export const actions = {
   register({ commit, dispatch }, credentails) {
+    commit("SET_LOADING");
     return axios
       .post("//localhost:3000/register", credentails)
       .then(({ data }) => {
@@ -26,6 +34,7 @@ export const actions = {
           message:
             "Thanks for registering, Your account has been logged in automaticly"
         };
+        commit("SET_LOADING_DONE");
         dispatch("notification/add", notification, { root: true });
       })
       .catch(error => {
@@ -33,6 +42,7 @@ export const actions = {
           type: "error",
           message: "There are some problem when you were trying to register"
         };
+        commit("SET_LOADING_DONE");
         dispatch("notification/add", notification, { root: true });
         throw error;
       });
@@ -40,12 +50,14 @@ export const actions = {
   loginAction({ commit, dispatch }, credentails) {
     return axios
       .post("//localhost:3000/login", credentails)
+      .then(commit("SET_LOADING"))
       .then(({ data }) => {
         commit("SET_USER_DATA", data);
         const notification = {
           type: "success",
           message: "Your account have logged in!"
         };
+        commit("SET_LOADING_DONE");
         dispatch("notification/add", notification, { root: true });
       })
       .catch(error => {
@@ -53,6 +65,7 @@ export const actions = {
           type: "error",
           message: "There are some problem when you were trying to login in"
         };
+        commit("SET_LOADING_DONE");
         dispatch("notification/add", notification, { root: true });
         throw error;
       });

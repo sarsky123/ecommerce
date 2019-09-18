@@ -12,6 +12,7 @@ import userLogin from "@/components/login.vue";
 import userRegister from "@/components/register.vue";
 import shop from "@/views/shop.vue";
 import search from "@/views/search.vue";
+import NProgress from "nprogress";
 
 Vue.use(Router);
 
@@ -33,32 +34,27 @@ const router = new Router({
     },
     {
       path: "/contact-us",
-      name: "cotact-us",
       component: contact,
       children: [
         {
-          path: "/contact-us/customer-service",
+          path: "",
           name: "customer-service",
-          component: customerService,
-          props: true
+          component: customerService
         },
         {
-          path: "/contact-us/ourstore",
+          path: "ourstore",
           name: "ourstore",
-          component: ourstore,
-          props: true
+          component: ourstore
         },
         {
-          path: "/contact-us/term-of-use",
+          path: "term-of-use",
           name: "term-of-use",
-          component: termOfUse,
-          props: true
+          component: termOfUse
         },
         {
-          path: "/contact-us/privacy",
+          path: "privacy",
           name: "privacy",
-          component: privacy,
-          props: true
+          component: privacy
         }
       ]
     },
@@ -95,14 +91,32 @@ const router = new Router({
       children: [
         {
           path: "/search/:searchContent",
-          name: "search",
+          name: "searchContent",
           component: search,
           props: true
         }
       ]
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
 });
+// Nprogress bar
+router.beforeResolve((to, from, next) => {
+  if (to.path) {
+    NProgress.start();
+  }
+  next();
+});
+router.afterEach(() => {
+  NProgress.done();
+});
+
 router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem("user");
   if (to.matched.some(record => record.meta.requiresAuth && !loggedIn)) {
