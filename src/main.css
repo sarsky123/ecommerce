@@ -366,7 +366,7 @@ ul {
     height: 12px;
     background: black;
     border-radius: 12px;
-    
+
     top: 50%;
     font-size: 0.5em;
     color: white;
@@ -566,13 +566,13 @@ ul {
     width: 100%;
   }
 
-  .header-wrapper .site-header .nav-desktop .header-menu .main-menu a {
+  .header-wrapper .site-header .nav-desktop .header-menu .main-menu a  {
     display: inline-block;
     padding-top: 15px;
     padding-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    font-size: 0.8em;
+    font-size: 0.8rem;
   }
 }
 

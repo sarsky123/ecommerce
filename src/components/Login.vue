@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container float-right">
+    <div class="container float-right" v-if="!AuthCheck()">
       <div class="row border-bottom">
         <div class="col px-4 py-3 border-bottom border-dark login-header">
           <h3 class="text-uppercase float-left m-0 font-weight-light">
@@ -15,7 +15,7 @@
         <ValidationObserver
           ref="observer"
           tag="form"
-          @submit.prevent="submit()"
+          @submit.prevent="auth0Login()"
           v-slot="{ invalid }"
         >
           <div class="row flex-column">
@@ -24,7 +24,6 @@
                 name="email"
                 rules="required|email"
                 :bails="false"
-                :persist="true"
                 v-slot="{ errors }"
               >
                 <label class="custom-label" for="email">
@@ -116,6 +115,26 @@ export default {
     ...mapState("authentication", ["loading"])
   },
   methods: {
+    //auth0
+    loginPopup() {
+      this.$store.dispatch("auth0/loginPopup");
+    },
+    AuthCheck() {
+      if (
+        localStorage.getItem("access_token") &&
+        localStorage.getItem("id_token") &&
+        localStorage.getItem("expires_at")
+      ) {
+        let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+        return new Date().getTime() < expiresAt;
+      }
+      return false;
+    },
+    auth0Login() {
+      this.$store.dispatch("auth0/auth0Login");
+    },
+
+    // default login
     ...mapActions("authentication", ["loginAction"]),
     toggleMenu() {
       this.$emit("toggleLogin");

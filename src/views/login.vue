@@ -13,13 +13,13 @@
         <b-nav-item
           ><router-link
             :to="{
-              name: 'userLogin'
+              name: 'login'
             }"
             >Login In</router-link
-          ></b-nav-item
-        >
-        <b-nav-item
-          ><router-link
+          >
+        </b-nav-item>
+        <b-nav-item>
+          <router-link
             :to="{
               name: 'userRegister'
             }"
@@ -35,7 +35,24 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      this.$store.dispatch("auth0/auth0Logout");
+    },
+    AuthCheck() {
+      if (
+        localStorage.getItem("access_token") &&
+        localStorage.getItem("id_token") &&
+        localStorage.getItem("expires_at")
+      ) {
+        let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+        return new Date().getTime() < expiresAt;
+      }
+      return false;
+    }
+  }
+};
 </script>
 
 <style lang="scss">

@@ -8,10 +8,12 @@
             <p class="float-right textLinks uppercase">
               <router-link
                 :to="{
-                  name: 'userLogin'
+                  name: 'login'
                 }"
+                v-if="!AuthCheck()"
                 >Login In</router-link
               >
+              <a href="#" v-else @click.prevent="logOut()">Log Out</a>
               &nbsp; · &nbsp;
               <router-link
                 :to="{
@@ -94,8 +96,21 @@
                   class="col bg-secondary text-capitalize text-center p-3
                 border-right border-light "
                   @click="toggleLoginMenu()"
+                  v-if="!AuthCheck()"
                 >
                   Login
+                </div>
+                <div
+                  class="col bg-secondary text-capitalize text-center p-3
+                border-right border-light "
+                  v-else
+                >
+                  <router-link
+                    :to="{ name: 'member' }"
+                    class="text-dark text-decoration-none"
+                  >
+                    Manage Account
+                  </router-link>
                 </div>
                 <div class="col bg-secondary text-capitalize text-center p-3">
                   whishlist
@@ -103,7 +118,7 @@
               </div>
             </div>
             <ul class="main-menu accessibleNav">
-              <router-link :to="{ name: 'shop' }">
+              <router-link :to="{ name: 'shop' }" class="p-0 shop-link">
                 <li class="main-menu-active">
                   <a href="/" class="link">Shop</a>
                 </li>
@@ -232,6 +247,20 @@ export default {
     toggleSearch() {
       this.searchOn = !this.searchOn;
     },
+    AuthCheck() {
+      if (
+        localStorage.getItem("access_token") &&
+        localStorage.getItem("id_token") &&
+        localStorage.getItem("expires_at")
+      ) {
+        let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+        return new Date().getTime() < expiresAt;
+      }
+      return false;
+    },
+    logOut() {
+      this.$store.dispatch("auth0/auth0Logout");
+    },
 
     hasProduct() {
       return this.getProductsInCart.length > 0;
@@ -310,7 +339,8 @@ export default {
       }
     }
   }
-  ul > li {
+  ul > li,
+  ul > .shop-link {
     font-size: 18px;
     position: relative;
     ::after {

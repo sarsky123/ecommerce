@@ -1,0 +1,7 @@
+"scripts": {
+    "presets": [
+        "env"
+    ],
+    "dev": "webpack-dev-server --mode development --progress --hot --open",
+    "build": "webpack --mode production --progress"
+}

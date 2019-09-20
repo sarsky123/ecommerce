@@ -1,4 +1,5 @@
 import Vue from "vue";
+import Store from "./store/store";
 import Router from "vue-router";
 import home from "@/views/Home.vue";
 import productDetail from "@/views/productDetail.vue";
@@ -10,7 +11,9 @@ import termOfUse from "@/components/termOfUse.vue";
 import login_register from "@/views/login.vue";
 import userLogin from "@/components/login.vue";
 import userRegister from "@/components/register.vue";
+import callback from "@/components/callback.vue";
 import shop from "@/views/shop.vue";
+import member from "@/views/member.vue";
 import search from "@/views/search.vue";
 import NProgress from "nprogress";
 
@@ -31,6 +34,11 @@ const router = new Router({
       name: "product-detail",
       component: productDetail,
       props: true
+    },
+    {
+      path: "/callback",
+      name: "callback",
+      component: callback
     },
     {
       path: "/contact-us",
@@ -59,13 +67,18 @@ const router = new Router({
       ]
     },
     {
+      path: "/member",
+      name: "member",
+      component: member,
+      meta: { requiresAuth: true }
+    },
+    {
       path: "/login",
-      name: "login",
       component: login_register,
       children: [
         {
-          path: "/login/login",
-          name: "userLogin",
+          path: "",
+          name: "login",
           component: userLogin,
           props: true
         },
@@ -118,11 +131,46 @@ router.afterEach(() => {
 });
 
 router.beforeEach((to, from, next) => {
-  const loggedIn = localStorage.getItem("user");
-  if (to.matched.some(record => record.meta.requiresAuth && !loggedIn)) {
-    next("/");
+  // Allow finishing callback url for logging in
+  if (to.matched.some(record => record.path == "/callback")) {
+    console.log("router.beforeEach found callback url");
+    Store.dispatch("auth0/auth0HandleAuthentication");
+    next(false);
   }
-  next();
+
+  // check if user is logged in (start assuming the user is not logged in = false)
+  let routerAuthCheck = false;
+  // Verify all the proper access variables are present for proper authorization
+  if (
+    localStorage.getItem("access_token") &&
+    localStorage.getItem("id_token") &&
+    localStorage.getItem("expires_at")
+  ) {
+    console.log("found local storage tokens");
+    // Check whether the current time is past the Access Token's expiry time
+    let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
+    // set localAuthTokenCheck true if unexpired / false if expired
+    routerAuthCheck = new Date().getTime() < expiresAt;
+  }
+
+  // set global ui understanding of authentication
+  Store.dispatch("auth0/setUserIsAuthenticated", routerAuthCheck);
+
+  // check if the route to be accessed requires authorizaton
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    // Check if user is Authenticated
+    if (routerAuthCheck) {
+      // user is Authenticated - allow access
+      next();
+    } else {
+      // user is not authenticated - redirect to login
+      router.replace("/login");
+    }
+  }
+  // Allow page to load
+  else {
+    next();
+  }
 });
 
 export default router;

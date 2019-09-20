@@ -17,6 +17,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import VueWindowSize from "vue-window-size";
 import VueCarousel from "vue-carousel";
 import axios from "axios";
+import auth0SPA from "@auth0/auth0-spa-js";
 import {
   ValidationProvider,
   ValidationObserver,
@@ -67,13 +68,16 @@ Vue.component("font-awesome-layers", FontAwesomeLayers);
 Vue.component("font-awesome-layers-text", FontAwesomeLayersText);
 
 //plugin
-Vue.use(BootstrapVue);
-Vue.use(VueWindowSize);
-Vue.use(VueCarousel);
 
 //bootstrap
 Vue.use(BootstrapVue);
 Vue.use(animate);
+Vue.use(BootstrapVue);
+
+//misc
+Vue.use(VueWindowSize);
+Vue.use(VueCarousel);
+Vue.use(auth0SPA);
 
 Vue.config.productionTip = false;
 
