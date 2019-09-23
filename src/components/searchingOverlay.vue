@@ -34,7 +34,7 @@ export default {
     },
     searchSubmit() {
       this.$router.push({
-        name: "search",
+        name: "searchContent",
         params: { searchContent: this.searchContent }
       });
       this.closeSearch();

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container float-right" v-if="!AuthCheck()">
+    <div class="container float-right mb-5" v-if="!AuthCheck()">
       <div class="row border-bottom">
         <div class="col px-4 py-3 border-bottom border-dark login-header">
           <h3 class="text-uppercase float-left m-0 font-weight-light">
@@ -116,8 +116,8 @@ export default {
   },
   methods: {
     //auth0
-    loginPopup() {
-      this.$store.dispatch("auth0/loginPopup");
+    loginRedirect() {
+      this.$store.dispatch("auth0/loginRedirect");
     },
     AuthCheck() {
       if (

@@ -3,8 +3,14 @@
     <div class="search-page-header">
       <div class="search-info">
         <div class="row">
-          <div class="col pb-3 text-center" v-if="searchContent">
+          <div
+            class="search-result col pb-3 text-center d-flex justify-content-center"
+            v-if="searchContent"
+          >
             <p>Search results for: {{ searchContent }}</p>
+            <span class="d-inline-block ml-3" @click="clearSearch()"
+              ><font-awesome-icon :icon="['fas', 'times']"></font-awesome-icon
+            ></span>
           </div>
         </div>
         <div class="row mb-4 mx-3">
@@ -20,7 +26,7 @@
               >
                 {{ filterCat }}
                 <font-awesome-icon
-                  :icon="['fab', 'instagram']"
+                  :icon="['fab', 'times']"
                   @click.native="clearFilter(index)"
                 ></font-awesome-icon>
               </div>
@@ -74,7 +80,7 @@
 <script>
 import catalog from "@/components/catalog.vue";
 
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -112,19 +118,8 @@ export default {
   components: {
     catalog
   },
-  created() {},
-
   computed: {
-    ...mapState(["product"]),
-    ...mapGetters("product", ["getProducts"]),
-    searchFilter() {
-      return this.products.filter(product => {
-        return this.searchContent
-          .toLowerCase()
-          .split(" ")
-          .every(kw => product.name.toLowerCase().includes(kw));
-      });
-    }
+    ...mapGetters("product", ["getProducts", "getFilteredProducts"])
   },
   methods: {
     groupBy: function(xs, key) {
@@ -133,10 +128,7 @@ export default {
         return rv;
       }, {});
     },
-    setCategoryFilter(p) {
-      this.catFilter.push(p);
-      this.catFilter = this.uniqueConstructor(this.catFilter);
-    },
+
     setOrderFilter(p) {
       this.orderFilter = p;
     },
@@ -148,38 +140,29 @@ export default {
       this.catFilter.splice(i, 1);
       console.log("closer is clicked");
     },
-    consoleTest() {
-      console.log("event is triggered");
+    clearSearch() {
+      this.$router.push("/search");
+      console.log("clearsearch is clicked");
     }
   },
 
   watch: {
-    catFilter: {
+    getFilteredProducts: {
       immediate: true,
       handler: function() {
-        var vm = this;
-
-        for (var i = 0; i < vm.catFilter.length; i++) {
-          vm.products = vm.products.filter(
-            product => product.category == vm.catFilter[i]
-          );
-        }
+        this.products = this.getFilteredProducts;
       }
     },
+    catFilter: {},
     "$route.params.searchContent": {
+      immediate: true,
       handler: function() {
         var vm = this;
-        vm.$store.dispatch("product/fetchProducts");
-        vm.products = vm.getProducts;
-        vm.products = vm.searchFilter;
-
-        console.log("search is inserted");
-      },
-      immediate: true,
-      deep: true
+        vm.$store.dispatch("product/filterProduct", vm.searchContent);
+        vm.$store.dispatch("product/fetchFilteredProduct");
+      }
     },
     orderFilter: {
-      immediate: true,
       handler: function() {
         var vm = this;
         if (vm.orderFilter) {
@@ -203,6 +186,18 @@ export default {
 </script>
 
 <style lang="scss">
+.search-result {
+  > p {
+    font-size: 16px;
+    margin: 0;
+  }
+  > span {
+    font-weight: lighter;
+    font-size: 13px;
+    line-height: 1;
+    margin: auto 0;
+  }
+}
 .dropdown-toggle {
   width: 100%;
 }

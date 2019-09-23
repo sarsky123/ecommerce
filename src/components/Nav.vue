@@ -95,9 +95,10 @@
                 <div
                   class="col bg-secondary text-capitalize text-center p-3
                 border-right border-light "
-                  @click="toggleLoginMenu()"
+                  @click="signIn()"
                   v-if="!AuthCheck()"
                 >
+                  <font-awesome-icon :icon="['fas', 'sign-in-alt']" />
                   Login
                 </div>
                 <div
@@ -109,10 +110,12 @@
                     :to="{ name: 'member' }"
                     class="text-dark text-decoration-none"
                   >
-                    Manage Account
+                    <font-awesome-icon :icon="['far', 'user']" class="mr-2" />
+                    <span class="text-capitalize">Your Account</span>
                   </router-link>
                 </div>
                 <div class="col bg-secondary text-capitalize text-center p-3">
+                  <font-awesome-icon :icon="['far', 'heart']" />
                   whishlist
                 </div>
               </div>
@@ -257,6 +260,9 @@ export default {
         return new Date().getTime() < expiresAt;
       }
       return false;
+    },
+    signIn() {
+      this.$store.dispatch("auth0/auth0Login");
     },
     logOut() {
       this.$store.dispatch("auth0/auth0Logout");

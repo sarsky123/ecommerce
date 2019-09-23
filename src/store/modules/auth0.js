@@ -1,16 +1,8 @@
-import auth0 from "auth0-js";
-import createAuth0Client from "@auth0/auth0-spa-js";
 import router from "../../router.js";
+import webAuth from "../../plugins/auth0";
 
 export const state = {
-  userIsAuthorized: false,
-  auth0: new auth0.WebAuth({
-    domain: process.env.VUE_APP_AUTH0_CONFIG_DOMAIN,
-    clientID: process.env.VUE_APP_AUTH0_CONFIG_CLIENTID,
-    redirectUri: process.env.VUE_APP_DOMAINURL + "/callback",
-    responseType: process.env.VUE_APP_AUTH0_CONFIG_RESPONSETYPE,
-    scope: process.env.VUE_APP_AUTH0_CONFIG_SCOPE
-  })
+  userIsAuthorized: false
 };
 
 export const mutations = {
@@ -22,12 +14,12 @@ export const actions = {
   setUserIsAuthenticated(context, replacement) {
     context.commit("SET_USER_IS_AUTHENTICATED", replacement);
   },
-  auth0Login(context) {
+  auth0Login() {
     console.log("in a store action named auth0Login");
-    context.state.auth0.authorize();
+    webAuth.authorize();
   },
-  auth0HandleAuthentication(context) {
-    context.state.auth0.parseHash((err, authResult) => {
+  auth0HandleAuthentication() {
+    webAuth.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         let expiresAt = JSON.stringify(
           authResult.expiresIn * 1000 + new Date().getTime()
@@ -60,27 +52,6 @@ export const actions = {
       process.env.VUE_APP_DOMAINURL +
       "/login&client_id=" +
       process.env.VUE_APP_AUTH0_CONFIG_CLIENTID;
-  },
-  // auth0 SPA
-  async loginPopup(context) {
-    context.dispatch("auth0SPA").then(auth => {
-      auth.loginWithPopup();
-    });
-  },
-  async auth0SPA() {
-    const auth = await createAuth0Client({
-      domain: process.env.VUE_APP_AUTH0_CONFIG_DOMAIN,
-      clientID: process.env.VUE_APP_AUTH0_CONFIG_CLIENTID,
-      redirectUri: process.env.VUE_APP_DOMAINURL + "/callback",
-      responseType: process.env.VUE_APP_AUTH0_CONFIG_RESPONSETYPE,
-      scope: process.env.VUE_APP_AUTH0_CONFIG_SCOPE
-    });
-    return auth;
-  },
-  async auth0HandleRedirectCallback(context) {
-    context.dispatch("auth0SPA").then(auth => {
-      auth.hadleRedirectCallback();
-    });
   }
 };
 

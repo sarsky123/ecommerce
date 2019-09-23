@@ -196,6 +196,7 @@ export default {
   },
   created() {
     this.$store.dispatch("product/fetchProducts");
+    this.$store.dispatch("product/fetchFilteredProduct");
   },
   mounted() {
     if (this.windowWidth > 960) {
@@ -226,28 +227,30 @@ export default {
 
 <style lang="scss">
 .hero-2 {
-  width: 67%;
+  width: 73%;
+  max-width: 980px;
   background-color: white;
   position: relative;
-  .col {
+  .col,
+  .col-5 {
+    padding: 5px 5px;
+  }
+  > .row:first-child {
+    height: 45%;
+    max-height: 230px;
+    margin-bottom: 15px;
+  }
+  > div:first-child {
     max-height: 230px;
     padding-bottom: 10px;
     overflow: hidden;
   }
-  .row {
-  }
-  > .row > div {
-    overflow: hidden;
-    height: auto;
-  }
-
   img {
+    object-fit: cover;
     display: block;
-    padding: 0 15px 15px 0;
-    overflow: hidden;
     background-position: center;
-    width: auto;
-    max-width: 100%;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -310,6 +313,14 @@ export default {
 @media screen and (max-width: 576px) {
   .homepage-custom {
     display: none;
+  }
+}
+.grid__image {
+  display: block;
+  height: 67%;
+  > img {
+    height: 100%;
+    object-fit: cover !important;
   }
 }
 

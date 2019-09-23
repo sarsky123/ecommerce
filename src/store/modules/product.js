@@ -1,11 +1,14 @@
 import productService from "@/services/productService.js";
-
+const contentful = require("contentful");
 export const namespaced = true;
 
 export const state = {
   products: [],
   productsTotal: 0,
-  product: {}
+  product: {},
+  filterCondition: [],
+  filteredProduct: [],
+  productOrder: []
 };
 
 export const mutations = {
@@ -20,6 +23,15 @@ export const mutations = {
   },
   SET_PRODUCTS(state, products) {
     state.products = products;
+  },
+  SET_FILTERCONDITION(state, condition) {
+    state.filterCondition = condition;
+  },
+  SET_PRODUCT_FILTERED(state, payload) {
+    state.filteredProduct = payload;
+  },
+  SET_PRODUCT_ORDER(state, order) {
+    state.productOrder = order;
   }
 };
 
@@ -36,28 +48,52 @@ export const actions = {
         });
     }
   },
+  async fetchFilteredProduct({ commit, getters }) {
+    const apiClient = contentful.createClient({
+      space: "d1c4u2kmipnr",
+      accessToken: "7TjtAOZ-I8BkPvGsU-UvvB6QusdRMcjV4LjF1o3vre0"
+    });
+    await apiClient
+      .getEntries({
+        content_type: "ecommerce",
+        query: getters.getfilterCondition,
+        order: "fields.price"
+      })
+      .then(res => {
+        let contentful = res;
+        let products = contentful.items;
 
-  fetchProduct({ commit, getters }, id) {
-    var product = getters.getProductById(id);
-
-    if (product) {
-      commit("SET_PRODUCT", product);
-    } else {
-      productService
-        .getProduct(id)
-        .then(response => {
-          commit("SET_PRODUCT", response.data);
-        })
-        .catch(error => {
-          console.log(error);
+        products = products.map(item => {
+          const { title, name, category, onsale, gender } = item.fields;
+          const { id } = item.sys;
+          const image = "https:" + item.fields.image.fields.file.url + "?w=500";
+          const price = item.fields.price.toFixed(2);
+          return { title, price, id, image, name, category, onsale, gender };
         });
-    }
+        console.log(products);
+
+        return products;
+      })
+      .then(products => {
+        commit("SET_PRODUCT_FILTERED", products);
+      })
+      .catch(error => console.log(error));
+  },
+
+  filterProduct({ commit }, condition) {
+    commit("SET_FILTERCONDITION", condition);
+  },
+  setProductOrder({ commit }, order) {
+    commit("SET_PRODUCT_ORDER", order);
   }
 };
 export const getters = {
   getProductById: state => id => {
     return state.products.find(product => product.id == id);
   },
+  getfilterCondition: state => state.filterCondition,
 
-  getProducts: state => state.products
+  getProducts: state => state.products,
+  getFilteredProducts: state => state.filteredProduct,
+  getProductOrder: state => state.productOrder
 };

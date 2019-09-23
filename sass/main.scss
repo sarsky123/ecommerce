@@ -666,17 +666,18 @@ ul {
         transition: $transition;
 
         .grid__item>img {
+
           opacity: 0.5;
         }
       }
 
       img {
+        object-fit: contain;
         display: block;
-        max-height: 100%;
         max-width: 300px;
         margin: 0 auto;
         width: 100%;
-        min-height: 250px;
+        max-height: 250px;
       }
 
       .figcaption {
