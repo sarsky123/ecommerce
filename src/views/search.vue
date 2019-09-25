@@ -14,14 +14,14 @@
           </div>
         </div>
         <div class="row mb-4 mx-3">
-          <div class="col mx-5 mb-4" v-if="catFilter.length">
+          <div class="col mx-5 mb-4" v-if="searchQuery.length">
             <div class="row">
               <p>Search in:</p>
             </div>
             <div class="row">
               <div
                 class="d-inline-block py-1 px-2 mr-3 text-uppercase border"
-                v-for="(filterCat, index) in catFilter"
+                v-for="(filterCat, index) in searchQuery"
                 :key="index"
               >
                 {{ filterCat }}
@@ -37,14 +37,13 @@
     </div>
     <div class="search-filter">
       <div class="row border mb-3">
-        <b-dropdown id="dropdown-1" text="Refine" class="col px-0">
-          <b-dropdown-item
-            class="w-100 text-capitalize"
-            v-for="(categories, index) in category"
-            :key="index"
-            @click.native="setCategoryFilter(categories)"
-            >{{ categories }}</b-dropdown-item
-          >
+        <b-dropdown
+          @toggle="toggleFilter()"
+          text="Refine"
+          class="col px-0"
+          menu-class="d-none"
+          no-flip
+        >
         </b-dropdown>
 
         <b-dropdown id="dropdown-1" text="Sort By" class="col px-0">
@@ -74,40 +73,51 @@
         </div>
       </div>
     </div>
+    <!--overlay for filter-->
+    <filterOverlay
+      v-if="filterIsOn"
+      @closeFilter="toggleFilter()"
+      :gender="gender"
+      :category="categoryMatchProduct"
+      :accessories="accessoriesMatchProduct"
+      :totalProduct="products"
+      @filterAdded="addFilterCondition"
+      @addFilterBrand="addFilterBrand"
+      @clearAll="clearALL()"
+    ></filterOverlay>
   </div>
 </template>
 
 <script>
 import catalog from "@/components/catalog.vue";
-
+import filterOverlay from "@/components/filterOverlay.vue";
 import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      filterIsOn: false,
       sort: ["Price (Low to High)", "Price (High to Low)", "On Sale"],
       gender: ["man", "woman"],
+      accessories: ["hats", "sunglasses", "watches", "gloves", "bags"],
+      products: [],
+      filterCondition: [],
+      searchQuery: [],
+      filterBrand: [],
       category: [
         "cloth",
-        "bags",
-        "hats",
-        "sunglasses",
-        "watches",
         "dresses",
         "coats",
         "jackets",
         "jeans",
         "boots",
         "sneakers",
-        "gloves",
         "tops",
         "shorts",
         "skirts",
         "suits"
       ],
-      products: [],
-      catFilter: [],
       orderFilter: "",
-      searchCondition: ["category"]
+      searchCondition: []
     };
   },
   props: {
@@ -116,10 +126,31 @@ export default {
     }
   },
   components: {
-    catalog
+    catalog,
+    filterOverlay
   },
   computed: {
-    ...mapGetters("product", ["getProducts", "getFilteredProducts"])
+    ...mapGetters("product", ["getProducts", "getFilteredProducts"]),
+    categoryMatchProduct() {
+      var prod = this.products;
+      var arr = prod.map(prod => prod.category);
+      arr = this.uniqueConstructor(arr);
+      arr = arr.filter(
+        obj => obj !== undefined && this.accessories.indexOf(obj) == -1
+      );
+
+      return arr;
+    },
+    accessoriesMatchProduct() {
+      var prod = this.products;
+      var arr = prod.map(prod => prod.category);
+      arr = this.uniqueConstructor(arr);
+      arr = arr.filter(
+        obj => obj !== undefined && this.accessories.indexOf(obj) >= 0
+      );
+
+      return arr;
+    }
   },
   methods: {
     groupBy: function(xs, key) {
@@ -128,38 +159,67 @@ export default {
         return rv;
       }, {});
     },
-
-    setOrderFilter(p) {
-      this.orderFilter = p;
-    },
     uniqueConstructor(arr) {
       arr = [...new Set(arr)];
       return arr;
     },
+    setOrderFilter(p) {
+      this.orderFilter = p;
+    },
+    clearALL() {
+      this.filterCondition = [];
+      this.filterBrand = [];
+    },
+
     clearFilter(i) {
-      this.catFilter.splice(i, 1);
+      this.searchQuery.splice(i, 1);
       console.log("closer is clicked");
     },
     clearSearch() {
       this.$router.push("/search");
       console.log("clearsearch is clicked");
+    },
+    toggleFilter() {
+      this.filterIsOn = !this.filterIsOn;
+    },
+    addFilterCondition(payload) {
+      this.filterCondition = payload;
+    },
+    addFilterBrand(payload) {
+      this.filterBrand = payload;
     }
   },
 
   watch: {
+    filterCondition: {
+      immediate: true,
+      handler: function() {
+        var vm = this;
+        vm.$store.dispatch("product/filterProduct", vm.filterCondition);
+        vm.$store.dispatch("product/fetchFilteredProduct");
+      }
+    },
+    filterBrand: {
+      immediate: true,
+      handler: function() {
+        var vm = this;
+        vm.$store.dispatch("product/filterBrand", vm.filterBrand);
+        vm.$store.dispatch("product/fetchFilteredProduct");
+      }
+    },
     getFilteredProducts: {
       immediate: true,
       handler: function() {
         this.products = this.getFilteredProducts;
       }
     },
-    catFilter: {},
     "$route.params.searchContent": {
       immediate: true,
-      handler: function() {
+      handler: async function() {
         var vm = this;
-        vm.$store.dispatch("product/filterProduct", vm.searchContent);
-        vm.$store.dispatch("product/fetchFilteredProduct");
+        await vm.$store
+          .dispatch("product/setSearching", vm.searchContent)
+          .then(vm.$store.dispatch("product/fetchFilteredProduct"));
       }
     },
     orderFilter: {

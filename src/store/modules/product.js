@@ -6,9 +6,11 @@ export const state = {
   products: [],
   productsTotal: 0,
   product: {},
+  filterBrand: [],
   filterCondition: [],
   filteredProduct: [],
-  productOrder: []
+  productOrder: [],
+  searchingInsert: []
 };
 
 export const mutations = {
@@ -26,6 +28,12 @@ export const mutations = {
   },
   SET_FILTERCONDITION(state, condition) {
     state.filterCondition = condition;
+  },
+  SET_BRAND(state, condition) {
+    state.filterBrand = condition;
+  },
+  SET_SEARCH(state, condition) {
+    state.searchingInsert = condition;
   },
   SET_PRODUCT_FILTERED(state, payload) {
     state.filteredProduct = payload;
@@ -56,7 +64,9 @@ export const actions = {
     await apiClient
       .getEntries({
         content_type: "ecommerce",
-        query: getters.getfilterCondition,
+        query: getters.getSearch,
+        "fields.category": getters.getfilterCondition,
+        "fields.title": getters.getFilterBrand,
         order: "fields.price"
       })
       .then(res => {
@@ -70,8 +80,6 @@ export const actions = {
           const price = item.fields.price.toFixed(2);
           return { title, price, id, image, name, category, onsale, gender };
         });
-        console.log(products);
-
         return products;
       })
       .then(products => {
@@ -85,6 +93,12 @@ export const actions = {
   },
   setProductOrder({ commit }, order) {
     commit("SET_PRODUCT_ORDER", order);
+  },
+  setSearching({ commit }, condition) {
+    commit("SET_SEARCH", condition);
+  },
+  filterBrand({ commit }, condition) {
+    commit("SET_BRAND", condition);
   }
 };
 export const getters = {
@@ -92,8 +106,9 @@ export const getters = {
     return state.products.find(product => product.id == id);
   },
   getfilterCondition: state => state.filterCondition,
-
+  getSearch: state => state.searchingInsert,
   getProducts: state => state.products,
   getFilteredProducts: state => state.filteredProduct,
+  getFilterBrand: state => state.filterBrand,
   getProductOrder: state => state.productOrder
 };

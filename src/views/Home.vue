@@ -10,18 +10,23 @@
         </div>
       </div>
       <div class="scroll-icon-wrap">
-        <a
-          href="javascript:void(0)"
-          class="scroll_icon icon icon-arrow-down icon-fallback-text"
-        >
-          <div class="arrow"></div>
+        <a href="javascript:void(0)">
+          <div>
+            <div
+              class="container scroll_icon icon icon-arrow-down icon-fallback-text"
+            >
+              <a data-scroll href="#hero-2">
+                <div class="arrow"></div>
+              </a>
+            </div>
+          </div>
         </a>
       </div>
       <div id="scroll"></div>
       <div class="hero-image-overlay"></div>
     </div>
     <div class="bg-white pt-5">
-      <div class="hero-2 mx-auto">
+      <div id="hero-2" class="hero-2 mx-auto">
         <div class="row">
           <div class="col-7">
             <img src="../assets/img/3.png" alt="1" />
@@ -226,6 +231,27 @@ export default {
 </script>
 
 <style lang="scss">
+.arrow {
+  box-sizing: border-box;
+  height: 2vw;
+  width: 2vw;
+  border-style: solid;
+  border-color: white;
+  border-width: 0px 1px 1px 0px;
+  transform: rotate(45deg);
+  transition: border-width 150ms ease-in-out;
+}
+.icon-arrow-down {
+  > a {
+    padding-right: calc(4cw+24px);
+    display: block;
+  }
+}
+
+.arrow:hover {
+  border-bottom-width: 4px;
+  border-right-width: 4px;
+}
 .hero-2 {
   width: 73%;
   max-width: 980px;

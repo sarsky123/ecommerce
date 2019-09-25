@@ -4,12 +4,8 @@
       <Nav v-if="!searchIsOn" @searchOverlayIsOn="toggleSearch"></Nav>
 
       <transition
-        :enter-active-class="
-          transition ? 'animated fadeInDown' : 'animated fadeInRight'
-        "
-        :leave-active-class="
-          transition ? 'animated fadeOut' : 'animated fadeOut'
-        "
+        :enter-active-class="animationActive"
+        :leave-active-class="animationLeave"
         mode="out-in"
       >
         <router-view :key="$route.fullPath"></router-view>
@@ -36,6 +32,7 @@ import cartCheckout from "./components/cartCheckout.vue";
 import foot from "@/components/footer.vue";
 import searchingOverlay from "@/components/searchingOverlay.vue";
 import notificationContainer from "@/components/notificationContainer.vue";
+
 export default {
   components: {
     Nav,
@@ -47,7 +44,9 @@ export default {
   data() {
     return {
       searchIsOn: false,
-      transition: true
+      transition: true,
+      animationActive: "",
+      animationLeave: ""
     };
   },
   methods: {
@@ -56,11 +55,16 @@ export default {
     }
   },
   watch: {
-    $route(to) {
+    $route(to, from) {
       if (to.path.includes("contact-us")) {
-        this.transition = false;
+        this.animationActive = "animated fadeInRight";
+        this.animationLeave = "animated fadeOut";
+      } else if (to.name == "searchContent" || from.name == "searchContent") {
+        this.animationActive = "";
+        this.animationLeave = "";
       } else {
-        this.transition = true;
+        this.animationActive = "animated fadeInDown";
+        this.animationLeave = "animated fadeOut";
       }
     }
   }
