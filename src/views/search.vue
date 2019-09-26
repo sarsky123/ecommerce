@@ -1,6 +1,33 @@
 <template>
   <div class="search-page w-100">
     <div class="search-page-header">
+      <div class="search-hero d-flex w-100  clearfix">
+        <div class="search-hero-row w-100 d-flex flex-column flex-md-row">
+          <div
+            class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center"
+          >
+            <div
+              class="row d-flex flex-column justify-content-center align-items-center w-50 text-center landing-left"
+            >
+              <h3>Autumn Wears</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Temporibus nihil ipsam reprehenderit? Unde natus veniam
+                obcaecati soluta ea ut quam laudantium corrupti fugit. Nihil,
+                cum.
+              </p>
+              <button class="btn btn-dark">
+                Shop Now
+              </button>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 ">
+            <div class="d-none d-md-flex col-md-12 col-lg-10 landing-image">
+              <div class="landing-image-inner"></div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="search-info">
         <div class="row">
           <div
@@ -42,6 +69,8 @@
           text="Refine"
           class="col px-0"
           menu-class="d-none"
+          toggle-class="border-none "
+          variant="bg-none"
           no-flip
         >
         </b-dropdown>
@@ -51,6 +80,8 @@
             class="w-100"
             v-for="(sortOrder, index) in sort"
             :key="index"
+            menu-class="d-none"
+            variant="bg-none"
             @click.native="setOrderFilter(sortOrder)"
             >{{ sortOrder }}</b-dropdown-item
           >
@@ -176,7 +207,7 @@ export default {
       console.log("closer is clicked");
     },
     clearSearch() {
-      this.$router.push("/search");
+      this.$router.push("/store");
       console.log("clearsearch is clicked");
     },
     toggleFilter() {
@@ -192,15 +223,14 @@ export default {
 
   watch: {
     filterCondition: {
-      immediate: true,
       handler: function() {
         var vm = this;
         vm.$store.dispatch("product/filterProduct", vm.filterCondition);
         vm.$store.dispatch("product/fetchFilteredProduct");
       }
     },
+
     filterBrand: {
-      immediate: true,
       handler: function() {
         var vm = this;
         vm.$store.dispatch("product/filterBrand", vm.filterBrand);
@@ -213,7 +243,7 @@ export default {
         this.products = this.getFilteredProducts;
       }
     },
-    "$route.params.searchContent": {
+    searchContent: {
       immediate: true,
       handler: async function() {
         var vm = this;
@@ -288,5 +318,89 @@ export default {
 .shop-wrapper {
   border-bottom: 1px solid #000;
   padding: 50px;
+}
+.search-filter {
+  width: 100%;
+  overflow: hidden;
+  .btn {
+    background-color: #e3aaaa !important;
+    opacity: 0.7;
+    border-radius: 0;
+    color: white;
+  }
+}
+.search-hero {
+  background-color: rgba(227, 170, 170, 0.4);
+  padding: 35px;
+  > .search-hero-row {
+    margin-right: -15px;
+    > div:first-child {
+      padding: 35px 0;
+    }
+  }
+}
+.landing-left {
+  z-index: 2;
+  > h3 {
+    color: rgb(255, 153, 153);
+    font-size: 26px;
+    text-shadow: 1px 1px 3px white, 1px 1px 3px white, 1px 1px 3px white;
+  }
+  > p {
+    font-size: 16px;
+    margin: 15px 0;
+    line-height: 2;
+  }
+  > .btn {
+    color: white;
+
+    border: 1px solid #ccc;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 20px;
+    padding: 10px 15px;
+  }
+}
+.landing-image {
+  background: #7f7fd5; /* fallback for old browsers */
+
+  background: -webkit-linear-gradient(
+    to left,
+    #aa4b6b,
+    #6b6b83,
+    #3b8d99
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    rgba(170, 75, 107, 0.5),
+    rgba(108, 107, 131, 0.5),
+    rgba(59, 141, 153, 0.5)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 10px;
+  .landing-image-inner {
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/img/store-hero-small.jpg);
+    object-fit: cover;
+    background-position: center;
+  }
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 10%;
+    left: 0;
+    z-index: 1;
+    transform: translateX(-100%);
+    width: 50%;
+    height: 75%;
+    background-color: rgba(227, 170, 170, 0.4);
+    @media screen and (max-width: 576px) {
+      display: none;
+    }
+  }
 }
 </style>

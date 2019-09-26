@@ -97,17 +97,17 @@ const router = new Router({
       props: true
     },
     {
-      path: "/search",
+      path: "/store",
       component: search,
       props: true,
       children: [
         {
           path: "",
-          name: "search",
+          name: "store",
           component: search
         },
         {
-          path: "/search/:searchContent",
+          path: "/store/:searchContent",
           name: "searchContent",
           component: search,
           props: true

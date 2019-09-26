@@ -5,29 +5,30 @@
       <div class="homepage-hero-content wrapper clearfix">
         <div class="text-left">
           <h1 class="homepage-hero-content_title">New Season</h1>
-          <p class="homepage-hero-content_block">Saben</p>
-          <a href="#" class="btn btn-large btn-splash uppercase">Shop Now</a>
+          <p class="homepage-hero-content_block pt-3">New Style.</p>
+          <router-link :to="{ name: 'store' }">
+            <a class="btn btn-large btn-splash uppercase pt-3">Shop Now</a>
+          </router-link>
         </div>
       </div>
-      <div class="scroll-icon-wrap">
-        <a href="javascript:void(0)">
-          <div>
+      <a href="#home-carousel">
+        <div class="scroll-icon-wrap">
+          <div class="d-flex flex-column justify-content-center">
             <div
               class="container scroll_icon icon icon-arrow-down icon-fallback-text"
-            >
-              <a data-scroll href="#hero-2">
-                <div class="arrow"></div>
-              </a>
+            ></div>
+            <div class="w-1 arrow-parent mx-auto d-block ">
+              <div class="arrow"></div>
             </div>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
       <div id="scroll"></div>
       <div class="hero-image-overlay"></div>
     </div>
     <div class="bg-white pt-5">
-      <div id="hero-2" class="hero-2 mx-auto">
-        <div class="row">
+      <div id="hero-2" class="hero-2 mx-auto d-flex flex-column clearfix">
+        <div class="row flex-fill">
           <div class="col-7">
             <img src="../assets/img/3.png" alt="1" />
           </div>
@@ -35,30 +36,63 @@
             <img src="../assets/img/6.png" alt="1" />
           </div>
         </div>
-        <div class="row">
+        <div class="row flex-fill">
           <div class="col-4">
             <img src="../assets/img/4.png" alt="1" />
           </div>
-          <div class="col-8">
-            <div class="row">
-              <div class="col"></div>
+          <div class="col-8 d-flex flex-column">
+            <div class="row row2-1 align-items-center  h-50">
+              <div
+                class="col text-center d-flex flex-column align-items-center justify-content-center"
+              >
+                <h3 class="mb-4 mx-auto">Life With Style</h3>
+                <p class="text-lighter mb-3">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
+                  facilis alias eveniet impedit similique quibusdam?
+                </p>
+                <button class="btn btn-info mt-4 px-3 py-2 mx-auto">
+                  <router-link
+                    class="text-decoration-none text-light"
+                    :to="{ name: 'store' }"
+                    >Shop Now</router-link
+                  >
+                </button>
+              </div>
               <div class="col">
                 <img src="../assets/img/lemonade.jpg" alt="1" />
               </div>
             </div>
-            <div class="row">
+            <div class="row align-items-center h-50">
               <div class="col">
                 <img src="../assets/img/cherry.jpg" alt="1" />
               </div>
-              <div class="col"></div>
+              <div
+                class="col text-center d-flex flex-column align-items-center justify-content-center"
+              >
+                <h3 class="mb-4">Look Great</h3>
+                <p class="text-lighter mb-3">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Lorem, ipsum dolor.
+                </p>
+                <button
+                  class="btn btn-info justify-content-center d-flex w-30 mx-auto mt-3 px-3 py-2"
+                >
+                  <router-link
+                    class="text-decoration-none text-light w-30"
+                    :to="{ name: 'store' }"
+                    >Shop Now</router-link
+                  >
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="anchor" name="home-carousel" id="home-carousel"></div>
     <div class="w-100 bg-white pt-5 px-4">
       <div
-        class="carousel-header text-uppercase 
+        class="carousel-header text-uppercase
         text-center"
       >
         <span class="bg-white px-3 d-inline-block">New Release </span>
@@ -247,6 +281,10 @@ export default {
     display: block;
   }
 }
+.row2-1 {
+  max-height: 300px;
+  overflow: hidden;
+}
 
 .arrow:hover {
   border-bottom-width: 4px;
@@ -254,18 +292,31 @@ export default {
 }
 .hero-2 {
   width: 73%;
+  height: 100vh;
+  min-height: 800px;
+  overflow: hidden;
   max-width: 980px;
   background-color: white;
   position: relative;
+
   .col,
-  .col-5 {
+  .col-5,
+  .col-7,
+  .col-4,
+  .col-8 {
     padding: 5px 5px;
+    overflow: hidden;
+    height: 100%;
   }
   > .row:first-child {
-    height: 45%;
-    max-height: 230px;
+    max-height: 30%;
     margin-bottom: 15px;
+    overflow: hidden;
   }
+  .row {
+    height: 100%;
+  }
+
   > div:first-child {
     max-height: 230px;
     padding-bottom: 10px;
@@ -351,4 +402,12 @@ export default {
 }
 
 //arrow
+.arrow {
+  margin-top: -45px;
+}
+//anchor
+.anchor {
+  padding-top: 80px;
+  background: white;
+}
 </style>

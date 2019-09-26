@@ -1,5 +1,7 @@
 <template>
-  <div class="row product-detail bg-white pt-sm-5 mb-3 w-100">
+  <div
+    class="row flex-row align-items-center product-detail bg-white pt-sm-5 mb-3 w-100"
+  >
     <div class="col-10 mx-auto col-sm-7 p-lg-5 ">
       <img
         :src="product.image"
@@ -25,6 +27,8 @@
             text="Optional Choice"
             class="bg-white w-100"
             variant="outline-dark"
+            toggle-class="bg-light text-dark"
+            menu-class="w-100"
           >
             <b-dropdown-item>Small</b-dropdown-item>
             <b-dropdown-item>Medium</b-dropdown-item>

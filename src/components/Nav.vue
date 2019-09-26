@@ -42,7 +42,10 @@
               >
                 {{ getProductsInCartLength() }}
               </span>
-              <a class="search d-inline-block" @click.prevent="toggleSearch()">
+              <a
+                class="search flex-fill d-inline-block"
+                @click.prevent="toggleSearch()"
+              >
                 <font-awesome-icon :icon="['fas', 'search']" />
               </a>
             </div>
@@ -126,8 +129,7 @@
                   <a href="/" class="link">Shop</a>
                 </li>
               </router-link>
-              <li><a href="#">MY BOYFRIEND BACK</a></li>
-              <li><a href="#">Safe Edit</a></li>
+              <li><a href="#">NEW EVENT</a></li>
               <li>
                 <router-link
                   :to="{
@@ -150,11 +152,11 @@
           <div class="desktop-menu">
             <div
               class="
-              'wrapper header-menu nav-wrapper
+              'wrapper header-menu nav-wrapper d-flex flex-row align-items-center 
             "
             >
               <div
-                class="search d-inline-block clearfix centralize mr-3"
+                class="search d-inline-block clearfix centralize m-0"
                 @click="openSearchOverlay"
               >
                 <font-awesome-icon
@@ -167,15 +169,13 @@
                   Search
                 </div>
               </div>
-              <ul class="main-menu accessibleNav">
+              <ul class="main-menu accessibleNav ml-auto">
                 <li class="main-menu-active">
                   <router-link :to="{ name: 'shop' }">
                     <p class="link">Shop</p>
                   </router-link>
                 </li>
 
-                <li><a href="#">MY BOYFRIEND BACK</a></li>
-                <li><a href="#">Safe Edit</a></li>
                 <li>
                   <router-link
                     :to="{

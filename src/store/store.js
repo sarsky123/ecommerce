@@ -10,7 +10,7 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  plugins: [createPersistedState()],
+  plugins: [],
   modules: { product, cart, auth0, authentication, notification },
   state: {},
   mutations: {},

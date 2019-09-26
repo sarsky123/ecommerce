@@ -1,22 +1,24 @@
 <template>
   <div>
     <div
-      class="cart__row"
+      class="cart__row pl-3"
       v-for="(item, index) in getProductsInCart"
       :key="index"
       :data-id="item.id"
     >
-      <div class="grid--full cart__row--table-large cart-content">
-        <div class="grid__item large--one-half">
-          <div class="grid--full cart__row--table-large">
-            <div class="grid__item one-third">
+      <div class="grid--full flex-row d-flex align-items-center cart-content">
+        <div class="grid__item col-6">
+          <div class="grid--full d-flex flex-row align-items-center">
+            <div class="grid__item col-4 col-sm-7">
               <a href="javascript:void(0)" class="cart__image">
                 <img :src="item.image" :alt="item.name" />
               </a>
             </div>
 
-            <div class="grid__item two-thirds cart__item__title">
-              <a href="javascript:void(0)" class="h4--body">{{ item.name }} </a>
+            <div class="grid__item col cart__item__title">
+              <a href="javascript:void(0)" class="h4--body mb-3"
+                >{{ item.name }}
+              </a>
 
               <p>$ {{ item.price }}</p>
 
@@ -24,7 +26,7 @@
 
               <a
                 href="javascript:void(0)"
-                class="cart__remove uppercase lighten ajaxcart__remove"
+                class="cart__remove uppercase lighten ajaxcart__remove mt-5"
                 @click="remove(index)"
               >
                 <small>Remove</small>
@@ -33,52 +35,48 @@
           </div>
         </div>
 
-        <div class="grid__item large--one-half">
-          <div class="grid--full cart__row--table-large">
-            <div class="grid__item one-third text-left">
-              <span class="h3--body money">$ {{ item.price }}</span>
+        <div class="grid__item col">
+          <div
+            class="grid--full d-flex flex-column justify-content-center w-100"
+          >
+            <div class="grid__item one-third text-center mx-auto p-0 ">
+              <span class="h3--body money">Price ${{ item.price }}</span>
             </div>
 
-            <div class="grid__item one-third text-center">
-              <div class="ajaxcart__qty">
-                <button
-                  type="button"
-                  class="ajaxcart__qty-adjust minus"
+            <div class="grid__item col-4 mx-auto my-3">
+              <div
+                class="ajaxcart__qty w-100 justify-content-center d-flex flex-row p-1 py-2 align-items-center"
+              >
+                <font-awesome-icon
+                  class="ajaxcart__qty-adjust minus fill-flex"
                   @click="decrementAmount(item.id, index)"
-                >
-                  −
-                </button>
+                  :icon="['fas', 'minus']"
+                />
+
                 <input
                   type="text"
-                  class="ajaxcart__qty-num"
+                  class="p-1 w-30 mx-auto fill-flex border-0 text-center"
                   :value="item.amount"
                   min="0"
                   aria-label="quantity"
                   pattern="[0-9]*"
                 />
-                <button
-                  type="button"
-                  class="ajaxcart__qty-adjust plus"
+                <font-awesome-icon
+                  class="ajaxcart__qty-adjust minus fill-flex "
                   @click="incrementAmount(item.id)"
-                >
-                  +
-                </button>
+                  :icon="['fas', 'plus']"
+                />
               </div>
             </div>
 
-            <div class="grid__item one-third text-right totalHere">
+            <div
+              class="grid__item one-third text-right totalHere mx-auto text-center mx-auto p-0"
+            >
               <span class="cart__mini-labels">Total</span>
-              <span class="h3--body iteMoney"
-                >$ {{ item.price * item.amount }}</span
+              <span class="h3--body iteMoney">
+                ${{ item.price * item.amount }}</span
               >
             </div>
-          </div>
-
-          <div
-            class="ajaxcart__errors hidden errors text-center"
-            id="ajaxcart__item__11815313113124__errors"
-          >
-            All available stock is in cart
           </div>
         </div>
       </div>

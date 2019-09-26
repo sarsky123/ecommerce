@@ -57,8 +57,8 @@ export default {
   watch: {
     $route(to, from) {
       if (to.path.includes("contact-us")) {
-        this.animationActive = "animated fadeInRight";
-        this.animationLeave = "animated fadeOut";
+        this.animationActive = "animated fadeInRight faster";
+        this.animationLeave = "animated fadeOutLeft faster";
       } else if (to.name == "searchContent" || from.name == "searchContent") {
         this.animationActive = "";
         this.animationLeave = "";

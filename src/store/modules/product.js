@@ -1,5 +1,7 @@
 import productService from "@/services/productService.js";
 const contentful = require("contentful");
+import NProgress from "nprogress";
+
 export const namespaced = true;
 
 export const state = {
@@ -57,6 +59,7 @@ export const actions = {
     }
   },
   async fetchFilteredProduct({ commit, getters }) {
+    NProgress.start();
     const apiClient = contentful.createClient({
       space: "d1c4u2kmipnr",
       accessToken: "7TjtAOZ-I8BkPvGsU-UvvB6QusdRMcjV4LjF1o3vre0"
@@ -84,6 +87,7 @@ export const actions = {
       })
       .then(products => {
         commit("SET_PRODUCT_FILTERED", products);
+        NProgress.done();
       })
       .catch(error => console.log(error));
   },

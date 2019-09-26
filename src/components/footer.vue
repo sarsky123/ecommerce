@@ -1,9 +1,54 @@
 <template>
   <div>
     <footer class="site-footer-wrapper" role="contentinfo">
+      <div class="col bg-white d-flex justify-content-center sign-up-425">
+        <b-button
+          squared
+          variant="outline-info"
+          class=" text-capitalize  px-4 py-2 mb-4 w-100 mx-5"
+          >sign up for the event</b-button
+        >
+      </div>
+      <div class="homepage-event bg-secondary">
+        <div class="row py-4 col">
+          <div class="col pr-0">
+            <b-button
+              squared
+              variant="outline-info"
+              class="float-left text-capitalize px-4 py-2 sign-up"
+              @click.prevent="auth0Login()"
+              >sign up for the event</b-button
+            >
+            <div class="float-right item-parent">
+              <ul
+                class="float-left d-flex flex-row text-white event-item
+                m-0
+                "
+              >
+                <li>
+                  <router-link
+                    :to="{
+                      name: 'store'
+                    }"
+                    >stores</router-link
+                  >
+                </li>
+                <li>
+                  <router-link
+                    :to="{
+                      name: 'store'
+                    }"
+                    >event</router-link
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="wrapper site-footer">
         <div class="grid-uniform">
-          <div class="grid__item large--one-third">
+          <div class="grid__item large--one-third mb-5">
             <h5>Customer Care</h5>
             <hr class="hr--underline" />
             <ul class="footer-quicklinks">
@@ -18,21 +63,22 @@
 
               <li><a href="/pages/faq">FAQs</a></li>
 
-              <li><a href="/pages/store-location">Store Location</a></li>
-
-              <li><a href="/pages/terms-of-use">Terms of Use</a></li>
-
-              <li><a href="/pages/shipping">Shipping</a></li>
-
-              <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+              <li>
+                <router-link
+                  :to="{
+                    name: 'term-of-use'
+                  }"
+                  >Term Of Use</router-link
+                >
+              </li>
             </ul>
           </div>
 
-          <div class="grid__item large--one-third">
+          <div class="grid__item large--one-third mb-5">
             <h5>About</h5>
             <hr class="hr--underline" />
             <div class="rte clearfix">
-              <meta charset="utf-8" /><span
+              <span
                 >Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Assumenda quibusdam eveniet saepe deserunt odit, recusandae unde
                 minus doloremque numquam dolorum.</span
@@ -40,121 +86,66 @@
             </div>
           </div>
 
-          <div class="grid__item large--one-third">
-            <h5>Newsletter</h5>
+          <div class="grid__item large--one-third mb-5">
+            <h5>Products</h5>
             <hr class="hr--underline" />
-            <p>Join our mailing list</p>
-            <!-- /snippets/newsletter-form.liquid -->
+            <ul class="footer-quicklinks">
+              <li>
+                <router-link
+                  :to="{
+                    name: 'ourstore'
+                  }"
+                  >Our Store</router-link
+                >
+              </li>
+              <li>
+                <router-link
+                  :to="{
+                    name: 'term-of-use'
+                  }"
+                  >Shipping</router-link
+                >
+              </li>
 
-            <form
-              action="//facebook.us7.list-manage.com/subscribe/post?u=fbd2d8017a014a3da9922cceb&amp;id=d16f830cf1"
-              method="post"
-              id="mc-embedded-subscribe-form"
-              name="mc-embedded-subscribe-form"
-              target="_blank"
-              class="input-group newsletter-form"
-            >
-              <input
-                type="email"
-                value=""
-                placeholder="your@email.com"
-                name="EMAIL"
-                id="mail"
-                class="input-group-field"
-                aria-label="your-email@example.com"
-                autocorrect="off"
-                autocapitalize="off"
-              />
-              <span class="input-group-btn">
-                <input
-                  type="submit"
-                  class="btn uppercase"
-                  name="subscribe"
-                  id="subscribe"
-                  value="Subscribe"
-                />
-              </span>
-            </form>
+              <li>
+                <router-link
+                  :to="{
+                    name: 'privacy'
+                  }"
+                  >Privacy</router-link
+                >
+              </li>
+            </ul>
+            <!-- /snippets/newsletter-form.liquid -->
           </div>
         </div>
 
-        <div class="grid footer-secondary-wrapper clearfix">
-          <ul class="footer-payment payment-icons grid__item inline-list">
-            <li>
-              <span class="icon-fallback-text">
-                <span
-                  class="icon icon-american_express"
-                  aria-hidden="true"
-                ></span>
-                <span class="fallback-text">american express</span>
-              </span>
+        <div class="d-flex flex-column pt-1clearfix w-100 mx-auto">
+          <ul
+            class="footer-payment payment-icons inline-list d-flex flex-row w-50 jusify-content-center mx-auto"
+          >
+            <li class="col">
+              <font-awesome-icon :icon="['fab', 'cc-amex']" />
             </li>
-
-            <li>
-              <span class="icon-fallback-text">
-                <span class="icon icon-apple_pay" aria-hidden="true"></span>
-                <span class="fallback-text">apple pay</span>
-              </span>
+            <li class="col">
+              <font-awesome-icon :icon="['fab', 'cc-paypal']" />
             </li>
-
-            <li>
-              <span class="icon-fallback-text">
-                <span class="icon icon-master" aria-hidden="true"></span>
-                <span class="fallback-text">master</span>
-              </span>
+            <li class="col">
+              <font-awesome-icon :icon="['fab', 'cc-mastercard']" />
             </li>
-
-            <li>
-              <span class="icon-fallback-text">
-                <span class="icon icon-paypal" aria-hidden="true"></span>
-                <span class="fallback-text">paypal</span>
-              </span>
+            <li class="col">
+              <font-awesome-icon :icon="['fab', 'cc-visa']" />
             </li>
-
-            <li>
-              <span class="icon-fallback-text">
-                <span class="icon icon-shopify_pay" aria-hidden="true"></span>
-                <span class="fallback-text">shopify pay</span>
-              </span>
-            </li>
-
-            <li>
-              <span class="icon-fallback-text">
-                <span class="icon icon-visa" aria-hidden="true"></span>
-                <span class="fallback-text">visa</span>
-              </span>
+            <li class="col">
+              <font-awesome-icon :icon="['fab', 'cc-apple-pay']" />
             </li>
           </ul>
 
-          <ul class="footer-social social-icons grid__item inline-list">
-            <li>
-              <a
-                class="icon-fallback-text"
-                href="https://www.facebook.com/Hebe-Designer-Boutique-263499693785401/?ref=ts&amp;fref=ts"
-                title="Hebe Designer Boutique on Facebook"
-                target="_blank"
-              >
-                <span class="icon icon-facebook" aria-hidden="true"></span>
-                <span class="fallback-text">Facebook</span>
-              </a>
-            </li>
-
-            <li>
-              <a
-                class="icon-fallback-text"
-                href="https://www.instagram.com/hebeboutique"
-                title="Hebe Designer Boutique on Instagram"
-                target="_blank"
-              >
-                <span class="icon icon-instagram" aria-hidden="true"></span>
-                <span class="fallback-text">Instagram</span>
-              </a>
-            </li>
-          </ul>
-
-          <ul class="footer-secondary grid__item inline-list">
-            <li><a href="/">© Copyright Hebe Designer Boutique 2019</a></li>
-          </ul>
+          <p
+            class="d-flex flex-row w-50 mt-3 jusify-content-center mx-auto text-center"
+          >
+            © Lorem ipsum Ducimus sit tempore minus praesentium vitae! Animi?
+          </p>
         </div>
       </div>
     </footer>
@@ -312,10 +303,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    auth0Login() {
+      this.$store.dispatch("auth0/auth0Login");
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
+.homepage-event > div:first-child {
+  max-width: 1440px;
+  padding-right: 50px;
+  margin: 0 auto;
+  a {
+    text-decoration: none;
+    color: white;
+    text-shadow: 0px 0px 1px #000;
+  }
+}
 .collapsed > .when-opened,
 :not(.collapsed) > .when-closed {
   display: none;
@@ -324,6 +331,11 @@ export default {};
   color: #000 !important;
   font-size: 24px !important;
   margin-right: 20px;
+}
+.footer-payment {
+  > li {
+    font-size: 40px;
+  }
 }
 
 @media screen and (max-width: 576px) {

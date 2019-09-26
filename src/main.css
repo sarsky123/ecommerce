@@ -448,8 +448,8 @@ ul {
 }
 
 .header-wrapper .info-bar {
-  background-color: black;
-  color: #fff;
+  background-color: #eee;
+  color: #333;
   padding: 5px 0;
   height: 30px;
 }
@@ -461,7 +461,7 @@ ul {
   top: 0;
   width: 15px;
   height: 25px;
-  background-color: #000;
+  background-color: transparent;
 }
 
 .header-wrapper .info-bar .textLinks {}
@@ -471,7 +471,7 @@ ul {
   font-weight: bold;
   line-height: 20px;
   text-align: left;
-  color: #fff;
+  color: #444;
   letter-spacing: 1px;
   font-size: 0.8em;
 }
@@ -625,10 +625,10 @@ ul {
 }
 
 .main-content .homepage-hero .Hero-Image {
-  background-image: url("https://cdn.shopify.com/s/files/1/1132/3440/t/3/assets/homepage_hero_image.jpg?105");
+  background-image: url(./assets/img/dandelion.jpg);
   display: block;
   background-size: cover;
-  background-position-y: 20%;
+  background-position-y: 46%;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -804,7 +804,7 @@ ul {
   top: 0;
   left: 0;
   background-color: #000;
-  background-image: url(https://cdn.shopify.com/s/files/1/1132/3440/t/3/assets/homepage_lower_image.jpg?91);
+  background-image: url(./assets/img/hero-custom.jpg); 
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

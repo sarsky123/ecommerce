@@ -1,12 +1,12 @@
 <template>
   <div>
-    <section class="product-detail">
-      <div>
+    <section class="product-detail border-bottom border-light">
+      <div class="py-5">
         <productModal :id="id" :product="product"></productModal>
       </div>
-      <div class="pt-3 detail-info pb-3">
+      <div class=" py-2 detail-info pb-3 mb-3 col">
         <b-tabs
-          content-class="mt-3 px-5 py-3"
+          content-class="mt-3 col py-3"
           nav-link-class="text-dark"
           active-nav-item-class="font-weight-bold text-dark bg-transparent"
           justified

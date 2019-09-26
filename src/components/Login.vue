@@ -15,7 +15,7 @@
         <ValidationObserver
           ref="observer"
           tag="form"
-          @submit.prevent="auth0Login()"
+          @submit.prevent="loginMethod()"
           v-slot="{ invalid }"
         >
           <div class="row flex-column">
@@ -116,9 +116,6 @@ export default {
   },
   methods: {
     //auth0
-    loginRedirect() {
-      this.$store.dispatch("auth0/loginRedirect");
-    },
     AuthCheck() {
       if (
         localStorage.getItem("access_token") &&
