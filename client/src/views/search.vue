@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="search-info">
+      <div class="search-info mt-5">
         <div class="row">
           <div
             class="search-result col pb-3 text-center d-flex justify-content-center"

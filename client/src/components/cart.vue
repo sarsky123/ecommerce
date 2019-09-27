@@ -10,9 +10,9 @@
         <div class="grid__item col-6">
           <div class="grid--full d-flex flex-row align-items-center">
             <div class="grid__item col-4 col-sm-7">
-              <a href="javascript:void(0)" class="cart__image">
+              <div class="cart__image">
                 <img :src="item.image" :alt="item.name" />
-              </a>
+              </div>
             </div>
 
             <div class="grid__item col cart__item__title">
@@ -132,4 +132,17 @@ export default {
 };
 </script>
 
-<style lang="css"></style>
+<style lang="scss">
+.cart-content {
+  max-height: 150px;
+}
+.cart__image {
+  > img {
+    width: auto;
+    max-height: 180px;
+    display: block;
+    object-fit: cover;
+    overflow: hidden;
+  }
+}
+</style>

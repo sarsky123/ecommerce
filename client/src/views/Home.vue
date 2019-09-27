@@ -37,26 +37,27 @@
           </div>
         </div>
         <div class="row flex-fill">
-          <div class="col-4">
+          <div class="d-none  d-md-block col-4">
             <img src="../assets/img/4.png" alt="1" />
           </div>
-          <div class="col-8 d-flex flex-column">
+          <div class="col d-flex flex-column">
             <div class="row row2-1 align-items-center  h-50">
               <div
                 class="col text-center d-flex flex-column align-items-center justify-content-center"
               >
-                <h3 class="mb-4 mx-auto">Life With Style</h3>
-                <p class="text-lighter mb-3">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
-                  facilis alias eveniet impedit similique quibusdam?
-                </p>
-                <button class="btn btn-info mt-4 px-3 py-2 mx-auto">
-                  <router-link
-                    class="text-decoration-none text-light"
-                    :to="{ name: 'store' }"
-                    >Shop Now</router-link
-                  >
-                </button>
+                <div class="w-75 mx-auto">
+                  <h3 class="mb-4 mx-auto">Life With Style</h3>
+                  <p class="text-lighter mb-3 w-80 ">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  </p>
+                  <button class="btn btn-info mt-4 px-3 py-2 mx-auto">
+                    <router-link
+                      class="text-decoration-none text-light"
+                      :to="{ name: 'store' }"
+                      >Shop Now</router-link
+                    >
+                  </button>
+                </div>
               </div>
               <div class="col">
                 <img src="../assets/img/lemonade.jpg" alt="1" />
@@ -69,20 +70,21 @@
               <div
                 class="col text-center d-flex flex-column align-items-center justify-content-center"
               >
-                <h3 class="mb-4">Look Great</h3>
-                <p class="text-lighter mb-3">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Lorem, ipsum dolor.
-                </p>
-                <button
-                  class="btn btn-info justify-content-center d-flex w-30 mx-auto mt-3 px-3 py-2"
-                >
-                  <router-link
-                    class="text-decoration-none text-light w-30"
-                    :to="{ name: 'store' }"
-                    >Shop Now</router-link
+                <div class="w-75 mx-auto">
+                  <h3 class="mb-4 text-wrap">Look Great</h3>
+                  <p class="text-lighter mb-3" text-wrap>
+                    Lorem ipsum dolor sit amet consectetur.
+                  </p>
+                  <button
+                    class="btn btn-info justify-content-center d-flex w-30 mx-auto mt-3 px-3 py-2"
                   >
-                </button>
+                    <router-link
+                      class="text-decoration-none text-light w-30"
+                      :to="{ name: 'store' }"
+                      >Shop Now</router-link
+                    >
+                  </button>
+                </div>
               </div>
             </div>
           </div>

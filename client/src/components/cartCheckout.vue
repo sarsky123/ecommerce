@@ -4,7 +4,23 @@
       <div class="cart-modal">
         <button class="closeCart" @click.prevent="showPopupCart()"></button>
         <div class="cart__content">
-          <span v-if="!hasProduct()">No products :/</span>
+          <div v-if="!hasProduct()">
+            <div>
+              <div class="row w-100">
+                <div class="col mb-5">
+                  <h3 class="capitalize py-3">Your Cart is empty</h3>
+                  <p class="text-capitalize my-3">
+                    click Button Below to our shop
+                  </p>
+                  <router-link :to="{ name: 'store' }">
+                    <button @click="showPopupCart()" class="btn btn-dark ">
+                      To Our store
+                    </button>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <form method="post" class="cart clearfix" v-if="hasProduct()">
             <h3>Your Cart</h3>
@@ -13,12 +29,6 @@
             </div>
             <div class="cart__footer clearfix">
               <div class="grid clearfix">
-                <div class="grid__item cart-instruction">
-                  <label for="text" class="cart__instructions__label">
-                    special instruction for seller
-                  </label>
-                  <textarea name="note" id="text" class="input-full"></textarea>
-                </div>
                 <div class="grid__item">
                   <p class="cart__footer-text">
                     <span class="subtotal uppercase">Subtotal</span>
@@ -29,8 +39,7 @@
                   </p>
                   <p class="cart__footer-text">
                     <a
-                      href="javascript:return false"
-                      class="clear-btn banner-btn"
+                      class="btn-secondary btn border-dark text-uppercase"
                       @click.prevent="clearTheCart()"
                       >Clear cart</a
                     >
@@ -39,7 +48,7 @@
                     <input
                       type="submit"
                       name="checkout"
-                      class="btn uppercase btn--large checkout__button"
+                      class="btn uppercase btn btn-dark w-100  rounded-0 py-3 mt-3"
                       value="Check Out"
                     />
                   </span>
