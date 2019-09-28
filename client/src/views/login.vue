@@ -13,7 +13,7 @@
         <b-nav-item
           ><router-link
             :to="{
-              name: 'login'
+              name: 'userLogin'
             }"
             >Login In</router-link
           >
@@ -29,7 +29,7 @@
       </b-nav>
     </div>
     <div>
-      <router-view> </router-view>
+      <router-view></router-view>
     </div>
   </section>
 </template>

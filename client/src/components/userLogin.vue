@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container float-right mb-5" v-if="!AuthCheck()">
+    <div class="container float-right mb-5">
       <div class="row border-bottom">
         <div class="col px-4 py-3 border-bottom border-dark login-header">
           <h3 class="text-uppercase float-left m-0 font-weight-light">
@@ -15,8 +15,8 @@
         <ValidationObserver
           ref="observer"
           tag="form"
-          @submit.prevent="loginMethod()"
           v-slot="{ invalid }"
+          @submit.prevent="submitLogin()"
         >
           <div class="row flex-column">
             <div class="col">
@@ -98,8 +98,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 import Spinner from "./Spinner.vue";
+import AuthenticationService from "../services/AuthenticationService.js";
 
 export default {
   components: {
@@ -132,11 +133,10 @@ export default {
     },
 
     // default login
-    ...mapActions("authentication", ["loginAction"]),
     toggleMenu() {
       this.$emit("toggleLogin");
     },
-    async submit() {
+    async submitLogin() {
       const isValid = await this.$refs.observer.validate();
       if (!isValid) {
         const notification = {
@@ -148,14 +148,26 @@ export default {
         this.loginMethod();
       }
     },
-    loginMethod() {
-      this.loginAction({
-        email: this.email,
-        password: this.password
-      }).then(() => {
-        this.toggleMenu();
-        window.location.reload();
-      });
+    async loginMethod() {
+      try {
+        const response = await AuthenticationService.login({
+          email: this.email,
+          password: this.password
+        });
+        console.log(response);
+        this.$store.dispatch("setToken", response.data.token);
+        this.$store.dispatch("setUser", response.data.user);
+        this.$router.push({
+          name: "member"
+        });
+      } catch (error) {
+        this.error = error.response.data.error;
+      } finally {
+        () => {
+          this.toggleMenu();
+          window.location.reload();
+        };
+      }
     },
     toggleRegister() {
       this.$emit("toggleRegister");

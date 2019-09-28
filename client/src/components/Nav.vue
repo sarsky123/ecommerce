@@ -8,7 +8,7 @@
             <p class="float-right textLinks uppercase">
               <router-link
                 :to="{
-                  name: 'login'
+                  name: 'userLogin'
                 }"
                 v-if="!AuthCheck()"
                 >Login In</router-link
@@ -225,7 +225,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { vueWindowSizeMixin } from "vue-window-size";
-import login from "@/components/login.vue";
+import login from "@/components/userLogin.vue";
 import register from "@/components/register.vue";
 export default {
   data() {
@@ -251,15 +251,11 @@ export default {
       this.searchOn = !this.searchOn;
     },
     AuthCheck() {
-      if (
-        localStorage.getItem("access_token") &&
-        localStorage.getItem("id_token") &&
-        localStorage.getItem("expires_at")
-      ) {
-        let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
-        return new Date().getTime() < expiresAt;
+      if (localStorage.getItem("token") && localStorage.getItem("user")) {
+        return true;
+      } else {
+        return false;
       }
-      return false;
     },
     signIn() {
       this.$store.dispatch("auth0/auth0Login");

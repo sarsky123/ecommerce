@@ -42,6 +42,12 @@ export const mutations = {
   },
   SET_PRODUCT_ORDER(state, order) {
     state.productOrder = order;
+  },
+  CLEAR_FILTER(state) {
+    state.filterBrand = [];
+    state.filterCondition = [];
+    state.productOrder = [];
+    state.searchingInsert = [];
   }
 };
 
@@ -103,6 +109,9 @@ export const actions = {
   },
   filterBrand({ commit }, condition) {
     commit("SET_BRAND", condition);
+  },
+  clearFilter({ commit }) {
+    commit("CLEAR_FILTER");
   }
 };
 export const getters = {

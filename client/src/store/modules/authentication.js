@@ -3,6 +3,7 @@ export const namespaced = true;
 
 export const state = {
   user: null,
+  token: null,
   loading: false
 };
 export const mutations = {
@@ -20,58 +21,21 @@ export const mutations = {
   },
   SET_LOADING_DONE(state) {
     state.loading = false;
+  },
+  setToken(state, token) {
+    state.token = token;
+    state.isUserLoggedIn = !!token;
+  },
+  setUser(state, user) {
+    state.user = user;
   }
 };
 export const actions = {
-  register({ commit, dispatch }, credentails) {
-    commit("SET_LOADING");
-    return axios
-      .post("//localhost:3000/register", credentails)
-      .then(({ data }) => {
-        commit("SET_USER_DATA", data);
-        const notification = {
-          type: "success",
-          message:
-            "Thanks for registering, Your account has been logged in automaticly"
-        };
-        commit("SET_LOADING_DONE");
-        dispatch("notification/add", notification, { root: true });
-      })
-      .catch(error => {
-        const notification = {
-          type: "error",
-          message: "There are some problem when you were trying to register"
-        };
-        commit("SET_LOADING_DONE");
-        dispatch("notification/add", notification, { root: true });
-        throw error;
-      });
+  setToken({ commit }, token) {
+    commit("setToken", token);
   },
-  loginAction({ commit, dispatch }, credentails) {
-    return axios
-      .post("//localhost:3000/login", credentails)
-      .then(commit("SET_LOADING"))
-      .then(({ data }) => {
-        commit("SET_USER_DATA", data);
-        const notification = {
-          type: "success",
-          message: "Your account have logged in!"
-        };
-        commit("SET_LOADING_DONE");
-        dispatch("notification/add", notification, { root: true });
-      })
-      .catch(error => {
-        const notification = {
-          type: "error",
-          message: "There are some problem when you were trying to login in"
-        };
-        commit("SET_LOADING_DONE");
-        dispatch("notification/add", notification, { root: true });
-        throw error;
-      });
-  },
-  logout({ commit }) {
-    commit("CLEAR_USER_DATA");
+  setUser({ commit }, user) {
+    commit("setUser", user);
   }
 };
 export const getters = {

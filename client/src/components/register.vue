@@ -125,6 +125,7 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import Spinner from "./Spinner.vue";
+import AuthenticationService from "../services/AuthenticationService.js";
 
 export default {
   components: {
@@ -159,16 +160,29 @@ export default {
         };
         this.$store.dispatch("notification/add", notification);
       } else {
-        this.$store
-          .dispatch("authentication/register", {
-            name: this.name,
+        try {
+          const response = await AuthenticationService.register({
             email: this.email,
             password: this.password
-          })
-          .then(() => {
+          });
+          this.$store.dispatch("authentication/setToken", response.data.token);
+          this.$store.dispatch("authentication/setUser", response.data.user);
+          let token = response.data.token;
+          localStorage.setItem("token", token);
+          let user = response.data.user;
+          localStorage.setItem("user", user);
+          this.$router.push({
+            name: "home"
+          });
+        } catch (error) {
+          this.error = error.response.data.error;
+          return;
+        } finally {
+          () => {
             this.toggleMenu();
             window.location.reload();
-          });
+          };
+        }
       }
     }
   }

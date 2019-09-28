@@ -9,7 +9,7 @@ import customerService from "@/components/customerService.vue";
 import ourstore from "@/components/ourstore.vue";
 import termOfUse from "@/components/termOfUse.vue";
 import login_register from "@/views/login.vue";
-import userLogin from "@/components/login.vue";
+import userLogin from "@/components/userLogin.vue";
 import userRegister from "@/components/register.vue";
 import callback from "@/components/callback.vue";
 import shop from "@/views/shop.vue";
@@ -78,9 +78,8 @@ const router = new Router({
       children: [
         {
           path: "",
-          name: "login",
-          component: userLogin,
-          props: true
+          name: "userLogin",
+          component: userLogin
         },
         {
           path: "/login/register",
