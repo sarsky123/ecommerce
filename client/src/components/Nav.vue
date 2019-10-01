@@ -261,7 +261,9 @@ export default {
       this.$store.dispatch("auth0/auth0Login");
     },
     logOut() {
-      this.$store.dispatch("auth0/auth0Logout");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      this.$store.dispatch("authentication/logOut");
     },
 
     hasProduct() {

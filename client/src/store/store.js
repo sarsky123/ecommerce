@@ -12,7 +12,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins: [
     createPersistedState({
-      paths: ["authentication.state"]
+      key: "authPersist",
+      paths: ["authentication"]
     })
   ],
   modules: { product, cart, auth0, authentication, notification },

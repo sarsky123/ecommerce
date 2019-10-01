@@ -117,19 +117,49 @@
             v-for="product in this.getProducts.slice(0, 12)"
             :key="product.index"
           >
-            <router-link
-              :to="{
-                name: 'product-detail',
-                params: { id: product.id }
-              }"
-              class="grid__image"
-            >
+            <div class="grid__image">
               <img
                 :src="product.image"
                 alt="'Product#' + product.id"
                 class="w-100 slide-image"
               />
-            </router-link>
+
+              <div class="hover-cover">
+                <div
+                  @click.self="pushTo('product-detail', product.id)"
+                  class="d-flex flex-column justify-content-between align-items-center"
+                >
+                  <div>
+                    <font-awesome-icon :icon="['fab', 'facebook']" />
+                    <font-awesome-icon
+                      :icon="['fab', 'instagram']"
+                      class="ml-3"
+                    />
+                  </div>
+                  <div><font-awesome-icon :icon="['fas', 'search']" /></div>
+                  <div
+                    class="d-flex flex-row algin-items-center hover-cover_bar"
+                  >
+                    <font-awesome-icon
+                      v-if="ifBookMarked(product)"
+                      @click="removeBookmark(product)"
+                      :icon="['fas', 'heart']"
+                    />
+                    <font-awesome-icon
+                      v-else
+                      @click="addBookmark(product)"
+                      :icon="['far', 'heart']"
+                    />
+                    <div @click="addProductToCart(product)">
+                      <font-awesome-icon
+                        class="ml-3 d-block"
+                        :icon="['fas', 'cart-plus']"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="slide-item">
               <p class="font-weight-bold my-2">NEW!</p>
@@ -174,22 +204,53 @@
             v-for="product in this.getProducts.slice(13, 25)"
             :key="product.index"
           >
-            <router-link
-              :to="{
-                name: 'product-detail',
-                params: { id: product.id }
-              }"
-              class="grid__image"
-            >
+            <div class="grid__image">
               <img
                 :src="product.image"
                 alt="'Product#' + product.id"
                 class="w-100 slide-image"
               />
-            </router-link>
+
+              <div class="hover-cover">
+                <div
+                  @click.self="pushTo('product-detail', product.id)"
+                  class="d-flex flex-column justify-content-between align-items-center"
+                >
+                  <div>
+                    <font-awesome-icon :icon="['fab', 'facebook']" />
+                    <font-awesome-icon
+                      :icon="['fab', 'instagram']"
+                      class="ml-3"
+                    />
+                  </div>
+                  <div><font-awesome-icon :icon="['fas', 'search']" /></div>
+                  <div
+                    class="d-flex flex-row algin-items-center hover-cover_bar"
+                  >
+                    <font-awesome-icon
+                      v-if="ifBookMarked(product)"
+                      @click="removeBookmark(product)"
+                      :icon="['fas', 'heart']"
+                    />
+                    <font-awesome-icon
+                      v-else
+                      @click="addBookmark(product)"
+                      :icon="['far', 'heart']"
+                    />
+                    <div @click="addProductToCart(product)">
+                      <font-awesome-icon
+                        class="ml-3 d-block"
+                        :icon="['fas', 'cart-plus']"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
             <div class="slide-item">
-              <p class="uppercase mb-0">
+              <p class="font-weight-bold my-2">NEW!</p>
+              <p class="mb-0">
                 {{ product.title }}
               </p>
               <p class="my-1">
@@ -197,7 +258,7 @@
               </p>
               <p class="pt-3">
                 <span>
-                  <span>NT${{ product.price }}</span>
+                  <span>NT${{ product.price, }}</span>
                 </span>
               </p>
             </div>
@@ -221,14 +282,19 @@
 </template>
 
 <script>
+import BookmarksService from "@/services/BookmarksService.js";
 import productInfo from "@/components/productInfo.vue";
 import { mapGetters } from "vuex";
 import { vueWindowSizeMixin } from "vue-window-size";
 import NoSSR from "vue-no-ssr";
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
-      perpage: null
+      perpage: null,
+      bookmark: [],
+      dectection: false
     };
   },
   components: {
@@ -238,14 +304,52 @@ export default {
   created() {
     this.$store.dispatch("product/fetchProducts");
     this.$store.dispatch("product/fetchFilteredProduct");
+    this.fetchBookmark();
   },
   mounted() {
+    this.dectection = !this.dectection;
     if (this.windowWidth > 960) {
       this.perpage = 4;
     } else if (this.windowWidth < 576) {
       this.perpage = 2;
     } else {
       this.perpage = 3;
+    }
+  },
+  methods: {
+    ...mapActions("cart", ["addProduct"]),
+    addProductToCart(product) {
+      var vm = this;
+      vm.addProduct(product);
+    },
+    pushTo(toRoute, params) {
+      this.$router.push({
+        name: toRoute,
+        params: { id: params }
+      });
+    },
+    async addBookmark(product) {
+      try {
+        await BookmarksService.post(product);
+      } catch (err) {
+        console.log(err);
+      }
+      this.dectection = !this.dectection;
+    },
+    async removeBookmark(p) {
+      try {
+        await BookmarksService.delete(p.id);
+      } catch (err) {
+        console.log(err);
+      }
+      this.dectection = !this.dectection;
+    },
+
+    async fetchBookmark() {
+      this.bookmark = (await BookmarksService.index()).data;
+    },
+    ifBookMarked(p) {
+      return !!(this.bookmark.map(bkm => bkm.ProductID).indexOf(p.id) > -1);
     }
   },
   computed: {
@@ -261,6 +365,9 @@ export default {
       } else {
         this.perpage = 3;
       }
+    },
+    async dectection() {
+      this.fetchBookmark();
     }
   }
 };
@@ -395,11 +502,27 @@ export default {
   }
 }
 .grid__image {
+  position: relative;
   display: block;
   height: 67%;
+  overflow: hidden;
+
   > img {
+    display: block;
+    width: 100%;
     height: 100%;
     object-fit: cover !important;
+  }
+
+  &:hover {
+    > img {
+      transform: scale(1.4, 1.4);
+      transition: all 10s linear;
+    }
+    .hover-cover {
+      opacity: 0.7;
+      transition: all 0.45s ease-out;
+    }
   }
 }
 
@@ -411,5 +534,29 @@ export default {
 .anchor {
   padding-top: 80px;
   background: white;
+}
+//hover-cover
+.hover-cover {
+  color: black;
+  display: block;
+  background-color: #bbb;
+  opacity: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  > div:first-child {
+    opacity: 5;
+    margin: 10px;
+    background-color: white;
+    opacity: 1;
+    height: 90%;
+  }
+  .hover-cover_bar {
+    font-size: 16px;
+  }
 }
 </style>

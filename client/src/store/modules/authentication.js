@@ -28,6 +28,10 @@ export const mutations = {
   },
   setUser(state, user) {
     state.user = user;
+  },
+  Clear_Everything(state) {
+    state.user = null;
+    state.token = null;
   }
 };
 export const actions = {
@@ -36,6 +40,9 @@ export const actions = {
   },
   setUser({ commit }, user) {
     commit("setUser", user);
+  },
+  logOut({ commit }) {
+    commit("Clear_Everything");
   }
 };
 export const getters = {

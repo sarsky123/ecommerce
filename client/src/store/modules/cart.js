@@ -17,10 +17,15 @@ export const getters = {
 };
 export const mutations = {
   ADD_PRODUCT: (state, product) => {
-    state.cartProducts.push({
-      ...product,
-      amount: 1
-    });
+    if (state.cartProducts.map(cartP => cartP.id).indexOf(product.id) == -1) {
+      state.cartProducts.push({
+        ...product,
+        amount: 1
+      });
+      console.log("product is added" + product);
+    } else {
+      throw new Error("fk you");
+    }
   },
   REMOVE_PRODUCT: (state, index) => {
     state.cartProducts.splice(index, 1);
@@ -39,27 +44,22 @@ export const mutations = {
   }
 };
 export const actions = {
-  addProduct(context, product) {
-    async function add() {
+  async addProduct(context, product) {
+    try {
       await context.commit("ADD_PRODUCT", product);
-      return;
+    } catch (error) {
+      const notification = {
+        type: "warning",
+        message: "Products are already in the cart"
+      };
+      context.dispatch("notification/add", notification, { root: true });
+      throw error;
     }
-    add()
-      .then(() => {
-        const notification = {
-          type: "success",
-          message: "Your product is in the cart!"
-        };
-        context.dispatch("notification/add", notification, { root: true });
-      })
-      .catch(error => {
-        const notification = {
-          type: "error",
-          message: "There are some problem when you were adding product"
-        };
-        context.dispatch("notification/add", notification, { root: true });
-        throw error;
-      });
+    const notification = {
+      type: "success",
+      message: "Your product is in the cart!"
+    };
+    context.dispatch("notification/add", notification, { root: true });
   },
   removeProduct: (context, index) => {
     async function remove() {
