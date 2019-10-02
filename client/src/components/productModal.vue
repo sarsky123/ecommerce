@@ -45,15 +45,21 @@
             type="button"
             class="btn btn-dark flex-fill mt-3 text-uppercase"
             @click.prevent="addProductToCart(products)"
+            v-if="!getProductById(products.id)"
+          >
+            <font-awesome-icon class="mr-1" :icon="['fas', 'cart-plus']" />
+
+            {{ btnStat }}
+          </button>
+          <button
+            v-else
+            type="button"
+            class="btn btn-dark flex-fill mt-3 text-uppercase"
+            @click.prevent="removeInCart(products)"
           >
             <font-awesome-icon
               class="mr-1"
-              :icon="['fas', 'cart-plus']"
-              v-if="!getProductById(products.id)"
-            />
-            <font-awesome-icon
-              v-else
-              class="mr-1"
+              @click="removeInCart(products)"
               :icon="['fas', 'shopping-bag']"
             />
             {{ btnStat }}
@@ -95,12 +101,11 @@ export default {
     return {
       btnStat: "add to cart",
       disabled: "false",
-      cart: [],
       bookmark: null
     };
   },
   methods: {
-    ...mapActions("cart", ["addProduct"]),
+    ...mapActions("cart", ["addProduct", "removeProduct"]),
     addProductToCart(product) {
       var vm = this;
       vm.ifProductInCart(product);
@@ -125,10 +130,20 @@ export default {
         await BookmarksService.post(product);
       } catch (err) {
         console.log(err);
+        const notification = {
+          type: "error",
+          message: "Some problem occured when trying to add whishlist"
+        };
+        this.$store.dispatch("notification/add", notification);
       } finally {
         this.bookmark = (await BookmarksService.index({
           id: product.id
         })).data;
+        const notification = {
+          type: "success",
+          message: "Selected product has been added to whishlist"
+        };
+        this.$store.dispatch("notification/add", notification);
       }
     },
     async removeBookmark(p) {
@@ -136,8 +151,24 @@ export default {
         await BookmarksService.delete(p.id);
       } catch (err) {
         console.log(err);
+        const notification = {
+          type: "error",
+          message: "Some problem occured when trying to remove whishlist"
+        };
+        this.$store.dispatch("notification/add", notification);
       } finally {
         this.bookmark = null;
+        const notification = {
+          type: "warning",
+          message: "Selected product has been removed from whishlist"
+        };
+        this.$store.dispatch("notification/add", notification);
+      }
+    },
+    removeInCart(p) {
+      const index = this.getProductsInCart.map(cartP => cartP.id).indexOf(p.id);
+      if (index > -1) {
+        this.removeProduct(index);
       }
     }
   },
@@ -166,13 +197,12 @@ export default {
     }
   },
   watch: {
-    cart: {
+    getProductsInCart: {
       immediate: true,
       handler: function() {
         this.ifProductInCart(this.products);
       }
-    },
-    async product() {}
+    }
   }
 };
 </script>

@@ -28,10 +28,11 @@ export default {
   font-family: sans-serif;
   z-index: 500;
   display: block;
-  width: 100%;
   position: fixed;
+  width: 300px;
+  margin-right: -150px;
   bottom: 125px;
-  margin: 0 auto;
+  right: 50%;
   font-size: 21px;
   font-weight: 400;
   line-height: 5px;

@@ -16,6 +16,10 @@ import shop from "@/views/shop.vue";
 import member from "@/views/member.vue";
 import search from "@/views/search.vue";
 import NProgress from "nprogress";
+import Order from "@/components/member/Order";
+import BrowsingHistory from "@/components/member/BrowsingHistory";
+import Wishlist from "@/components/member/Wishlist";
+import ProfileSetting from "@/components/member/ProfileSetting";
 
 Vue.use(Router);
 
@@ -68,8 +72,30 @@ const router = new Router({
     },
     {
       path: "/member",
-      name: "member",
-      component: member
+
+      component: member,
+      children: [
+        {
+          path: "",
+          name: "member",
+          component: ProfileSetting
+        },
+        {
+          path: "browsing_history",
+          name: "browsing_history",
+          component: BrowsingHistory
+        },
+        {
+          path: "wishlist",
+          name: "wishlist",
+          component: Wishlist
+        },
+        {
+          path: "order",
+          name: "order",
+          component: Order
+        }
+      ]
     },
     {
       path: "/login",

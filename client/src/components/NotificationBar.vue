@@ -55,15 +55,15 @@ export default {
   border-radius: 2px;
 }
 .notification-error {
-  background-color: red !important;
+  background-color: #ca6f6f !important;
   color: white !important;
 }
 .notification-success {
-  background-color: green !important;
+  background-color: #aae3aa !important;
   color: white !important;
 }
 .notification-warning {
-  background-color: yellow !important;
+  background-color: #e3e3aa !important;
   color: white !important;
 }
 </style>

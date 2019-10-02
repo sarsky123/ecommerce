@@ -100,7 +100,7 @@ hr {
 }
 
 .wrapper {
-  max-width: 1180px;
+  max-width: 1440px;
   margin: 0 auto;
   position: relative;
   padding: 0 30px;
@@ -440,11 +440,14 @@ ul {
 /*header*/
 .header-wrapper {
   position: fixed;
-  width: 100%;
+  width: 100vw;
   top: 0;
   left: 0;
   z-index: 15;
   background-color: #fff;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
+  
 }
 
 .header-wrapper .info-bar {

@@ -50,7 +50,7 @@
                   <p class="text-lighter mb-3 w-80 ">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   </p>
-                  <button class="btn btn-info mt-4 px-3 py-2 mx-auto">
+                  <button class="btn gridHero-button mt-4 px-3 py-2 mx-auto">
                     <router-link
                       class="text-decoration-none text-light"
                       :to="{ name: 'store' }"
@@ -76,7 +76,7 @@
                     Lorem ipsum dolor sit amet consectetur.
                   </p>
                   <button
-                    class="btn btn-info justify-content-center d-flex w-30 mx-auto mt-3 px-3 py-2"
+                    class="btn gridHero-button justify-content-center d-flex w-30 mx-auto mt-3 px-3 py-2"
                   >
                     <router-link
                       class="text-decoration-none text-light w-30"
@@ -445,6 +445,14 @@ export default {
     margin-bottom: 15px;
     overflow: hidden;
   }
+  > .row:last-child {
+    > div:first-child {
+      margin-right: 10px;
+      img {
+        padding-bottom: 5px;
+      }
+    }
+  }
   .row {
     height: 100%;
   }
@@ -554,10 +562,17 @@ export default {
     }
   }
 }
+//gridHero
+.gridHero-button {
+  background-color: #e3aaaa !important;
+  &:hover {
+    color: #000 !important;
+  }
+}
 
 //arrow
 .arrow {
-  margin-top: -45px;
+  margin-top: -4vw;
 }
 //anchor
 .anchor {

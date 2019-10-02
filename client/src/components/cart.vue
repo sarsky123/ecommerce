@@ -9,7 +9,7 @@
       <div class="grid--full flex-row d-flex align-items-center cart-content">
         <div class="grid__item col-6">
           <div class="grid--full d-flex flex-row align-items-center">
-            <div class="grid__item col-4 col-sm-7">
+            <div class="grid__item col-7 col-sm-7 p-0 p-md-3">
               <div class="cart__image">
                 <img :src="item.image" :alt="item.name" />
               </div>
@@ -134,7 +134,6 @@ export default {
 
 <style lang="scss">
 .cart-content {
-  max-height: 150px;
 }
 .cart__image {
   > img {
