@@ -13,7 +13,7 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "authPersist",
-      paths: ["authentication"]
+      paths: ["authentication", "cart", "product"]
     })
   ],
   modules: { product, cart, auth0, authentication, notification },

@@ -2,7 +2,7 @@
   <div>
     <section class="product-detail border-bottom border-light">
       <div class="py-5">
-        <productModal :id="id" :product="product"></productModal>
+        <productModal :products="product"></productModal>
       </div>
       <div class=" py-2 detail-info pb-3 mb-3 col">
         <b-tabs
@@ -60,7 +60,7 @@ export default {
       product: {}
     };
   },
-  mounted() {
+  async mounted() {
     var vm = this;
     vm.product = vm.getProductById(vm.id);
   },

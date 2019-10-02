@@ -35,15 +35,15 @@
           </div>
         </div>
 
-        <div class="grid__item col">
+        <div class="grid__item col-6">
           <div
-            class="grid--full d-flex flex-column justify-content-center w-100"
+            class="grid--full d-flex flex-column align-items-center justify-content-center w-100"
           >
-            <div class="grid__item one-third text-center mx-auto p-0 ">
+            <div class="grid__item one-third text-center p-0 ">
               <span class="h3--body money">Price ${{ item.price }}</span>
             </div>
 
-            <div class="grid__item col-4 mx-auto my-3">
+            <div class="grid__item col-4  my-3">
               <div
                 class="ajaxcart__qty w-100 justify-content-center d-flex flex-row p-1 py-2 align-items-center"
               >
@@ -55,7 +55,7 @@
 
                 <input
                   type="text"
-                  class="p-1 w-30 mx-auto fill-flex border-0 text-center"
+                  class="p-1 w-30  fill-flex border-0 text-center"
                   :value="item.amount"
                   min="0"
                   aria-label="quantity"
@@ -70,7 +70,7 @@
             </div>
 
             <div
-              class="grid__item one-third text-right totalHere mx-auto text-center mx-auto p-0"
+              class="grid__item one-third text-right totalHere  text-center p-0"
             >
               <span class="cart__mini-labels">Total</span>
               <span class="h3--body iteMoney">

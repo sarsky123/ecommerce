@@ -136,7 +136,13 @@
                       class="ml-3"
                     />
                   </div>
-                  <div><font-awesome-icon :icon="['fas', 'search']" /></div>
+                  <div>
+                    <font-awesome-icon
+                      @click="pushTo('product-detail', product.id)"
+                      :icon="['fas', 'search']"
+                      class="cover-search"
+                    />
+                  </div>
                   <div
                     class="d-flex flex-row algin-items-center hover-cover_bar"
                   >
@@ -152,8 +158,14 @@
                     />
                     <div @click="addProductToCart(product)">
                       <font-awesome-icon
+                        v-if="!getProductById(product.id)"
                         class="ml-3 d-block"
                         :icon="['fas', 'cart-plus']"
+                      />
+                      <font-awesome-icon
+                        v-else
+                        class="ml-3 d-block"
+                        :icon="['fas', 'shopping-bag']"
                       />
                     </div>
                   </div>
@@ -223,7 +235,13 @@
                       class="ml-3"
                     />
                   </div>
-                  <div><font-awesome-icon :icon="['fas', 'search']" /></div>
+                  <div>
+                    <font-awesome-icon
+                      @click="pushTo('product-detail', product.id)"
+                      :icon="['fas', 'search']"
+                      class="cover-search"
+                    />
+                  </div>
                   <div
                     class="d-flex flex-row algin-items-center hover-cover_bar"
                   >
@@ -239,8 +257,14 @@
                     />
                     <div @click="addProductToCart(product)">
                       <font-awesome-icon
+                        v-if="!getProductById(product.id)"
                         class="ml-3 d-block"
                         :icon="['fas', 'cart-plus']"
+                      />
+                      <font-awesome-icon
+                        v-else
+                        class="ml-3 d-block"
+                        :icon="['fas', 'shopping-bag']"
                       />
                     </div>
                   </div>
@@ -284,11 +308,9 @@
 <script>
 import BookmarksService from "@/services/BookmarksService.js";
 import productInfo from "@/components/productInfo.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { vueWindowSizeMixin } from "vue-window-size";
 import NoSSR from "vue-no-ssr";
-import { mapActions } from "vuex";
-
 export default {
   data() {
     return {
@@ -353,7 +375,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("product", ["getProducts"])
+    ...mapGetters("product", ["getProducts"]),
+    ...mapGetters("cart", ["getProductById"])
   },
   mixins: [vueWindowSizeMixin],
   watch: {
@@ -507,7 +530,7 @@ export default {
   height: 67%;
   overflow: hidden;
 
-  > img {
+  img {
     display: block;
     width: 100%;
     height: 100%;
@@ -522,6 +545,12 @@ export default {
     .hover-cover {
       opacity: 0.7;
       transition: all 0.45s ease-out;
+    }
+  }
+
+  .svg-inline--fa {
+    &:hover {
+      color: rgb(211, 60, 148);
     }
   }
 }
@@ -558,5 +587,8 @@ export default {
   .hover-cover_bar {
     font-size: 16px;
   }
+}
+.cover-search {
+  font-size: 20px;
 }
 </style>

@@ -9,7 +9,7 @@ module.exports = {
             const userId = req.user.id
             const {id} = req.query
             const where = {
-                UserId: userId
+                UserID: userId
             }
             if (id) {
                 where.ProductID = id
@@ -68,7 +68,7 @@ module.exports = {
             const bookmark = await Bookmark.findOne({
                 where: {
                     ProductID: bookmarkId,
-                    UserId: userId
+                    UserID: userId
                 }
             })
             if (!bookmark) {
