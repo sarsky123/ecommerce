@@ -6,34 +6,36 @@
           My Account Setting
         </h2>
       </div>
-      <div class="profile-tab-header p-3 col-12 border-bottom border-dark">
-        <ul class="text-uppercase d-flex flex-row profile-tab">
-          <li>
-            <router-link tag="span" :to="{ name: 'member' }">
-              <font-awesome-icon :icon="['fas', 'id-badge']" />
-              <p>Profile Setting</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link tag="span" :to="{ name: 'order' }">
-              <font-awesome-icon :icon="['fas', 'clipboard']" />
-              <p>Order History</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link tag="span" :to="{ name: 'wishlist' }">
-              <font-awesome-icon :icon="['far', 'heart']" />
-              <p>Wishlist</p>
-            </router-link>
-          </li>
-          <li>
-            <router-link tag="span" :to="{ name: 'browsing_history' }">
-              <font-awesome-icon :icon="['fas', 'history']" />
-              <p>browsing history</p>
-            </router-link>
-          </li>
-        </ul>
-      </div>
+    </div>
+    <div
+      class="profile-tab-header p-sm-2 p-lg-4 col-12 border-bottom border-dark"
+    >
+      <ul class="text-uppercase d-flex flex-row profile-tab wrapper">
+        <li>
+          <router-link tag="span" :to="{ name: 'member' }">
+            <font-awesome-icon :icon="['fas', 'id-badge']" />
+            <p>Profile Setting</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link tag="span" :to="{ name: 'order' }">
+            <font-awesome-icon :icon="['fas', 'clipboard']" />
+            <p>Order History</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link tag="span" :to="{ name: 'wishlist' }">
+            <font-awesome-icon :icon="['far', 'heart']" />
+            <p>Wishlist</p>
+          </router-link>
+        </li>
+        <li>
+          <router-link tag="span" :to="{ name: 'browsing_history' }">
+            <font-awesome-icon :icon="['fas', 'history']" />
+            <p>browsing history</p>
+          </router-link>
+        </li>
+      </ul>
     </div>
     <div class=" w-100 d-flex flex-row ">
       <router-view></router-view>
@@ -49,6 +51,12 @@ export default {};
 .view-wrapper {
   margin: 130px 0 50px;
 }
+.profile-tab-header {
+  position: sticky;
+  top: 95px;
+  z-index: 10;
+  background: #fff;
+}
 .profile-tab {
   align-self: center;
   display: flex;
@@ -57,6 +65,8 @@ export default {};
   margin-bottom: 0;
   padding: 8px 0;
   > li {
+    display: flex;
+    align-items: center;
     > span {
       cursor: pointer;
       margin-right: 10px;
@@ -76,10 +86,19 @@ export default {};
       margin-left: 5px;
     }
   }
-  @media screen and (max-width: 468px) {
+}
+//media
+
+@media screen and (max-width: 468px) {
+  .profile-tab-header {
     p {
       display: none;
     }
+  }
+}
+@media screen and (min-width: 960px) {
+  .profile-tab-header {
+    top: 120px;
   }
 }
 </style>

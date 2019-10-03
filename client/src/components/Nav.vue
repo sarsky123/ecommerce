@@ -1,25 +1,27 @@
 <template>
   <div class="header-wrapper ">
-    <div class="info-bar d-flex Desktop-show">
-      <div class=" wrapper m-0 ml-auto">
-        <div class="">
-          <p class=" textLinks uppercase">
-            <router-link
-              :to="{
-                name: 'userLogin'
-              }"
-              v-if="!AuthCheck()"
-              >Login In</router-link
-            >
-            <a href="#" v-else @click.prevent="logOut()">Log Out</a>
-            &nbsp; · &nbsp;
-            <router-link
-              :to="{
-                name: 'userRegister'
-              }"
-              >Register In</router-link
-            >
-          </p>
+    <div class="info-bar Desktop-show">
+      <div class="wrapper d-flex ">
+        <div class="m-0 ml-auto">
+          <div class="">
+            <p class=" textLinks uppercase">
+              <router-link
+                :to="{
+                  name: 'userLogin'
+                }"
+                v-if="!AuthCheck()"
+                >Login In</router-link
+              >
+              <a href="#" v-else @click.prevent="logOut()">Log Out</a>
+              &nbsp; · &nbsp;
+              <router-link
+                :to="{
+                  name: 'userRegister'
+                }"
+                >Register In</router-link
+              >
+            </p>
+          </div>
         </div>
       </div>
     </div>
