@@ -12,12 +12,16 @@ export const getters = {
   getShowModal: state => state.showModal,
   getPopupCart: state => state.showPopupCart,
   getProductById: state => id => {
-    return state.cartProducts.find(product => product.id === id);
+    return state.cartProducts.find(product => product.ProductId === id);
   }
 };
 export const mutations = {
   ADD_PRODUCT: (state, product) => {
-    if (state.cartProducts.map(cartP => cartP.id).indexOf(product.id) == -1) {
+    if (
+      state.cartProducts
+        .map(cartP => cartP.ProductId)
+        .indexOf(product.ProductId) == -1
+    ) {
       state.cartProducts.push({
         ...product,
         amount: 1

@@ -16,7 +16,7 @@
           <div class="grid-uniform clearfix">
             <catalog
               v-for="(product, index) in products
-                .filter(item => item.gender == gender)
+                .filter(item => item.Gender == Gender)
                 .slice(0, 8)"
               :key="index"
               :product="product"
@@ -35,7 +35,7 @@
           <div class="grid-uniform clearfix">
             <catalog
               v-for="(product, index) in products
-                .filter(item => item.category == category)
+                .filter(item => item.Category == Category)
                 .slice(0, 8)"
               :key="index"
               :product="product"

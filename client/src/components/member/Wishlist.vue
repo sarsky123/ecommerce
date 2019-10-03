@@ -35,12 +35,12 @@
         <div class="col image-cover">
           <div class="hover-cover">
             <div
-              @click.self="pushTo('product-detail', wishProduct.id)"
+              @click.self="pushTo('product-detail', wishProduct.ProductID)"
               class="d-flex flex-column justify-content-center align-items-center"
             >
               <div>
                 <font-awesome-icon
-                  @click="pushTo('product-detail', wishProduct.id)"
+                  @click="pushTo('product-detail', wishProduct.ProductID)"
                   :icon="['fas', 'search']"
                   class="cover-search"
                 />
@@ -57,14 +57,14 @@
         <div class="w-100 col">
           <button
             :class="
-              getProductById(wishProduct.id)
+              getProductById(wishProduct.ProductID)
                 ? 'btn btn-secondary text-capitalize rounded-0 w-100 align-self-end'
                 : 'btn btn-dark text-capitalize rounded-0 w-100 align-self-end'
             "
-            :disabled="getProductById(wishProduct.id)"
+            :disabled="getProductById(wishProduct.ProductID)"
           >
             <span
-              v-if="getProductById(wishProduct.id)"
+              v-if="getProductById(wishProduct.ProductID)"
               class="d-flex flex-row align-items-center justify-content-center"
               ><font-awesome-icon
                 class="mr-3 d-inline-block"
@@ -74,7 +74,7 @@
             >
             <span
               v-else
-              @click="addProductToCart(wishProduct, wishProduct.id)"
+              @click="addProductToCart(wishProduct)"
               class="d-flex flex-row align-items-center justify-content-center"
               ><font-awesome-icon
                 class="mr-3 d-inline-block"
@@ -104,12 +104,12 @@
           <div class="col image-cover">
             <div class="hover-cover">
               <div
-                @click.self="pushTo('product-detail', wishProduct.id)"
+                @click.self="pushTo('product-detail', wishProduct.ProductID)"
                 class="d-flex flex-column justify-content-center align-items-center"
               >
                 <div>
                   <font-awesome-icon
-                    @click="pushTo('product-detail', wishProduct.id)"
+                    @click="pushTo('product-detail', wishProduct.ProductID)"
                     :icon="['fas', 'search']"
                     class="cover-search"
                   />
@@ -126,14 +126,14 @@
           <div class="w-100 col">
             <button
               :class="
-                getProductById(wishProduct.id)
+                getProductById(wishProduct.ProductID)
                   ? 'btn btn-secondary text-capitalize rounded-0 w-100 align-self-end'
                   : 'btn btn-dark text-capitalize rounded-0 w-100 align-self-end'
               "
-              :disabled="getProductById(wishProduct.id)"
+              :disabled="getProductById(wishProduct.ProductID)"
             >
               <span
-                v-if="getProductById(wishProduct.id)"
+                v-if="getProductById(wishProduct.ProductID)"
                 class="d-flex flex-row align-items-center justify-content-center"
                 ><font-awesome-icon
                   class="mr-3 d-inline-block"
@@ -143,7 +143,7 @@
               >
               <span
                 v-else
-                @click="addProductToCart(wishProduct, wishProduct.id)"
+                @click="addProductToCart(wishProduct)"
                 class="d-flex flex-row align-items-center justify-content-center"
                 ><font-awesome-icon
                   class="mr-3 d-inline-block"
@@ -205,7 +205,7 @@ export default {
     addProductToCart(product) {
       console.log("button is been clicked");
       var vm = this;
-      if (!this.getProductById(product.id)) {
+      if (!this.getProductById(product.ProductID)) {
         vm.addProduct(product);
       }
     },

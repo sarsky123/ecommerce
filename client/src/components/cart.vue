@@ -4,25 +4,25 @@
       class="cart__row pl-3"
       v-for="(item, index) in getProductsInCart"
       :key="index"
-      :data-id="item.id"
+      :data-id="item.ProductId"
     >
       <div class="grid--full flex-row d-flex align-items-center cart-content">
         <div class="grid__item col-6">
           <div class="grid--full d-flex flex-row align-items-center">
             <div class="grid__item col-7 col-sm-7 p-0 p-md-3">
               <div class="cart__image">
-                <img :src="item.image" :alt="item.name" />
+                <img :src="item.Image" :alt="item.Name" />
               </div>
             </div>
 
             <div class="grid__item col cart__item__title">
               <a href="javascript:void(0)" class="h4--body mb-3"
-                >{{ item.name }}
+                >{{ item.Name }}
               </a>
 
-              <p>$ {{ item.price }}</p>
+              <p>$ {{ item.Price }}</p>
 
-              <p>{{ item.title }}</p>
+              <p>{{ item.Title }}</p>
 
               <a
                 href="javascript:void(0)"
@@ -40,7 +40,7 @@
             class="grid--full d-flex flex-column align-items-center justify-content-center w-100"
           >
             <div class="grid__item one-third text-center p-0 ">
-              <span class="h3--body money">Price ${{ item.price }}</span>
+              <span class="h3--body money">Price ${{ item.Price }}</span>
             </div>
 
             <div class="grid__item col-4  my-3">
@@ -49,7 +49,7 @@
               >
                 <font-awesome-icon
                   class="ajaxcart__qty-adjust minus fill-flex"
-                  @click="decrementAmount(item.id, index)"
+                  @click="decrementAmount(item.ProductId, index)"
                   :icon="['fas', 'minus']"
                 />
 
@@ -63,7 +63,7 @@
                 />
                 <font-awesome-icon
                   class="ajaxcart__qty-adjust minus fill-flex "
-                  @click="incrementAmount(item.id)"
+                  @click="incrementAmount(item.ProductId)"
                   :icon="['fas', 'plus']"
                 />
               </div>
@@ -74,7 +74,7 @@
             >
               <span class="cart__mini-labels">Total</span>
               <span class="h3--body iteMoney">
-                ${{ item.price * item.amount }}</span
+                ${{ item.Price * item.amount }}</span
               >
             </div>
           </div>
@@ -96,7 +96,7 @@ export default {
     },
     totalPrice() {
       return this.getProductsInCart.reduce(
-        (current, next) => current + next.price,
+        (current, next) => current + next.Price,
         0
       );
     },

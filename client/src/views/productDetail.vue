@@ -51,7 +51,7 @@ export default {
     productModal
   },
   props: {
-    id: {
+    ProductID: {
       type: String
     }
   },
@@ -61,8 +61,7 @@ export default {
     };
   },
   async mounted() {
-    var vm = this;
-    vm.product = vm.getProductById(vm.id);
+    this.product = this.getProductById(this.ProductID);
   },
 
   computed: {

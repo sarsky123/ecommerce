@@ -5,30 +5,30 @@
     <router-link
       :to="{
         name: 'product-detail',
-        params: { id: product.id }
+        params: { ProductID: product.ProductID }
       }"
     >
       <img
-        :src="product.image"
+        :src="product.Image"
         class="grid__image"
         alt="product.name + '#' + product.id"
       />
     </router-link>
-    <bagBtn @click.native="addProductToCart(product, product.id)"
+    <bagBtn @click.native="addProductToCart(product, product.ProductID)"
       ><i class="fas fa-shopping-cart"></i>{{ btnStat }}</bagBtn
     >
     <div class="figcaption under">
       <p class="uppercase vendor__link">
         <b
-          ><a href="javascript:void(0)">{{ product.title }}</a></b
+          ><a href="javascript:void(0)">{{ product.Title }}</a></b
         >
       </p>
       <p class="h6 name_wrapper">
-        {{ product.name }}
+        {{ product.Name }}
       </p>
       <p class="price_wrapper">
         <span class="price">
-          <span class="money">$ {{ product.price }}</span>
+          <span class="money">$ {{ product.Price }}</span>
         </span>
       </p>
     </div>
@@ -67,7 +67,7 @@ export default {
 
     ifProductInCart(product) {
       var vm = this;
-      let id = product.id;
+      let id = product.ProductID;
       if (vm.getProductById(id)) {
         vm.$set(vm, "disabled", "true");
         vm.$set(vm, "btnStat", "In Cart");

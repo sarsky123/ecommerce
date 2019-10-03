@@ -119,14 +119,14 @@
           >
             <div class="grid__image">
               <img
-                :src="product.image"
-                alt="'Product#' + product.id"
+                :src="product.Image"
+                alt="'Product#' + product.ProductID"
                 class="w-100 slide-image"
               />
 
               <div class="hover-cover">
                 <div
-                  @click.self="pushTo('product-detail', product.id)"
+                  @click.self="pushTo('product-detail', product.ProductID)"
                   class="d-flex flex-column justify-content-between align-items-center"
                 >
                   <div>
@@ -138,7 +138,7 @@
                   </div>
                   <div>
                     <font-awesome-icon
-                      @click="pushTo('product-detail', product.id)"
+                      @click="pushTo('product-detail', product.ProductID)"
                       :icon="['fas', 'search']"
                       class="cover-search"
                     />
@@ -146,20 +146,21 @@
                   <div
                     class="d-flex flex-row algin-items-center hover-cover_bar"
                   >
-                    <font-awesome-icon
-                      v-if="ifBookMarked(product)"
-                      @click="removeBookmark(product)"
-                      :icon="['fas', 'heart']"
-                    />
-                    <font-awesome-icon
-                      v-else
-                      @click="addBookmark(product)"
-                      :icon="['far', 'heart']"
-                    />
+                    <span v-if="loggedIn" class="mr-3">
+                      <font-awesome-icon
+                        v-if="ifBookMarked(product)"
+                        @click="removeBookmark(product)"
+                        :icon="['fas', 'heart']"
+                      />
+                      <font-awesome-icon
+                        v-else
+                        @click="addBookmark(product)"
+                        :icon="['far', 'heart']"
+                      />
+                    </span>
                     <div @click="addProductToCart(product)">
                       <font-awesome-icon
-                        v-if="!getProductById(product.id)"
-                        class="ml-3 d-block"
+                        v-if="!getProductById(product.ProductID)"
                         :icon="['fas', 'cart-plus']"
                       />
                       <font-awesome-icon
@@ -176,14 +177,14 @@
             <div class="slide-item">
               <p class="font-weight-bold my-2">NEW!</p>
               <p class="mb-0">
-                {{ product.title }}
+                {{ product.Title }}
               </p>
               <p class="my-1">
-                {{ product.name }}
+                {{ product.Name }}
               </p>
               <p class="pt-3">
                 <span>
-                  <span>NT${{ product.price, }}</span>
+                  <span>NT${{ product.Price, }}</span>
                 </span>
               </p>
             </div>
@@ -218,14 +219,14 @@
           >
             <div class="grid__image">
               <img
-                :src="product.image"
-                alt="'Product#' + product.id"
+                :src="product.Image"
+                alt="'Product#' + product.ProductID"
                 class="w-100 slide-image"
               />
 
               <div class="hover-cover">
                 <div
-                  @click.self="pushTo('product-detail', product.id)"
+                  @click.self="pushTo('product-detail', product.ProductID)"
                   class="d-flex flex-column justify-content-between align-items-center"
                 >
                   <div>
@@ -237,7 +238,7 @@
                   </div>
                   <div>
                     <font-awesome-icon
-                      @click="pushTo('product-detail', product.id)"
+                      @click="pushTo('product-detail', product.ProductID)"
                       :icon="['fas', 'search']"
                       class="cover-search"
                     />
@@ -245,20 +246,21 @@
                   <div
                     class="d-flex flex-row algin-items-center hover-cover_bar"
                   >
-                    <font-awesome-icon
-                      v-if="ifBookMarked(product)"
-                      @click="removeBookmark(product)"
-                      :icon="['fas', 'heart']"
-                    />
-                    <font-awesome-icon
-                      v-else
-                      @click="addBookmark(product)"
-                      :icon="['far', 'heart']"
-                    />
+                    <span v-if="loggedIn" class="mr-3">
+                      <font-awesome-icon
+                        v-if="ifBookMarked(product)"
+                        @click="removeBookmark(product)"
+                        :icon="['fas', 'heart']"
+                      />
+                      <font-awesome-icon
+                        v-else
+                        @click="addBookmark(product)"
+                        :icon="['far', 'heart']"
+                      />
+                    </span>
                     <div @click="addProductToCart(product)">
                       <font-awesome-icon
-                        v-if="!getProductById(product.id)"
-                        class="ml-3 d-block"
+                        v-if="!getProductById(product.ProductID)"
                         :icon="['fas', 'cart-plus']"
                       />
                       <font-awesome-icon
@@ -275,14 +277,14 @@
             <div class="slide-item">
               <p class="font-weight-bold my-2">NEW!</p>
               <p class="mb-0">
-                {{ product.title }}
+                {{ product.Title }}
               </p>
               <p class="my-1">
-                {{ product.name }}
+                {{ product.Name }}
               </p>
               <p class="pt-3">
                 <span>
-                  <span>NT${{ product.price, }}</span>
+                  <span>NT${{ product.Price, }}</span>
                 </span>
               </p>
             </div>
@@ -347,7 +349,7 @@ export default {
     pushTo(toRoute, params) {
       this.$router.push({
         name: toRoute,
-        params: { id: params }
+        params: { ProductID: params }
       });
     },
     async addBookmark(product) {
@@ -360,7 +362,7 @@ export default {
     },
     async removeBookmark(p) {
       try {
-        await BookmarksService.delete(p.id);
+        await BookmarksService.delete(p.ProductID);
       } catch (err) {
         console.log(err);
       }
@@ -371,12 +373,15 @@ export default {
       this.bookmark = (await BookmarksService.index()).data;
     },
     ifBookMarked(p) {
-      return !!(this.bookmark.map(bkm => bkm.ProductID).indexOf(p.id) > -1);
+      return !!(
+        this.bookmark.map(bkm => bkm.ProductID).indexOf(p.ProductID) > -1
+      );
     }
   },
   computed: {
     ...mapGetters("product", ["getProducts"]),
-    ...mapGetters("cart", ["getProductById"])
+    ...mapGetters("cart", ["getProductById"]),
+    ...mapGetters("authentication", ["loggedIn"])
   },
   mixins: [vueWindowSizeMixin],
   watch: {

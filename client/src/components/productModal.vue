@@ -4,15 +4,15 @@
   >
     <div class="col-10 mx-auto col-sm-7 px-lg-5 ">
       <img
-        :src="products.image"
-        alt="product-image"
+        :src="products.Image"
+        :alt="products.Name"
         class="w-100 h-100 d-block px-3 no-gutters"
       />
     </div>
     <div class="col-12 col-sm-5 px-5">
-      <h3 class="border-bottom pb-2 border-dark">{{ products.name }}</h3>
-      <p class="p_detail_title">{{ products.title }}</p>
-      <p class="p_detail_price">$ {{ products.price }}</p>
+      <h3 class="border-bottom pb-2 border-dark">{{ products.Name }}</h3>
+      <p class="p_detail_title">{{ products.Title }}</p>
+      <p class="p_detail_price">$ {{ products.Price }}</p>
       <div class="detail-description ">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur,
@@ -45,7 +45,7 @@
             type="button"
             class="btn btn-dark flex-fill mt-3 text-uppercase"
             @click.prevent="addProductToCart(products)"
-            v-if="!getProductById(products.id)"
+            v-if="!getProductById(products.ProductID)"
           >
             <font-awesome-icon class="mr-1" :icon="['fas', 'cart-plus']" />
 
@@ -116,7 +116,7 @@ export default {
 
     ifProductInCart(product) {
       var vm = this;
-      let id = product.id;
+      let id = product.ProductID;
       if (vm.getProductById(id)) {
         vm.$set(vm, "disabled", "true");
         vm.$set(vm, "btnStat", "In Cart");
@@ -137,7 +137,7 @@ export default {
         this.$store.dispatch("notification/add", notification);
       } finally {
         this.bookmark = (await BookmarksService.index({
-          id: product.id
+          ProductID: product.ProductID
         })).data;
         const notification = {
           type: "success",
@@ -166,7 +166,9 @@ export default {
       }
     },
     removeInCart(p) {
-      const index = this.getProductsInCart.map(cartP => cartP.id).indexOf(p.id);
+      const index = this.getProductsInCart
+        .map(cartP => cartP.ProductID)
+        .indexOf(p.id);
       if (index > -1) {
         this.removeProduct(index);
       }
@@ -179,13 +181,13 @@ export default {
     ...mapGetters("authentication", ["loggedIn"])
   },
   async mounted() {
-    if (!this.loggedIn && this.products.id) {
+    if (!this.loggedIn && this.products.ProductID) {
       console.log("mounted access deny");
       return;
     }
     try {
       const bookmarks = (await BookmarksService.index({
-        id: this.products.id
+        ProductID: this.products.ProductID
       })).data;
       if (bookmarks.length) {
         this.bookmark = bookmarks[0];
@@ -193,7 +195,9 @@ export default {
     } catch (err) {
       console.log(err);
     } finally {
-      console.log("mounted access success" + this.bookmark + this.products.id);
+      console.log(
+        "mounted access success" + this.bookmark + this.products.ProductID
+      );
     }
   },
   watch: {

@@ -7,12 +7,12 @@ module.exports = {
     async index(req, res) {
         try {
             const userId = req.user.id
-            const {id} = req.query
+            const { ProductID } = req.query
             const where = {
                 UserID: userId
             }
-            if (id) {
-                where.ProductID = id
+            if (ProductID) {
+                where.ProductID = ProductID
             }
             const bookmarks = await Bookmark.findAll({
                 where: where
@@ -28,22 +28,22 @@ module.exports = {
     async post(req, res) {
         try {
             const userID = req.user.id
-            const { id } = req.body
+            const { ProductID } = req.body
             var Product = {
-                Category: req.body.category,
-                Gender: req.body.gender,
-                ProductID: req.body.id,
-                Image: req.body.image,
-                Name: req.body.name,
-                Onsale: req.body.onsale,
-                Price: req.body.price,
-                Title: req.body.title
+                Category: req.body.Category,
+                Gender: req.body.Gender,
+                ProductID: req.body.ProductID,
+                Image: req.body.Image,
+                Name: req.body.Name,
+                Onsale: req.body.Onsale,
+                Price: req.body.Price,
+                Title: req.body.Title
             }
             Product.UserID = userID
             const bookmark = await Bookmark.findOne({
                 where: {
                     UserID: userID,
-                    ProductID: id
+                    ProductID: ProductID
                 }
             })
             if (bookmark) {

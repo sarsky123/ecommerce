@@ -75,21 +75,31 @@ export const actions = {
       .getEntries({
         content_type: "ecommerce",
         query: getters.getSearch,
-        "fields.category": getters.getfilterCondition,
-        "fields.title": getters.getFilterBrand,
-        order: "fields.price"
+        "fields.Category": getters.getfilterCondition,
+        "fields.Title": getters.getFilterBrand,
+        order: "fields.Price"
       })
       .then(res => {
         let contentful = res;
         let products = contentful.items;
 
         products = products.map(item => {
-          const { title, name, category, onsale, gender } = item.fields;
-          const { id } = item.sys;
-          const image = "https:" + item.fields.image.fields.file.url + "?w=500";
-          const price = item.fields.price.toFixed(2);
-          return { title, price, id, image, name, category, onsale, gender };
+          const { Title, Name, Category, Onsale, Gender } = item.fields;
+          const ProductID = item.sys.id;
+          const Image = "https:" + item.fields.Image.fields.file.url + "?w=500";
+          const Price = item.fields.Price.toFixed(2);
+          return {
+            Title,
+            Price,
+            ProductID,
+            Image,
+            Name,
+            Category,
+            Onsale,
+            Gender
+          };
         });
+
         return products;
       })
       .then(products => {
@@ -116,8 +126,8 @@ export const actions = {
   }
 };
 export const getters = {
-  getProductById: state => id => {
-    return state.products.find(product => product.id == id);
+  getProductById: state => ProductID => {
+    return state.products.find(product => product.ProductID == ProductID);
   },
   getfilterCondition: state => state.filterCondition,
   getSearch: state => state.searchingInsert,
