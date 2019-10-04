@@ -1,5 +1,5 @@
 <template>
-  <div class="header-wrapper ">
+  <div class="header-wrapper">
     <div class="info-bar Desktop-show">
       <div class="wrapper d-flex ">
         <div class="m-0 ml-auto">
@@ -13,13 +13,15 @@
                 >Login In</router-link
               >
               <a href="#" v-else @click.prevent="logOut()">Log Out</a>
-              &nbsp; · &nbsp;
-              <router-link
-                :to="{
-                  name: 'userRegister'
-                }"
-                >Register In</router-link
-              >
+              <span v-if="!AuthCheck()">
+                &nbsp; · &nbsp;
+                <router-link
+                  :to="{
+                    name: 'userRegister'
+                  }"
+                  >Register In</router-link
+                >
+              </span>
             </p>
           </div>
         </div>
@@ -97,11 +99,11 @@
                 <div
                   class="col bg-secondary text-capitalize text-center p-3
                 border-right border-light "
-                  @click="signIn()"
+                  @click="toggleLoginMenu()"
                   v-if="!AuthCheck()"
                 >
                   <font-awesome-icon :icon="['fas', 'sign-in-alt']" />
-                  Login
+                  Login In
                 </div>
                 <div
                   class="col bg-secondary text-capitalize text-center p-3
@@ -250,14 +252,15 @@ export default {
       this.searchOn = !this.searchOn;
     },
     AuthCheck() {
-      if (localStorage.getItem("token") && localStorage.getItem("user")) {
+      if (
+        localStorage.getItem("token") &&
+        localStorage.getItem("user") &&
+        this.loggedIn
+      ) {
         return true;
       } else {
         return false;
       }
-    },
-    signIn() {
-      this.$store.dispatch("auth0/auth0Login");
     },
     logOut() {
       localStorage.removeItem("token");
@@ -291,7 +294,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("cart", ["getProductsInCart", "getPopupCart"])
+    ...mapGetters("cart", ["getProductsInCart", "getPopupCart"]),
+    ...mapGetters("authentication", ["loggedIn"])
   },
   mixins: [vueWindowSizeMixin],
 

@@ -65,7 +65,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters("product", ["getProductById"])
+    ...mapGetters("product", ["getProductById"]),
+
+    ...mapGetters("authentication", ["loggedIn"])
   }
 };
 </script>

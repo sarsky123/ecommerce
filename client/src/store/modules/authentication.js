@@ -1,4 +1,3 @@
-import axios from "axios";
 export const namespaced = true;
 
 export const state = {
@@ -7,11 +6,6 @@ export const state = {
   loading: false
 };
 export const mutations = {
-  SET_USER_DATA(state, userData) {
-    state.user = userData;
-    localStorage.setItem("user", JSON.stringify(userData));
-    axios.defaults.headers.common["Authorization"] = `Bearer ${userData.token}`;
-  },
   CLEAR_USER_DATA() {
     localStorage.removeItem("user");
     location.reload();
@@ -24,10 +18,12 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token;
+    localStorage.setItem("token", token);
     state.isUserLoggedIn = !!token;
   },
   setUser(state, user) {
     state.user = user;
+    localStorage.setItem("user", user);
   },
   Clear_Everything(state) {
     state.user = null;
@@ -43,6 +39,7 @@ export const actions = {
   },
   logOut({ commit }) {
     commit("Clear_Everything");
+    window.location.reload();
   }
 };
 export const getters = {

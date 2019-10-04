@@ -12,6 +12,7 @@
   "author": "Yu",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",

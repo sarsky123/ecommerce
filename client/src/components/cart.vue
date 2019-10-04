@@ -4,7 +4,7 @@
       class="cart__row pl-3"
       v-for="(item, index) in getProductsInCart"
       :key="index"
-      :data-id="item.ProductId"
+      :data-id="item.ProductID"
     >
       <div class="grid--full flex-row d-flex align-items-center cart-content">
         <div class="grid__item col-6">
@@ -49,7 +49,7 @@
               >
                 <font-awesome-icon
                   class="ajaxcart__qty-adjust minus fill-flex"
-                  @click="decrementAmount(item.ProductId, index)"
+                  @click="decrementAmount(item.ProductID, index)"
                   :icon="['fas', 'minus']"
                 />
 
@@ -63,7 +63,7 @@
                 />
                 <font-awesome-icon
                   class="ajaxcart__qty-adjust minus fill-flex "
-                  @click="incrementAmount(item.ProductId)"
+                  @click="incrementAmount(item.ProductID)"
                   :icon="['fas', 'plus']"
                 />
               </div>

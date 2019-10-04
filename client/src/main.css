@@ -295,9 +295,7 @@ ul {
     float: none;
   }
 
-  .grid--full>.grid__item {
-  
-  }
+  .grid--full>.grid__item {}
 
   .cart-content .cart__item__title {
     text-align: left;
@@ -318,6 +316,7 @@ ul {
   .mobile-wrapper {
     display: block;
     width: 100%;
+    padding-bottom: 5px;
   }
 
   .logo-image {
@@ -440,14 +439,13 @@ ul {
 /*header*/
 .header-wrapper {
   position: fixed;
-  width: 100vw;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 15;
   background-color: #fff;
   border-bottom: 1px solid black;
-  padding-bottom: 5px;
-  
+
 }
 
 .header-wrapper .info-bar {
@@ -467,7 +465,15 @@ ul {
   background-color: transparent;
 }
 
-.header-wrapper .info-bar .textLinks {}
+.header-wrapper .info-bar .textLinks span {
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: left;
+  color: #444;
+  letter-spacing: 1px;
+  font-size: 0.8em;
+}
 
 .header-wrapper .info-bar .textLinks a {
   text-transform: uppercase;
@@ -807,7 +813,7 @@ ul {
   top: 0;
   left: 0;
   background-color: #000;
-  background-image: url(./assets/img/hero-custom.jpg); 
+  background-image: url(./assets/img/hero-custom.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

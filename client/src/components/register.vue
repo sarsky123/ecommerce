@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container float-right">
+    <div class="container float-right mb-5">
       <div class="row border-bottom">
         <div class="col px-4 py-3 border-bottom border-dark login-header">
           <h3 class="text-uppercase float-left m-0 font-weight-light">
@@ -97,7 +97,9 @@
                 />
                 <span class="text-danger">{{ errors[0] }}</span>
               </validation-provider>
-
+              <div class="error-message text-danger text-capitalize">
+                <p>{{ error }}</p>
+              </div>
               <button
                 class="w-100 bg-secondary text-white py-2 border-none login-submit mt-5"
                 type="submit"
@@ -136,7 +138,8 @@ export default {
       email: "",
       password: "",
       name: "",
-      confirmation: ""
+      confirmation: "",
+      error: null
     };
   },
   computed: {
@@ -174,14 +177,11 @@ export default {
           this.$router.push({
             name: "home"
           });
+          window.location.reload();
+          this.toggleMenu;
         } catch (error) {
           this.error = error.response.data.error;
           return;
-        } finally {
-          () => {
-            this.toggleMenu();
-            window.location.reload();
-          };
         }
       }
     }

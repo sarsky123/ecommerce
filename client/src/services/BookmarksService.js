@@ -7,8 +7,11 @@ export default {
     });
   },
   post(bookmark) {
-    return Api().post("bookmarks", bookmark);
+    return Api().post("bookmarks", {
+      ProductID: bookmark
+    });
   },
+
   delete(bookmarkId) {
     return Api().delete(`bookmarks/${bookmarkId}`);
   }

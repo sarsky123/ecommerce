@@ -44,6 +44,8 @@ export const actions = {
     localStorage.removeItem("access_token");
     localStorage.removeItem("id_token");
     localStorage.removeItem("expires_at");
+    localStorage.removeItem("email");
+    localStorage.removeItem("password");
 
     // redirect to auth0 logout to completely log the user out
     window.location.href =

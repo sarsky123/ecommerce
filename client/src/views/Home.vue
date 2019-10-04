@@ -165,7 +165,6 @@
                       />
                       <font-awesome-icon
                         v-else
-                        class="ml-3 d-block"
                         :icon="['fas', 'shopping-bag']"
                       />
                     </div>
@@ -265,7 +264,6 @@
                       />
                       <font-awesome-icon
                         v-else
-                        class="ml-3 d-block"
                         :icon="['fas', 'shopping-bag']"
                       />
                     </div>
@@ -354,7 +352,7 @@ export default {
     },
     async addBookmark(product) {
       try {
-        await BookmarksService.post(product);
+        await BookmarksService.post(product.ProductID);
       } catch (err) {
         console.log(err);
       }
@@ -373,8 +371,9 @@ export default {
       this.bookmark = (await BookmarksService.index()).data;
     },
     ifBookMarked(p) {
-      return !!(
-        this.bookmark.map(bkm => bkm.ProductID).indexOf(p.ProductID) > -1
+      return (
+        this.bookmark.map(bookmark => bookmark.ProductID).indexOf(p.ProductID) >
+        -1
       );
     }
   },

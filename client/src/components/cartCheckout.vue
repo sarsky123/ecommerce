@@ -77,7 +77,7 @@ export default {
     },
     totalPrice() {
       return this.getProductsInCart.reduce(function(current, next) {
-        var total = next.price * next.amount;
+        var total = next.Price * next.amount;
         return current + total;
       }, 0);
     },

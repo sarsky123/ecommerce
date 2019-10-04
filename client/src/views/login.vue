@@ -38,7 +38,11 @@
 export default {
   methods: {
     logout() {
-      this.$store.dispatch("auth0/auth0Logout");
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+      window.location.reload();
     },
     AuthCheck() {
       if (

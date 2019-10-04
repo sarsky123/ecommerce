@@ -17,7 +17,10 @@ module.exports = {
             const bookmarks = await Bookmark.findAll({
                 where: where
             })
+                
+            console.log('index bookmarks is here '+ bookmarks);
             res.send(bookmarks)
+            
         } catch (err) {
             res.status(500).send({
                 error: 'an error has occured trying to fetch the bookmark'
@@ -28,18 +31,7 @@ module.exports = {
     async post(req, res) {
         try {
             const userID = req.user.id
-            const { ProductID } = req.body
-            var Product = {
-                Category: req.body.Category,
-                Gender: req.body.Gender,
-                ProductID: req.body.ProductID,
-                Image: req.body.Image,
-                Name: req.body.Name,
-                Onsale: req.body.Onsale,
-                Price: req.body.Price,
-                Title: req.body.Title
-            }
-            Product.UserID = userID
+            const {ProductID} = req.body
             const bookmark = await Bookmark.findOne({
                 where: {
                     UserID: userID,
@@ -51,13 +43,17 @@ module.exports = {
                     error: 'you already have this set as a bookmark'
                 })
             }
-            console.log(req.body);
-            const newBookmark = await Bookmark.create(Product)
+            console.log('this is ProductID '+ ProductID)
+            
+            const newBookmark = await Bookmark.create({
+                UserID: userID,
+                ProductID: ProductID
+            })
             res.send(newBookmark)
         } catch (err) {
             console.log(err)
             res.status(500).send({
-                error: 'an error has occured trying to create the bookmark'
+                error: 'an error has occured trying to create the bookmark'  
             })
         }
     },

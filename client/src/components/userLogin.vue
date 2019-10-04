@@ -67,6 +67,9 @@
                 />
                 <label for="sign__in_form_keepmelogin">keep me sign in</label>
               </div>
+              <div class="error-message text-danger text-capitalize">
+                <p>{{ error }}</p>
+              </div>
               <div class="w-100 forget-password d-flex my-4 ">
                 <a href="#" class="text-seconday text-capitalize forget">
                   forget your password?
@@ -109,7 +112,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      error: null
     };
   },
   computed: {
@@ -155,17 +159,13 @@ export default {
           password: this.password
         });
         console.log(response);
-        this.$store.dispatch("setToken", response.data.token);
-        this.$store.dispatch("setUser", response.data.user);
-        this.$router.push({
-          name: "member"
-        });
+        this.$store.dispatch("authentication/setToken", response.data.token);
+        this.$store.dispatch("authentication/setUser", response.data.user);
       } catch (error) {
         this.error = error.response.data.error;
-      } finally {
-        this.toggleMenu();
-        window.location.reload();
       }
+      this.toggleMenu();
+      window.location.reload();
     },
     toggleRegister() {
       this.$emit("toggleRegister");

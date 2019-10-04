@@ -11,24 +11,23 @@ export const getters = {
   getCurrentProduct: state => state.currentProduct,
   getShowModal: state => state.showModal,
   getPopupCart: state => state.showPopupCart,
-  getProductById: state => id => {
-    return state.cartProducts.find(product => product.ProductId === id);
+  getProductById: state => ProductID => {
+    return state.cartProducts.find(product => product.ProductID === ProductID);
   }
 };
 export const mutations = {
   ADD_PRODUCT: (state, product) => {
     if (
-      state.cartProducts
-        .map(cartP => cartP.ProductId)
-        .indexOf(product.ProductId) == -1
+      !state.cartProducts.find(
+        cartProduct => cartProduct.ProductID == product.ProductID
+      )
     ) {
       state.cartProducts.push({
         ...product,
         amount: 1
       });
-      console.log("product is added" + product);
     } else {
-      throw new Error("fk you");
+      throw new Error();
     }
   },
   REMOVE_PRODUCT: (state, index) => {

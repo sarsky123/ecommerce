@@ -1,5 +1,4 @@
 import Vue from "vue";
-import Store from "./store/store";
 import Router from "vue-router";
 import home from "@/views/Home.vue";
 import productDetail from "@/views/productDetail.vue";
@@ -72,8 +71,8 @@ const router = new Router({
     },
     {
       path: "/member",
-
       component: member,
+      meta: { requiresAuth: true },
       children: [
         {
           path: "",
@@ -100,6 +99,7 @@ const router = new Router({
     {
       path: "/login",
       component: login_register,
+      meta: { notLoggedIn: true },
       children: [
         {
           path: "",
@@ -159,32 +159,16 @@ router.afterEach(() => {
 });
 
 router.beforeEach((to, from, next) => {
-  // Allow finishing callback url for logging in
-  if (to.matched.some(record => record.path == "/callback")) {
-    console.log("router.beforeEach found callback url");
-    Store.dispatch("auth0/auth0HandleAuthentication");
-    next(false);
-  }
-
   // check if user is logged in (start assuming the user is not logged in = false)
   let routerAuthCheck = false;
   // Verify all the proper access variables are present for proper authorization
-  if (
-    localStorage.getItem("access_token") &&
-    localStorage.getItem("id_token") &&
-    localStorage.getItem("expires_at")
-  ) {
-    console.log("found local storage tokens");
-    // Check whether the current time is past the Access Token's expiry time
-    let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
-    // set localAuthTokenCheck true if unexpired / false if expired
-    routerAuthCheck = new Date().getTime() < expiresAt;
+  if (localStorage.getItem("user") && localStorage.getItem("token")) {
+    routerAuthCheck = true;
+  }
+  if (to.matched.some(record => record.meta.notLoggedIn) && routerAuthCheck) {
+    router.replace("/");
   }
 
-  // set global ui understanding of authentication
-  Store.dispatch("auth0/setUserIsAuthenticated", routerAuthCheck);
-
-  // check if the route to be accessed requires authorizaton
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Check if user is Authenticated
     if (routerAuthCheck) {
@@ -194,8 +178,7 @@ router.beforeEach((to, from, next) => {
       // user is not authenticated - redirect to login
       router.replace("/login");
     }
-  }
-  // Allow page to load
+  } // Allow page to load
   else {
     next();
   }

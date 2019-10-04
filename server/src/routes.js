@@ -2,6 +2,8 @@ const AuthenticationController = require('./controllers/AuthenticationController
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const isAuthenticated = require('./policies/isAuthenticated')
 const BookmarksController = require('./controllers/BookmarksController.js')
+const HistoriesController = require('./controllers/HistoriesControllers')
+
 
 module.exports = (app) => {
     app.post('/register',
@@ -20,6 +22,12 @@ module.exports = (app) => {
         isAuthenticated,
         BookmarksController.remove)
 
-    
+
+    app.get('/histories',
+        isAuthenticated,
+        HistoriesController.index)
+    app.post('/histories',
+        isAuthenticated,
+        HistoriesController.post)
 
 }

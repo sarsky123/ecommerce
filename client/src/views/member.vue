@@ -98,7 +98,7 @@ export default {};
 }
 @media screen and (min-width: 960px) {
   .profile-tab-header {
-    top: 120px;
+    top: 105px;
   }
 }
 </style>

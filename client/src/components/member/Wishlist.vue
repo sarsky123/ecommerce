@@ -171,13 +171,14 @@ import BookmarksService from "../../services/BookmarksService";
 export default {
   data() {
     return {
-      bookmark: null,
+      bookmark: [],
       recentAdded: [],
       recentAddedFolded: false
     };
   },
   computed: {
     ...mapGetters("cart", ["getProductById"]),
+    ...mapGetters("product", ["getProducts"]),
     ...mapGetters("authentication", ["loggedIn"]),
     ...mapState("authentication", ["isUserLoggedIn"])
   },
@@ -187,7 +188,12 @@ export default {
       return;
     }
     try {
-      this.bookmark = (await BookmarksService.index()).data;
+      let data = (await BookmarksService.index()).data.map(
+        data => data.ProductID
+      );
+      this.bookmark = this.getProducts.filter(gp => {
+        return data.indexOf(gp.ProductID) > -1;
+      });
     } catch (err) {
       console.log(err);
     }
@@ -200,7 +206,12 @@ export default {
       } catch (err) {
         console.log(err);
       }
-      this.bookmark = (await BookmarksService.index()).data;
+      let data = (await BookmarksService.index()).data.map(
+        data => data.ProductID
+      );
+      this.bookmark = this.getProducts.filter(gp => {
+        return data.indexOf(gp.ProductID) > -1;
+      });
     },
     addProductToCart(product) {
       console.log("button is been clicked");
@@ -212,7 +223,7 @@ export default {
     pushTo(toRoute, params) {
       this.$router.push({
         name: toRoute,
-        params: { id: params }
+        params: { ProductID: params }
       });
     },
     toggleAddedFolded() {

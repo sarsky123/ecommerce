@@ -93,6 +93,7 @@
 import { mapGetters, mapActions } from "vuex";
 import BookmarksService from "@/services/BookmarksService";
 
+import HistoryService from "../services/BrowsingHistoryService";
 export default {
   props: {
     products: Object
@@ -127,7 +128,7 @@ export default {
     },
     async addBookmark(product) {
       try {
-        await BookmarksService.post(product);
+        await BookmarksService.post(product.ProductID);
       } catch (err) {
         console.log(err);
         const notification = {
@@ -146,9 +147,9 @@ export default {
         this.$store.dispatch("notification/add", notification);
       }
     },
-    async removeBookmark(p) {
+    async removeBookmark(product) {
       try {
-        await BookmarksService.delete(p.id);
+        await BookmarksService.delete(product.ProductID);
       } catch (err) {
         console.log(err);
         const notification = {
@@ -181,7 +182,7 @@ export default {
     ...mapGetters("authentication", ["loggedIn"])
   },
   async mounted() {
-    if (!this.loggedIn && this.products.ProductID) {
+    if (!this.loggedIn && this.products) {
       console.log("mounted access deny");
       return;
     }
@@ -192,6 +193,7 @@ export default {
       if (bookmarks.length) {
         this.bookmark = bookmarks[0];
       }
+      await HistoryService.post(this.products.ProductID);
     } catch (err) {
       console.log(err);
     } finally {
