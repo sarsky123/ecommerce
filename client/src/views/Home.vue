@@ -28,17 +28,17 @@
     </div>
     <div class="bg-white pt-5">
       <div id="hero-2" class="hero-2 mx-auto d-flex flex-column clearfix">
-        <div class="row flex-fill">
+        <div class="row flex-fill flex-row">
           <div class="col-7">
-            <img src="../assets/img/3.png" alt="1" />
+            <img src="../assets/img/beauty-3.jpg" alt="masked" />
           </div>
           <div class="col-5">
-            <img src="../assets/img/6.png" alt="1" />
+            <img src="../assets/img/beauty-15.jpg" alt="rosehand" />
           </div>
         </div>
         <div class="row flex-fill">
           <div class="d-none  d-md-block col-4">
-            <img src="../assets/img/4.png" alt="1" />
+            <img src="../assets/img/beauty-4.jpg" alt="pridy grill" />
           </div>
           <div class="col d-flex flex-column">
             <div class="row row2-1 align-items-center  h-50">
@@ -60,12 +60,15 @@
                 </div>
               </div>
               <div class="col">
-                <img src="../assets/img/lemonade.jpg" alt="1" />
+                <img
+                  src="../assets/img/beauty-18.jpg"
+                  alt="girl holding stuff"
+                />
               </div>
             </div>
             <div class="row align-items-center h-50">
               <div class="col">
-                <img src="../assets/img/cherry.jpg" alt="1" />
+                <img src="../assets/img/beauty-16.jpg" alt="rosey grill" />
               </div>
               <div
                 class="col text-center d-flex flex-column align-items-center justify-content-center"
@@ -539,7 +542,7 @@ export default {
 .grid__image {
   position: relative;
   display: block;
-  height: 67%;
+  height: 300px;
   overflow: hidden;
 
   img {

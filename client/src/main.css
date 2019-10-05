@@ -106,12 +106,6 @@ hr {
   padding: 0 30px;
 }
 
-.wrapper :after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
 body {
   font-size: 14px;
   line-height: 1.6;
@@ -748,11 +742,8 @@ ul {
 .homepage-collection .grid-uniform .grid__item img {
   display: block;
   object-fit: cover;
-  max-height: 70% !important;
-  max-width: 300px;
-  margin: 0 auto;
   width: 100%;
-  min-height: 250px;
+  height: 300px;
 }
 
 .homepage-collection .grid-uniform .grid__item .figcaption {
@@ -771,6 +762,9 @@ ul {
 }
 
 /*homepage-custom*/
+.homepage-custom {
+  z-index: -1;
+}
 .homepage-custom .homepage-custom_parallax {
   overflow: hidden;
   position: relative;

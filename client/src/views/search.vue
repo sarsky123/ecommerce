@@ -93,6 +93,10 @@
         <div class="col"></div>
       </div>
       <div class="row">
+        <p class="text-center mx-auto" v-if="getfilterCondition.length">
+          Filtering :
+          <span class="text-capitalize">{{ getfilterCondition }}</span>
+        </p>
         <div class="collection homepage-collection w-100">
           <div class="grid-uniform ">
             <catalog
@@ -161,7 +165,11 @@ export default {
     filterOverlay
   },
   computed: {
-    ...mapGetters("product", ["getProducts", "getFilteredProducts"]),
+    ...mapGetters("product", [
+      "getProducts",
+      "getFilteredProducts",
+      "getfilterCondition"
+    ]),
     categoryMatchProduct() {
       var prod = this.products;
       var arr = prod.map(prod => prod.Category);

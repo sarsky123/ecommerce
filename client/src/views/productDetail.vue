@@ -6,18 +6,18 @@
       </div>
       <div class=" py-2 detail-info pb-3 mb-3 col">
         <b-tabs
-          content-class="mt-3 col py-3"
-          nav-link-class="text-dark"
+          content-class="mt-3 col py-3 text-light"
+          nav-link-class="text-light"
           active-nav-item-class="font-weight-bold text-dark bg-transparent"
           justified
         >
-          <b-tab title-item-class="text-dark" title="PRODUCT DETAILS" active
+          <b-tab title-item-class="text-light" title="PRODUCT DETAILS"
             ><p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa
               amet temporibus in enim minima nobis.
             </p></b-tab
           >
-          <b-tab title="FABRIC & CARE"
+          <b-tab title="FABRIC & CARE" title-link-class="text-light"
             ><p>
               FABRIC & CARE Lorem ipsum dolor sit amet consectetur adipisicing
               elit. Recusandae odit laboriosam doloribus esse illum perferendis
@@ -25,13 +25,13 @@
               nostrum hic iste? Quibusdam laboriosam doloribus vero!
             </p></b-tab
           >
-          <b-tab title="BRAND BIO"
+          <b-tab title="BRAND BIO" title-link-class="text-light"
             ><p>
               BRAND BIO Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Quod ex reiciendis aut quaerat molestias quia.
             </p></b-tab
           >
-          <b-tab title="DELIVERY"
+          <b-tab title="DELIVERY" title-link-class="text-light"
             ><p>
               DELIVERY Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Maxime soluta quo aliquid quas minus vero.
@@ -86,16 +86,15 @@ section {
 }
 .nav-link {
   &:hover {
-    border: none !important;
-    border-bottom: 1px solid black !important;
-    color: #777 !important;
+    border-bottom: 1px solid white !important;
+    color: #333 !important;
   }
   &.active {
-    border: none !important;
     border-bottom: 2px solid black !important;
   }
 }
 .detail-info {
-  background: #f0f0f0;
+  background: #e3aaaa;
+  color: white;
 }
 </style>

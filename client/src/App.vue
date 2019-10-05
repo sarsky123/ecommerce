@@ -59,7 +59,11 @@ export default {
       if (to.path.includes("contact-us")) {
         this.animationActive = "animated fadeInRight faster";
         this.animationLeave = "animated fadeOutLeft faster";
-      } else if (to.name == "searchContent" || from.name == "searchContent") {
+      } else if (
+        to.name == "searchContent" ||
+        from.name == "searchContent" ||
+        to.path.includes("#")
+      ) {
         this.animationActive = "";
         this.animationLeave = "";
       } else {
