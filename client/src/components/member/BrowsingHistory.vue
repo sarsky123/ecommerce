@@ -15,10 +15,10 @@
           :key="index"
           @click="pushTo('product-detail', bh.ProductID)"
         >
-          <th scope="row">{{ bh.Name }}</th>
+          <th scope="row" class="text-capitalize">{{ bh.Name }}</th>
           <td>{{ bh.Title }}</td>
           <td>{{ bh.Price }}</td>
-          <td>{{ bh.Category }}</td>
+          <td class="text-uppercase">{{ bh.Category }}</td>
         </tr>
       </tbody>
     </table>

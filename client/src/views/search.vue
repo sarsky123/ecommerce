@@ -164,7 +164,7 @@ export default {
     ...mapGetters("product", ["getProducts", "getFilteredProducts"]),
     categoryMatchProduct() {
       var prod = this.products;
-      var arr = prod.map(prod => prod.category);
+      var arr = prod.map(prod => prod.Category);
       arr = this.uniqueConstructor(arr);
       arr = arr.filter(
         obj => obj !== undefined && this.accessories.indexOf(obj) == -1
@@ -174,7 +174,7 @@ export default {
     },
     accessoriesMatchProduct() {
       var prod = this.products;
-      var arr = prod.map(prod => prod.category);
+      var arr = prod.map(prod => prod.Category);
       arr = this.uniqueConstructor(arr);
       arr = arr.filter(
         obj => obj !== undefined && this.accessories.indexOf(obj) >= 0
@@ -258,14 +258,14 @@ export default {
         if (vm.orderFilter) {
           switch (vm.orderFilter) {
             case "Price (Low to High)":
-              vm.products.sort((a, b) => a.price - b.price);
+              vm.products.sort((a, b) => a.Price - b.Price);
               break;
 
             case "Price (High to Low)":
-              vm.products.sort((a, b) => b.price - a.price);
+              vm.products.sort((a, b) => b.Price - a.Price);
               break;
             case "On Sale":
-              vm.products.sort((a, b) => b.onsale - a.onsale);
+              vm.products.sort((a, b) => b.Onsale - a.Onsale);
               break;
           }
         }

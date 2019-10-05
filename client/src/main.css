@@ -686,17 +686,7 @@ ul {
 }
 
 .main-content .scroll-icon-wrap .scroll_icon {
-  font-style: 0px;
-  background: rgba(255, 255, 255, 0.25);
-  display: inline-block;
-  width: 45px;
-  height: 45px;
-  border-radius: 100px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-  color: #fff;
-  text-decoration: none;
+  
 }
 
 .main-content .hero-image-overlay {

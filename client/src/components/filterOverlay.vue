@@ -78,7 +78,7 @@
                       @click="filterWithPayload(cat)"
                       >{{ cat
                       }}<span class="filterCount"
-                        >( {{ filteredCount(cat, "category") }} )
+                        >( {{ filteredCount(cat, "Category") }} )
                       </span></b-card-text
                     >
                   </b-card-body>
@@ -118,7 +118,7 @@
                     >
                       {{ accessorie
                       }}<span class="filterCount"
-                        >( {{ filteredCount(accessorie, "category") }} )
+                        >( {{ filteredCount(accessorie, "Category") }} )
                       </span></b-card-text
                     >
                   </b-card-body>
@@ -158,7 +158,7 @@
                     >
                       {{ br
                       }}<span class="filterCount"
-                        >( {{ filteredCount(br, "title") }} )
+                        >( {{ filteredCount(br, "Title") }} )
                       </span></b-card-text
                     >
                   </b-card-body>
@@ -213,7 +213,7 @@ export default {
     groupByBrand() {
       var myArray = [];
       for (let i = 0; i < this.totalProduct.length; i++) {
-        myArray.push(this.totalProduct[i].title);
+        myArray.push(this.totalProduct[i].Title);
       }
       myArray = [...new Set(myArray)];
       return myArray;

@@ -125,9 +125,9 @@
               </div>
             </div>
             <ul class="main-menu accessibleNav">
-              <router-link :to="{ name: 'shop' }" class="p-0 shop-link">
+              <router-link :to="{ name: 'store' }" class="p-0 shop-link">
                 <li class="main-menu-active">
-                  <a href="/" class="link">Shop</a>
+                  <a href="/" class="link">Store</a>
                 </li>
               </router-link>
               <li><a href="#">NEW EVENT</a></li>
@@ -172,8 +172,8 @@
               </div>
               <ul class="main-menu accessibleNav ml-auto">
                 <li class="main-menu-active">
-                  <router-link :to="{ name: 'shop' }">
-                    <p class="link">Shop</p>
+                  <router-link :to="{ name: 'store' }">
+                    <p class="link">Store</p>
                   </router-link>
                 </li>
 

@@ -2,7 +2,7 @@
   <div
     class="row flex-row align-items-center product-detail bg-white pt-sm-5 mb-3 w-100"
   >
-    <div class="col-10 mx-auto col-sm-7 px-lg-5 ">
+    <div class="col-10 mx-auto col-sm-7 px-lg-5 product-detail-img">
       <img
         :src="products.Image"
         :alt="products.Name"
@@ -221,8 +221,8 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    max-width: 700px;
-    max-height: 700px;
+    max-width: 600px;
+    max-height: 400px;
     overflow: hidden;
     object-fit: cover;
     > img {
