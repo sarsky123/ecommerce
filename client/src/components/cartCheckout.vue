@@ -39,16 +39,15 @@
                   </p>
                   <p class="cart__footer-text">
                     <a
-                      class="btn-secondary btn border-dark text-uppercase"
+                      class="btn-secondary btn border-none text-uppercase text-light"
                       @click.prevent="clearTheCart()"
                       >Clear cart</a
                     >
                   </p>
-                  <span>
+                  <span @click="goCheckout()">
                     <input
-                      type="submit"
                       name="checkout"
-                      class="btn uppercase btn btn-dark w-100  rounded-0 py-3 mt-3"
+                      class="btn uppercase btn-dark w-100  rounded-0 py-3 mt-3"
                       value="Check Out"
                     />
                   </span>
@@ -94,6 +93,10 @@ export default {
     },
     clearTheCart() {
       this.clearCart();
+    },
+    goCheckout() {
+      this.$router.push("checkoutPage");
+      this.showPopupCart();
     }
   },
   computed: {

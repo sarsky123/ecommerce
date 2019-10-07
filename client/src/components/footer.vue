@@ -122,7 +122,7 @@
 
         <div class="d-flex flex-column pt-1clearfix w-100 mx-auto">
           <ul
-            class="footer-payment payment-icons inline-list d-flex flex-row w-50 jusify-content-center mx-auto"
+            class="footer-payment payment-icons inline-list d-flex flex-row w-100 jusify-content-between mx-auto"
           >
             <li class="col">
               <font-awesome-icon :icon="['fab', 'cc-amex']" />

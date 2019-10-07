@@ -8,7 +8,7 @@
         align="center"
         class="border-0"
         tabs
-        active-nav-item-class="font-weight-bold text-dark bg-transparent"
+        active-nav-item-class="font-weight-bold bg-transparent"
       >
         <b-nav-item
           ><router-link

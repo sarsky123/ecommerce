@@ -8,7 +8,7 @@
         align="center"
         class="border-0"
         tabs
-        active-nav-item-class="font-weight-bold text-dark bg-transparent"
+        active-nav-item-class="font-weight-bold text-light bg-transparent"
       >
         <b-nav-item
           ><router-link
@@ -67,19 +67,20 @@ export default {};
     color: #999 !important;
     &:hover {
       text-decoration: none !important;
-      color: black !important;
+      color: white !important;
     }
   }
 }
 .nav-link {
   &:hover {
     border: none !important;
-    border-bottom: 1px solid black !important;
-    color: black !important;
+    border-bottom: 1px solid white !important;
+    color: #cbd3da !important;
   }
   &.active {
     border: none !important;
-    border-bottom: 2px solid black !important;
+    border-bottom: 2px solid white !important;
+    color: #999;
   }
 }
 </style>

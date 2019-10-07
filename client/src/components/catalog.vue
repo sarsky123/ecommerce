@@ -91,7 +91,8 @@ export default {
   computed: {
     ...mapGetters("cart", ["getProductsInCart", "getProductById"]),
     ...mapState("cart", ["cartProducts"]),
-    ...mapGetters("authentication", ["loggedIn"])
+    ...mapGetters("authentication", ["loggedIn"]),
+    ...mapGetters("bookmark", ["getBookmarks"])
   },
   mounted() {
     //binding store data to local scale so that we could apply watch into it
@@ -127,32 +128,38 @@ export default {
     },
     async addBookmark(product) {
       try {
-        await BookmarksService.post(product.ProductID);
+        var resp = await BookmarksService.post(product.ProductID);
+        if (resp.status === 200) {
+          this.$store.dispatch(
+            "bookmark/addIndividualBookmark",
+            resp.data.ProductID
+          );
+        }
       } catch (err) {
         console.log(err);
       }
-      this.dectection = !this.dectection;
     },
     async removeBookmark(p) {
       try {
-        await BookmarksService.delete(p.ProductID);
+        var resp = await BookmarksService.delete(p.ProductID);
+        if (resp.status === 200) {
+          this.$store.dispatch("bookmark/deleteBookmark", resp.data.ProductID);
+        }
       } catch (err) {
         console.log(err);
       }
-      this.dectection = !this.dectection;
     },
 
     async fetchBookmark() {
-      this.bookmark = (await BookmarksService.index()).data;
+      const bookmark = await BookmarksService.index();
+      if (bookmark.status === 200) {
+        this.$store.dispatch("bookmark/setBookmark", bookmark.data);
+      }
     },
     ifBookMarked(p) {
-      return (
-        this.bookmark.map(bookmark => bookmark.ProductID).indexOf(p.ProductID) >
-        -1
-      );
+      return this.bookmark.indexOf(p.ProductID) > -1;
     }
   },
-  components: {},
   props: {
     product: Object
   },
@@ -164,8 +171,11 @@ export default {
         this.ifProductInCart(this.product);
       }
     },
-    async dectection() {
-      this.fetchBookmark();
+    getBookmarks: {
+      immediate: true,
+      handler: function() {
+        this.bookmark = this.getBookmarks;
+      }
     }
   }
 };

@@ -8,10 +8,10 @@
         <b-tabs
           content-class="mt-3 col py-3 text-light"
           nav-link-class="text-light"
-          active-nav-item-class="font-weight-bold text-dark bg-transparent"
+          active-nav-item-class="font-weight-bold  bg-transparent"
           justified
         >
-          <b-tab title-item-class="text-light" title="PRODUCT DETAILS"
+          <b-tab title="PRODUCT DETAILS" title-item-class="text-light"
             ><p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa
               amet temporibus in enim minima nobis.
@@ -82,15 +82,13 @@ section {
   margin-top: 150px;
 }
 .nav-link {
-  color: black !important;
+  color: white;
 }
 .nav-link {
   &:hover {
+    border: none;
     border-bottom: 1px solid white !important;
     color: #333 !important;
-  }
-  &.active {
-    border-bottom: 2px solid black !important;
   }
 }
 .detail-info {

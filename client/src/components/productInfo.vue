@@ -5,7 +5,7 @@
 
       <div class="grid-uniform clearfix">
         <catalog
-          v-for="(product, index) in this.getProducts.slice(26, 40)"
+          v-for="(product, index) in this.getProducts.slice(26, 32)"
           :key="index"
           :product="product"
         ></catalog>

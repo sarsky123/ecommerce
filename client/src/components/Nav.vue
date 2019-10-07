@@ -7,12 +7,21 @@
             <p class=" textLinks uppercase">
               <router-link
                 :to="{
+                  name: 'member'
+                }"
+                tag="a"
+                >Manage Account</router-link
+              >&nbsp; ·
+              <router-link
+                :to="{
                   name: 'userLogin'
                 }"
                 v-if="!AuthCheck()"
-                >Login In</router-link
               >
-              <a href="#" v-else @click.prevent="logOut()">Log Out</a>
+                Login In</router-link
+              >
+
+              <a href="#" v-else @click.prevent="logOut()"> &nbsp;Log Out</a>
               <span v-if="!AuthCheck()">
                 &nbsp; · &nbsp;
                 <router-link

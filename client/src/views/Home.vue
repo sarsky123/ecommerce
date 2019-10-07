@@ -46,7 +46,7 @@
                 class="col text-center d-flex flex-column align-items-center justify-content-center"
               >
                 <div class="w-75 mx-auto">
-                  <h3 class="mb-4 mx-auto">Life With Style</h3>
+                  <h3 class="mb-4 mx-auto text-capitalize">viva la vida</h3>
                   <p class="text-lighter mb-3 w-80 ">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   </p>
@@ -74,7 +74,7 @@
                 class="col text-center d-flex flex-column align-items-center justify-content-center"
               >
                 <div class="w-75 mx-auto">
-                  <h3 class="mb-4 text-wrap">Look Great</h3>
+                  <h3 class="mb-4 text-wrap">Sesonal Sale</h3>
                   <p class="text-lighter mb-3" text-wrap>
                     Lorem ipsum dolor sit amet consectetur.
                   </p>
@@ -108,6 +108,7 @@
       <no-ssr>
         <carousel
           :perPage="perpage"
+          loop
           hide-controls
           class="bg-white col-10 mx-auto px-0"
           centerMode
@@ -206,6 +207,7 @@
       </div>
       <no-ssr>
         <carousel
+          loop
           :perPage="perpage"
           hide-controls
           class="bg-white col-10 mx-auto px-0"
@@ -318,8 +320,7 @@ export default {
   data() {
     return {
       perpage: null,
-      bookmark: [],
-      dectection: false
+      bookmark: null
     };
   },
   components: {
@@ -332,7 +333,6 @@ export default {
     this.fetchBookmark();
   },
   mounted() {
-    this.dectection = !this.dectection;
     if (this.windowWidth > 960) {
       this.perpage = 4;
     } else if (this.windowWidth < 576) {
@@ -355,35 +355,43 @@ export default {
     },
     async addBookmark(product) {
       try {
-        await BookmarksService.post(product.ProductID);
+        var resp = await BookmarksService.post(product.ProductID);
+        if (resp.status === 200) {
+          this.$store.dispatch(
+            "bookmark/addIndividualBookmark",
+            resp.data.ProductID
+          );
+        }
       } catch (err) {
         console.log(err);
       }
-      this.dectection = !this.dectection;
     },
     async removeBookmark(p) {
       try {
-        await BookmarksService.delete(p.ProductID);
+        var resp = await BookmarksService.delete(p.ProductID);
+        if (resp.status === 200) {
+          console.log(resp.data);
+          this.$store.dispatch("bookmark/deleteBookmark", resp.data.ProductID);
+        }
       } catch (err) {
         console.log(err);
       }
-      this.dectection = !this.dectection;
     },
-
     async fetchBookmark() {
-      this.bookmark = (await BookmarksService.index()).data;
+      const bookmark = await BookmarksService.index();
+      if (bookmark.status === 200) {
+        this.$store.dispatch("bookmark/setBookmark", bookmark.data);
+      }
     },
     ifBookMarked(p) {
-      return (
-        this.bookmark.map(bookmark => bookmark.ProductID).indexOf(p.ProductID) >
-        -1
-      );
+      return this.bookmark.indexOf(p.ProductID) > -1;
     }
   },
   computed: {
     ...mapGetters("product", ["getProducts"]),
     ...mapGetters("cart", ["getProductById"]),
-    ...mapGetters("authentication", ["loggedIn"])
+    ...mapGetters("authentication", ["loggedIn"]),
+    ...mapGetters("bookmark", ["getBookmarks"])
   },
   mixins: [vueWindowSizeMixin],
   watch: {
@@ -396,8 +404,11 @@ export default {
         this.perpage = 3;
       }
     },
-    async dectection() {
-      this.fetchBookmark();
+    getBookmarks: {
+      immediate: true,
+      handler: function() {
+        this.bookmark = this.getBookmarks;
+      }
     }
   }
 };

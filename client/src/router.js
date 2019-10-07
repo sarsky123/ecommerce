@@ -19,6 +19,7 @@ import Order from "@/components/member/Order";
 import BrowsingHistory from "@/components/member/BrowsingHistory";
 import Wishlist from "@/components/member/Wishlist";
 import ProfileSetting from "@/components/member/ProfileSetting";
+import CheckoutPage from "@/views/CheckoutPage.vue";
 
 Vue.use(Router);
 
@@ -118,6 +119,12 @@ const router = new Router({
       path: "/shop",
       name: "shop",
       component: shop,
+      props: true
+    },
+    {
+      path: "/checkoutPage",
+      name: "checkoutPage",
+      component: CheckoutPage,
       props: true
     },
     {

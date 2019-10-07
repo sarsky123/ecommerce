@@ -232,7 +232,6 @@ export default {
   bottom: 0;
   background-color: rgba(210, 210, 210, 0.8);
   z-index: 15;
-  cursor: pointer;
   width: 100%;
 }
 .filter_header {

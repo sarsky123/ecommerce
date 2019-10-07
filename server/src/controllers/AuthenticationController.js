@@ -38,14 +38,9 @@ module.exports = {
                     error: 'The login information was incorrect, please check your email information'
                 })
             }
-            console.log('this is password ' + password);
-            
-            console.log('this is user pw '+user.password);
             
 
             const isPasswordValid = await user.comparePassword(password, user.password)
-
-            console.log('is password right? ' + isPasswordValid);
 
             
             if (!isPasswordValid) {
