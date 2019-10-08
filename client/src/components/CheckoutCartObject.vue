@@ -10,7 +10,7 @@
         <div class="grid__item col-8 p-0">
           <div class="grid--full d-flex flex-row align-items-center">
             <div class="grid__item col-5 col-sm-6 p-0">
-              <div class="cart__image py-2">
+              <div class="cart__image px-sm-3 py-2">
                 <img :src="item.Image" :alt="item.Name" />
               </div>
             </div>

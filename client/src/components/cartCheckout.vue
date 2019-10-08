@@ -24,7 +24,7 @@
 
           <form method="post" class="cart clearfix" v-if="hasProduct()">
             <h3>Your Cart</h3>
-            <div class="cart__body">
+            <div class="cart__body" id="style-1">
               <cart></cart>
             </div>
             <div class="cart__footer clearfix">
@@ -109,4 +109,27 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.cart__body {
+  max-height: 50vh;
+  overflow: scroll;
+}
+.btn {
+  cursor: pointer !important;
+}
+#style-1::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+#style-1::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+#style-1::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 2px rgba(134, 111, 111, 0.6);
+  background-color: #aaa;
+}
+</style>

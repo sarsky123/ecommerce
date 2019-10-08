@@ -68,18 +68,12 @@
             class="btn btn-secondary flex-fill ml-1 mt-3 text-uppercase"
             v-if="loggedIn"
           >
-            <div v-if="loggedIn && !bookmark">
-              <font-awesome-icon
-                @click="addBookmark(products)"
-                :icon="['far', 'heart']"
-              />
+            <div v-if="loggedIn && !bookmark" @click="addBookmark(products)">
+              <font-awesome-icon :icon="['far', 'heart']" />
               Whishlist
             </div>
-            <div v-else>
-              <font-awesome-icon
-                @click="removeBookmark(products)"
-                :icon="['fas', 'heart']"
-              />
+            <div v-else @click="removeBookmark(products)">
+              <font-awesome-icon :icon="['fas', 'heart']" />
               Remove
             </div>
           </div>
@@ -128,7 +122,19 @@ export default {
     },
     async addBookmark(product) {
       try {
-        await BookmarksService.post(product.ProductID);
+        const resp = await BookmarksService.post(product.ProductID);
+        if (resp.status == 200) {
+          this.$store.dispatch(
+            "bookmark/addIndividualBookmark",
+            resp.data.ProductID
+          );
+        }
+
+        const notification = {
+          type: "success",
+          message: "Selected product has been added to whishlist"
+        };
+        this.$store.dispatch("notification/add", notification);
       } catch (err) {
         console.log(err);
         const notification = {
@@ -136,32 +142,25 @@ export default {
           message: "Some problem occured when trying to add whishlist"
         };
         this.$store.dispatch("notification/add", notification);
-      } finally {
-        this.bookmark = (await BookmarksService.index({
-          ProductID: product.ProductID
-        })).data;
-        const notification = {
-          type: "success",
-          message: "Selected product has been added to whishlist"
-        };
-        this.$store.dispatch("notification/add", notification);
       }
     },
-    async removeBookmark(product) {
+    async removeBookmark(p) {
       try {
-        await BookmarksService.delete(product.ProductID);
+        var resp = await BookmarksService.delete(p.ProductID);
+        console.log(resp);
+        if (resp.status === 200) {
+          this.$store.dispatch("bookmark/deleteBookmark", resp.data.ProductID);
+        }
+        const notification = {
+          type: "warning",
+          message: "Selected product has been removed from whishlist"
+        };
+        this.$store.dispatch("notification/add", notification);
       } catch (err) {
         console.log(err);
         const notification = {
           type: "error",
           message: "Some problem occured when trying to remove whishlist"
-        };
-        this.$store.dispatch("notification/add", notification);
-      } finally {
-        this.bookmark = null;
-        const notification = {
-          type: "warning",
-          message: "Selected product has been removed from whishlist"
         };
         this.$store.dispatch("notification/add", notification);
       }
@@ -173,33 +172,40 @@ export default {
       if (index > -1) {
         this.removeProduct(index);
       }
+    },
+    async fetchBookmark() {
+      const bookmark = await BookmarksService.index();
+      if (bookmark.status === 200) {
+        this.$store.dispatch("bookmark/setBookmark", bookmark.data);
+      }
+      console.log("bookmark is fetched from server");
     }
   },
 
   computed: {
     ...mapGetters("product", ["getProducts"]),
     ...mapGetters("cart", ["getProductsInCart", "getProductById"]),
-    ...mapGetters("authentication", ["loggedIn"])
+    ...mapGetters("authentication", ["loggedIn"]),
+    ...mapGetters("bookmark", ["getBookmarks"])
+  },
+  created() {
+    this.fetchBookmark();
   },
   async mounted() {
     if (!this.loggedIn && this.products) {
-      console.log("mounted access deny");
       return;
     }
     try {
+      await HistoryService.post(this.products.ProductID);
       const bookmarks = (await BookmarksService.index({
         ProductID: this.products.ProductID
       })).data;
       if (bookmarks.length) {
-        this.bookmark = bookmarks[0];
+        const indexedBookmark = bookmarks[0];
+        this.bookmark = !!(this.getBookmarks.indexOf(indexedBookmark) > -1);
       }
-      await HistoryService.post(this.products.ProductID);
     } catch (err) {
       console.log(err);
-    } finally {
-      console.log(
-        "mounted access success" + this.bookmark + this.products.ProductID
-      );
     }
   },
   watch: {
@@ -207,6 +213,14 @@ export default {
       immediate: true,
       handler: function() {
         this.ifProductInCart(this.products);
+      }
+    },
+    getBookmarks: {
+      immediate: true,
+      handler: function() {
+        this.bookmark = !!(
+          this.getBookmarks.indexOf(this.products.ProductID) > -1
+        );
       }
     }
   }

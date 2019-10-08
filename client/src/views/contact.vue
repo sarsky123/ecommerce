@@ -79,8 +79,7 @@ export default {};
   }
   &.active {
     border: none !important;
-    border-bottom: 2px solid white !important;
-    color: #999;
+    color: #999 !important;
   }
 }
 </style>

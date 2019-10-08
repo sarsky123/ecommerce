@@ -133,8 +133,10 @@ export default {
 </script>
 
 <style lang="scss">
-.cart-content {
+.svg-inline--fa {
+  cursor: pointer;
 }
+
 .cart__image {
   > img {
     width: auto;

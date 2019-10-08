@@ -328,9 +328,9 @@ export default {
     "no-ssr": NoSSR
   },
   created() {
+    this.fetchBookmark();
     this.$store.dispatch("product/fetchProducts");
     this.$store.dispatch("product/fetchFilteredProduct");
-    this.fetchBookmark();
   },
   mounted() {
     if (this.windowWidth > 960) {
@@ -382,6 +382,7 @@ export default {
       if (bookmark.status === 200) {
         this.$store.dispatch("bookmark/setBookmark", bookmark.data);
       }
+      console.log("bookmark is fetched from server");
     },
     ifBookMarked(p) {
       return this.bookmark.indexOf(p.ProductID) > -1;

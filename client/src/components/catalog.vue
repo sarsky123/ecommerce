@@ -157,7 +157,7 @@ export default {
       }
     },
     ifBookMarked(p) {
-      return this.bookmark.indexOf(p.ProductID) > -1;
+      return !!(this.bookmark.indexOf(p.ProductID) > -1);
     }
   },
   props: {

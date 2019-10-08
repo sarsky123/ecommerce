@@ -227,6 +227,7 @@ ul {
   display: block;
   opacity: 0.5;
   letter-spacing: 1px;
+  cursor: pointer;
 }
 
 .noscroll {
@@ -938,7 +939,6 @@ footer .payment-icons li {
   bottom: 0;
   background-color: rgba(210, 210, 210, 0.8);
   z-index: 50;
-  cursor: pointer;
   width: 100%;
 }
 
@@ -978,6 +978,11 @@ footer .payment-icons li {
 .cartoverlay .cart-modal .cart__image>img {
   width: 100%;
   height: 100%;
+}
+
+.cart__image {
+
+  cursor: pointer;
 }
 
 .cartoverlay .cart-modal .cart__row {

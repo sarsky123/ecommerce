@@ -1,6 +1,6 @@
 <template>
   <div class="w-100 col">
-    <table class="table table-striped my-3">
+    <table class="table table-striped my-3" v-if="BrowsingHistory.length > 0">
       <thead class="text-capitalize">
         <tr>
           <th scope="col">Name</th>
@@ -22,6 +22,9 @@
         </tr>
       </tbody>
     </table>
+    <div v-else>
+      <h5>No prvious browsing record</h5>
+    </div>
   </div>
 </template>
 

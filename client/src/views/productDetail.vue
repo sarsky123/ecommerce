@@ -94,5 +94,10 @@ section {
 .detail-info {
   background: #e3aaaa;
   color: white;
+  .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 </style>

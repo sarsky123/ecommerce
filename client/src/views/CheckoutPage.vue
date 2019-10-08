@@ -459,7 +459,7 @@
           </div>
         </div>
         <!--Order Summary-->
-        <div class="col-12 col-md-5   ">
+        <div class="col-12 col-md-5">
           <div class="ml-2 checkoutTotal pb-4 mb-5 align-self-center col-12">
             <h5 class="text-uppercase py-4">order summary</h5>
             <div>
@@ -592,6 +592,9 @@ export default {
   .checkoutForm {
     padding: 0 15px 15px 15px;
   }
+  @media screen and (max-width: 768px) {
+    padding-bottom: 50px
+  }
 }
 //checkout info
 .step-indicator {
@@ -657,7 +660,7 @@ export default {
   }
 }
 .form-container {
-  padding-top: 25px;
+  padding: 55px 0;
   > span {
     margin-bottom: 15px;
   }
@@ -687,7 +690,7 @@ export default {
   padding-right: 5px;
   h5 {
     color: #ca6f6f;
-    font-weight: 300;
+    font-weight: 600;
   }
   @media screen and (max-width: 1024px) {
     margin-top: 25px;
