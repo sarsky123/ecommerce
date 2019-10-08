@@ -20,7 +20,13 @@ module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         email: {
             type: DataTypes.STRING,
-            unique: true
+            unique: true,
+            allowNull: false,
+            validate: {
+                isEmail:{
+                    msg: "Must be a valid email"
+                }
+            }
         },
         password: DataTypes.STRING
     }, {

@@ -120,22 +120,6 @@ export default {
     ...mapState("authentication", ["loading"])
   },
   methods: {
-    //auth0
-    AuthCheck() {
-      if (
-        localStorage.getItem("access_token") &&
-        localStorage.getItem("id_token") &&
-        localStorage.getItem("expires_at")
-      ) {
-        let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
-        return new Date().getTime() < expiresAt;
-      }
-      return false;
-    },
-    auth0Login() {
-      this.$store.dispatch("auth0/auth0Login");
-    },
-
     // default login
     toggleMenu() {
       this.$emit("toggleLogin");
@@ -158,9 +142,13 @@ export default {
           email: this.email,
           password: this.password
         });
-        console.log(response);
-        this.$store.dispatch("authentication/setToken", response.data.token);
-        this.$store.dispatch("authentication/setUser", response.data.user);
+        if (response.status == 200) {
+          console.log(response);
+          this.$store.dispatch("authentication/setToken", response.data.token);
+          this.$store.dispatch("authentication/setUser", response.data.user);
+        } else {
+          throw Error();
+        }
       } catch (error) {
         this.error = error.response.data.error;
       }

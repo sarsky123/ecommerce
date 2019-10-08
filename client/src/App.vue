@@ -62,7 +62,8 @@ export default {
       } else if (
         to.name == "searchContent" ||
         from.name == "searchContent" ||
-        to.path.includes("home-carousel")
+        to.path.includes("home-carousel") ||
+        to.path.includes("member")
       ) {
         this.animationActive = "";
         this.animationLeave = "";

@@ -569,14 +569,28 @@ export default {
     },
     async checkoutPay() {
       try {
-        const response = await CheckoutService.post(this.getCheckoutInfo);
+        const request = this.getCheckoutInfo;
+        const response = await CheckoutService.post(request);
         console.log(response);
         if (response.status == 200) {
           this.step = "4";
           console.log(this.step);
+          const notification = {
+            type: "success",
+            message: "Your order is completed!"
+          };
+          this.$store.dispatch("notification/add", notification);
+        } else {
+          throw Error("500");
         }
       } catch (err) {
         console.log(err);
+        const notification = {
+          type: "error",
+          message:
+            "There's problem happened during checkout , please do it again!"
+        };
+        this.$store.dispatch("notification/add", notification);
       }
     },
     DecreStep() {
@@ -593,7 +607,7 @@ export default {
     padding: 0 15px 15px 15px;
   }
   @media screen and (max-width: 768px) {
-    padding-bottom: 50px
+    padding-bottom: 50px;
   }
 }
 //checkout info

@@ -168,17 +168,24 @@ export default {
             email: this.email,
             password: this.password
           });
-          this.$store.dispatch("authentication/setToken", response.data.token);
-          this.$store.dispatch("authentication/setUser", response.data.user);
-          let token = response.data.token;
-          localStorage.setItem("token", token);
-          let user = response.data.user;
-          localStorage.setItem("user", user);
-          this.$router.push({
-            name: "home"
-          });
-          window.location.reload();
-          this.toggleMenu;
+          if (response.status == 200) {
+            this.$store.dispatch(
+              "authentication/setToken",
+              response.data.token
+            );
+            this.$store.dispatch("authentication/setUser", response.data.user);
+            let token = response.data.token;
+            localStorage.setItem("token", token);
+            let user = response.data.user;
+            localStorage.setItem("user", user);
+            this.$router.push({
+              name: "home"
+            });
+            window.location.reload();
+            this.toggleMenu;
+          } else {
+            throw Error();
+          }
         } catch (error) {
           this.error = error.response.data.error;
           return;

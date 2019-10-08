@@ -1,104 +1,36 @@
 <template>
   <div class="w-100">
-    <div>
-      <h3 class="text-capitalize text-center  pt-4 border-bottom">
-        Recently Added
-        <span class="arrow-container ">
-          <div
-            :class="
-              recentAddedFolded ? 'center-con' : 'center-con rotate-reverse'
-            "
-          >
-            <div class="round" @click="toggleAddedFolded()">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </span>
-      </h3>
-    </div>
-    <div
-      :class="
-        recentAddedFolded
-          ? 'whish-wrapper d-flex flex-row w-100 row faded'
-          : 'whish-wrapper d-flex flex-row w-100 row'
-      "
-    >
-      <div
-        class="col col-sm-6 col-md-4 col-lg-3 py-4 mb-2 d-flex flex-column
-            align-items-center justify-content-center text-center wishlist-box"
-        v-for="(wishProduct, index) in recentAdded"
-        :key="index"
-      >
-        <div class="col image-cover">
-          <div class="hover-cover">
+    <div class="w-100" v-if="this.bookmark.length">
+      <div>
+        <h3 class="text-capitalize text-center  pt-4 border-bottom">
+          Recently Added
+          <span class="arrow-container ">
             <div
-              @click.self="pushTo('product-detail', wishProduct.ProductID)"
-              class="d-flex flex-column justify-content-center align-items-center"
+              :class="
+                recentAddedFolded ? 'center-con' : 'center-con rotate-reverse'
+              "
             >
-              <div>
-                <font-awesome-icon
-                  @click="pushTo('product-detail', wishProduct.ProductID)"
-                  :icon="['fas', 'search']"
-                  class="cover-search"
-                />
+              <div class="round" @click="toggleAddedFolded()">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
               </div>
             </div>
-          </div>
-          <img :src="wishProduct.Image" :alt="wishProduct.Name" />
-        </div>
-        <div class="col mt-2 d-flex flex-column whish-info text-left">
-          <h5>{{ wishProduct.Name }}</h5>
-          <h3>{{ wishProduct.Title }}</h3>
-          <p>${{ wishProduct.Price }}</p>
-        </div>
-        <div class="w-100 col">
-          <button
-            :class="
-              getProductById(wishProduct.ProductID)
-                ? 'btn btn-secondary text-capitalize rounded-0 w-100 align-self-end'
-                : 'btn btn-dark text-capitalize rounded-0 w-100 align-self-end'
-            "
-            :disabled="getProductById(wishProduct.ProductID)"
-          >
-            <span
-              v-if="getProductById(wishProduct.ProductID)"
-              class="d-flex flex-row align-items-center justify-content-center"
-              ><font-awesome-icon
-                class="mr-3 d-inline-block"
-                :icon="['fas', 'shopping-bag']"
-              />
-              <span>in cart</span></span
-            >
-            <span
-              v-else
-              @click="addProductToCart(wishProduct)"
-              class="d-flex flex-row align-items-center justify-content-center"
-              ><font-awesome-icon
-                class="mr-3 d-inline-block"
-                :icon="['fas', 'cart-plus']"
-              />
-              <span>add to cart</span></span
-            >
-          </button>
-        </div>
-        <span class="align-self-end close-button"
-          ><font-awesome-icon
-            :icon="['fas', 'times']"
-            @click="removeBookmark(wishProduct)"
-          ></font-awesome-icon
-        ></span>
+          </span>
+        </h3>
       </div>
-    </div>
-    <div class="d-flex flex-column w-100 text-center">
-      <h3 class="wish-title">Your Wishlist</h3>
-      <div class="whish-wrapper d-flex flex-row w-100 row">
+      <div
+        :class="
+          recentAddedFolded
+            ? 'whish-wrapper d-flex flex-row w-100 row faded'
+            : 'whish-wrapper d-flex flex-row w-100 row'
+        "
+      >
         <div
           class="col col-sm-6 col-md-4 col-lg-3 py-4 mb-2 d-flex flex-column
             align-items-center justify-content-center text-center wishlist-box"
-          v-for="(wishProduct, index) in this.bookmark"
+          v-for="(wishProduct, index) in recentAdded"
           :key="index"
         >
           <div class="col image-cover">
@@ -119,9 +51,9 @@
             <img :src="wishProduct.Image" :alt="wishProduct.Name" />
           </div>
           <div class="col mt-2 d-flex flex-column whish-info text-left">
-            <h3>{{ wishProduct.Name }}</h3>
-            <h5>{{ wishProduct.Title }}</h5>
-            <p>$ {{ wishProduct.Price }}</p>
+            <h5>{{ wishProduct.Name }}</h5>
+            <h3>{{ wishProduct.Title }}</h3>
+            <p>${{ wishProduct.Price }}</p>
           </div>
           <div class="w-100 col">
             <button
@@ -161,6 +93,81 @@
           ></span>
         </div>
       </div>
+      <div class="d-flex flex-column w-100 text-center">
+        <h3 class="wish-title">Your Wishlist</h3>
+        <div class="whish-wrapper d-flex flex-row w-100 row">
+          <div
+            class="col col-sm-6 col-md-4 col-lg-3 py-4 mb-2 d-flex flex-column
+            align-items-center justify-content-center text-center wishlist-box"
+            v-for="(wishProduct, index) in this.bookmark"
+            :key="index"
+          >
+            <div class="col image-cover">
+              <div class="hover-cover">
+                <div
+                  @click.self="pushTo('product-detail', wishProduct.ProductID)"
+                  class="d-flex flex-column justify-content-center align-items-center"
+                >
+                  <div>
+                    <font-awesome-icon
+                      @click="pushTo('product-detail', wishProduct.ProductID)"
+                      :icon="['fas', 'search']"
+                      class="cover-search"
+                    />
+                  </div>
+                </div>
+              </div>
+              <img :src="wishProduct.Image" :alt="wishProduct.Name" />
+            </div>
+            <div class="col mt-2 d-flex flex-column whish-info text-left">
+              <h3>{{ wishProduct.Name }}</h3>
+              <h5>{{ wishProduct.Title }}</h5>
+              <p>$ {{ wishProduct.Price }}</p>
+            </div>
+            <div class="w-100 col">
+              <button
+                :class="
+                  getProductById(wishProduct.ProductID)
+                    ? 'btn btn-secondary text-capitalize rounded-0 w-100 align-self-end'
+                    : 'btn btn-dark text-capitalize rounded-0 w-100 align-self-end'
+                "
+                :disabled="getProductById(wishProduct.ProductID)"
+              >
+                <span
+                  v-if="getProductById(wishProduct.ProductID)"
+                  class="d-flex flex-row align-items-center justify-content-center"
+                  ><font-awesome-icon
+                    class="mr-3 d-inline-block"
+                    :icon="['fas', 'shopping-bag']"
+                  />
+                  <span>in cart</span></span
+                >
+                <span
+                  v-else
+                  @click="addProductToCart(wishProduct)"
+                  class="d-flex flex-row align-items-center justify-content-center"
+                  ><font-awesome-icon
+                    class="mr-3 d-inline-block"
+                    :icon="['fas', 'cart-plus']"
+                  />
+                  <span>add to cart</span></span
+                >
+              </button>
+            </div>
+            <span class="align-self-end close-button"
+              ><font-awesome-icon
+                :icon="['fas', 'times']"
+                @click="removeBookmark(wishProduct)"
+              ></font-awesome-icon
+            ></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100" v-else>
+      <h5 class="text-center text-capitalize py-5">
+        No Wishlist has been added yet
+      </h5>
     </div>
   </div>
 </template>
