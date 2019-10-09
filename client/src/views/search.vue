@@ -16,8 +16,12 @@
                 obcaecati soluta ea ut quam laudantium corrupti fugit. Nihil,
                 cum.
               </p>
-              <button class="btn btn-dark">
-                Shop Now
+              <button
+                class="btn btn-dark d-flex flex-column align-items-center"
+              >
+                <span class="text-uppercase">
+                  Shop Now
+                </span>
               </button>
             </div>
           </div>
@@ -72,16 +76,23 @@
           toggle-class="border-none "
           variant="bg-none"
           no-flip
+          id="dropdown-none"
         >
         </b-dropdown>
-
-        <b-dropdown id="dropdown-1" text="Sort By" class="col px-0">
+        <b-dropdown
+          id="dropdown-1"
+          text="Sort By"
+          menu-class="w-100"
+          toggle-class="w-100"
+          variant="bg-secondary"
+          class="col px-0"
+        >
           <b-dropdown-item
             class="w-100"
             v-for="(sortOrder, index) in sort"
             :key="index"
             menu-class="d-none"
-            variant="bg-none"
+            variant=""
             @click.native="setOrderFilter(sortOrder)"
             >{{ sortOrder }}</b-dropdown-item
           >
@@ -329,7 +340,6 @@ export default {
 }
 .search-filter {
   width: 100%;
-  overflow: hidden;
   .btn {
     background-color: #e3aaaa !important;
     opacity: 0.7;

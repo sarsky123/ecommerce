@@ -28,7 +28,7 @@
         "
       >
         <div
-          class="col col-sm-6 col-md-4 col-lg-3 py-4 mb-2 d-flex flex-column
+          class="col-sm-6 col-md-4 col-lg-3 py-4 mb-2 d-flex flex-column
             align-items-center justify-content-center text-center wishlist-box"
           v-for="(wishProduct, index) in recentAdded"
           :key="index"
@@ -97,7 +97,7 @@
         <h3 class="wish-title">Your Wishlist</h3>
         <div class="whish-wrapper d-flex flex-row w-100 row">
           <div
-            class="col col-sm-6 col-md-4 col-lg-3 py-4 mb-2 d-flex flex-column
+            class="col-sm-6 col-md-4 col-lg-3 py-4 mb-2 d-flex flex-column
             align-items-center justify-content-center text-center wishlist-box"
             v-for="(wishProduct, index) in this.bookmark"
             :key="index"
@@ -240,7 +240,7 @@ export default {
   watch: {
     bookmark() {
       this.recentAdded = this.bookmark.slice(
-        this.bookmark.length - 3,
+        this.bookmark.length - 4,
         this.bookmark.length
       );
       this.recentAdded.reverse();

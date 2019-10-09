@@ -1,5 +1,5 @@
 <template>
-  <div class="col ">
+  <div class="col m-2 orderHistoryBox">
     <div class="cart__row my-3 border border-dark  ">
       <div class="orderHistoryItem-header col py-2 ">
         <div class="d-flex flex-row align-items-center flex-fill mr-3">
@@ -135,6 +135,9 @@ h5 {
 }
 
 // Order-item
+.orderHistoryBox {
+  border-bottom: 1px solid #ddd;
+}
 .orderHistoryItem-header {
   display: flex;
   flex-direction: row;
@@ -178,7 +181,7 @@ h5 {
 }
 .OrderStatus {
   display: flex;
-  color: #ca6f6f;
+  color: black;
   flex-direction: column;
   padding: 15px 20px 25px 20px;
   align-items: center;

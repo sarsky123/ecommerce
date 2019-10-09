@@ -1,6 +1,9 @@
 <template>
   <div class="w-100 col">
-    <table class="table table-striped my-3" v-if="BrowsingHistory.length > 0">
+    <table
+      class="table table-striped my-3"
+      v-if="getHistoryProducts.length > 0"
+    >
       <thead class="text-capitalize">
         <tr>
           <th scope="col">Name</th>
@@ -40,7 +43,9 @@ export default {
   },
   async mounted() {
     try {
-      this.BrowsingHistory = (await HistoryService.get()).data;
+      const fetchHistory = await HistoryService.get();
+      this.BrowsingHistory = fetchHistory.data;
+      console.log(fetchHistory);
     } catch (err) {
       console.log(err);
     }

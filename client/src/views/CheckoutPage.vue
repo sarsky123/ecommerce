@@ -7,7 +7,7 @@
       <div
         class="checkoutContent w-100 d-flex flex-md-row row flex-column-reverse"
       >
-        <div class="col-12 col-md-7 border-right">
+        <div class="col-12 col-md-7">
           <div
             class="step-indicator d-flex flex-row w-100 justify-content-between"
           >
@@ -571,10 +571,10 @@ export default {
       try {
         const request = this.getCheckoutInfo;
         const response = await CheckoutService.post(request);
-        console.log(response);
+
         if (response.status == 200) {
           this.step = "4";
-          console.log(this.step);
+
           const notification = {
             type: "success",
             message: "Your order is completed!"
@@ -584,13 +584,15 @@ export default {
           throw Error("500");
         }
       } catch (err) {
-        console.log(err);
         const notification = {
           type: "error",
-          message:
-            "There's problem happened during checkout , please do it again!"
+          message: `
+            There's problem happened during checkout , please do it again!
+            
+            ${err}`
         };
         this.$store.dispatch("notification/add", notification);
+        this.step = "1";
       }
     },
     DecreStep() {
@@ -611,6 +613,12 @@ export default {
   }
 }
 //checkout info
+.checkoutContent > div:first-child {
+  border-right: 1px solid #ccc;
+  @media screen and (max-width: 976px) {
+    border-right: none;
+  }
+}
 .step-indicator {
   position: relative;
   padding-right: 15px;

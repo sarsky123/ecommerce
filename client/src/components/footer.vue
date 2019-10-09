@@ -46,9 +46,9 @@
           </div>
         </div>
       </div>
-      <div class="wrapper site-footer">
-        <div class="grid-uniform">
-          <div class="grid__item large--one-third mb-5">
+      <div class="col site-footer mx-auto">
+        <div class=" d-flex flex-row align-items-start justify-content-between">
+          <div class="col mb-5">
             <h5>Customer Care</h5>
             <hr class="hr--underline" />
             <ul class="footer-quicklinks">
@@ -74,7 +74,7 @@
             </ul>
           </div>
 
-          <div class="grid__item large--one-third mb-5">
+          <div class="col mb-5">
             <h5>About</h5>
             <hr class="hr--underline" />
             <div class="rte clearfix">
@@ -86,7 +86,7 @@
             </div>
           </div>
 
-          <div class="grid__item large--one-third mb-5">
+          <div class="col mb-5">
             <h5>Products</h5>
             <hr class="hr--underline" />
             <ul class="footer-quicklinks">
@@ -120,30 +120,28 @@
           </div>
         </div>
 
-        <div class="d-flex flex-column pt-1clearfix w-100 mx-auto">
+        <div class="d-flex flex-column pt-1 w-100 mx-auto">
           <ul
             class="footer-payment payment-icons inline-list d-flex flex-row w-100 jusify-content-between mx-auto"
           >
-            <li class="col">
+            <li class="flex-fill text-center">
               <font-awesome-icon :icon="['fab', 'cc-amex']" />
             </li>
-            <li class="col">
+            <li class="flex-fill text-center">
               <font-awesome-icon :icon="['fab', 'cc-paypal']" />
             </li>
-            <li class="col">
+            <li class="flex-fill text-center">
               <font-awesome-icon :icon="['fab', 'cc-mastercard']" />
             </li>
-            <li class="col">
+            <li class="flex-fill text-center">
               <font-awesome-icon :icon="['fab', 'cc-visa']" />
             </li>
-            <li class="col">
+            <li class="flex-fill text-center">
               <font-awesome-icon :icon="['fab', 'cc-apple-pay']" />
             </li>
           </ul>
 
-          <p
-            class="d-flex flex-row w-50 mt-3 jusify-content-center mx-auto text-center"
-          >
+          <p class="text-center mt-3">
             © Lorem ipsum Ducimus sit tempore minus praesentium vitae! Animi?
           </p>
         </div>
@@ -188,10 +186,10 @@
               block
               href="#"
               v-b-toggle.accordion-1
-              class="rounded-0 px-3 py-3 text-left border-light float-left"
+              class="rounded-0 px-3 py-3 text-left border-light d-flex flex-row align-items-center"
               variant="outline-dark text-uppercase"
-              >CONTACT US <span class="float-right when-closed">+</span
-              ><span class="float-right when-opened">-</span></b-button
+              >CONTACT US <span class="ml-auto when-closed">+</span
+              ><span class="ml-auto when-opened">-</span></b-button
             >
           </b-card-header>
           <b-collapse
@@ -216,10 +214,10 @@
               block
               href="#"
               v-b-toggle.accordion-2
-              class="rounded-0 px-3 py-3 text-left border-light float-left"
+              class="rounded-0 px-3 py-3 text-left border-light d-flex flex-row align-items-center"
               variant="outline-dark text-uppercase"
-              >About us <span class="float-right when-closed">+</span
-              ><span class="float-right when-opened">-</span></b-button
+              >About us <span class="ml-auto when-closed">+</span
+              ><span class="ml-auto when-opened">-</span></b-button
             >
           </b-card-header>
           <b-collapse
@@ -243,10 +241,10 @@
               block
               href="#"
               v-b-toggle.accordion-3
-              class="rounded-0 px-3 py-3 text-left border-light float-left"
+              class="rounded-0 px-3 py-3 text-left border-light d-flex flex-row align-items-center"
               variant="outline-dark text-uppercase"
-              >Delivery & return <span class="float-right when-closed">+</span
-              ><span class="float-right when-opened">-</span></b-button
+              >Delivery & return <span class="ml-auto when-closed">+</span
+              ><span class="ml-auto when-opened">-</span></b-button
             >
           </b-card-header>
           <b-collapse
@@ -333,9 +331,14 @@ export default {
   margin-right: 20px;
 }
 .footer-payment {
+  max-width: 1440px;
   > li {
     font-size: 40px;
   }
+}
+.site-footer > div:first-child {
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 576px) {

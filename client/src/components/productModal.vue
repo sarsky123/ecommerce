@@ -195,8 +195,10 @@ export default {
     if (!this.loggedIn && this.products) {
       return;
     }
+    const postHistory = await HistoryService.post(this.products.ProductID);
+    console.log(postHistory.data);
+
     try {
-      await HistoryService.post(this.products.ProductID);
       const bookmarks = (await BookmarksService.index({
         ProductID: this.products.ProductID
       })).data;

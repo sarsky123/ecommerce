@@ -1,6 +1,6 @@
 <template>
   <div class="homepage-collection homepage-white">
-    <div class="wrapper">
+    <div>
       <h4 class="home_subtitle">Featured Products</h4>
 
       <div class="grid-uniform clearfix">

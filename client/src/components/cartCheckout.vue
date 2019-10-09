@@ -23,7 +23,7 @@
           </div>
 
           <form method="post" class="cart clearfix" v-if="hasProduct()">
-            <h3>Your Cart</h3>
+            <h3 class="p-1">Your Cart</h3>
             <div class="cart__body" id="style-1">
               <cart></cart>
             </div>
@@ -95,7 +95,7 @@ export default {
       this.clearCart();
     },
     goCheckout() {
-      this.$router.push("checkoutPage");
+      this.$router.push("/checkoutPage");
       this.showPopupCart();
     }
   },
@@ -111,6 +111,7 @@ export default {
 
 <style lang="css" scoped>
 .cart__body {
+  border-bottom: 1px solid #ccc;
   max-height: 50vh;
   overflow: scroll;
 }

@@ -54,7 +54,6 @@ h3 {
 .grid__item {
   float: left;
   height: auto;
-  padding-left: 30px;
   vertical-align: top;
   width: 100%;
 }
@@ -238,6 +237,9 @@ ul {
 .centralized {
   line-height: 1;
   margin: auto;
+}
+.col {
+  max-width: 1440px !important;
 }
 
 /*Show & Hidden*/
@@ -721,7 +723,7 @@ ul {
   width: 90vw;
   max-width: 1440px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  grid-template-rows: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-rows: repeat(auto-fit, minmax(240px, 1fr));
   grid-column-gap: 1.5em;
   grid-row-gap: 2em;
   overflow: hidden;
@@ -951,9 +953,9 @@ footer .payment-icons li {
   width: 100%;
   top: 100%;
   left: 0%;
-  margin: 100px auto 0 auto;
+  margin: 50px auto 0 auto;
   max-width: 760px;
-  height: 75%;
+  height: calc(100% - 100px);
   overflow: auto;
   z-index: 999;
   opacity: 1;
@@ -1007,9 +1009,7 @@ footer .payment-icons li {
 }
 
 .cartoverlay .cart-modal .cart__footer {
-  margin-top: 30px;
   padding-top: 30px;
-  border-top: 1px solid black;
 }
 
 .cartoverlay .cart-modal .cart__footer .checkout__button {

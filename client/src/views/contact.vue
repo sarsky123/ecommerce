@@ -45,7 +45,7 @@
       </b-nav>
     </div>
     <div>
-      <router-view></router-view>
+      <router-view class="col"></router-view>
     </div>
   </div>
 </template>
@@ -61,25 +61,25 @@ export default {};
     line-height: 10rem;
     text-transform: uppercase;
   }
-}
-.nav-link {
-  > a {
-    color: #999 !important;
-    &:hover {
-      text-decoration: none !important;
-      color: white !important;
+  .nav-link {
+    > a {
+      color: #999 !important;
+      &:hover {
+        text-decoration: none !important;
+        color: #e3aaaa !important;
+      }
     }
   }
-}
-.nav-link {
-  &:hover {
-    border: none !important;
-    border-bottom: 1px solid white !important;
-    color: #cbd3da !important;
-  }
-  &.active {
-    border: none !important;
-    color: #999 !important;
+  .nav-link {
+    &:hover {
+      border: none !important;
+      border-bottom: 1px solid white !important;
+      color: #cbd3da !important;
+    }
+    &.active {
+      border: none !important;
+      color: #999 !important;
+    }
   }
 }
 </style>

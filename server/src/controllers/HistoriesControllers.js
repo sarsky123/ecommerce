@@ -30,6 +30,9 @@ module.exports = {
         try {
             const user = req.user.id
             const { ProductID } = req.body
+
+            console.log(ProductID);
+            
             
             const history = await Histories.create({
                 historyUser: user,
