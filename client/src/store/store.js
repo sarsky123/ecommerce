@@ -8,6 +8,7 @@ import * as notification from "@/store/modules/notification.js";
 import * as auth0 from "@/store/modules/auth0.js";
 import * as bookmark from "@/store/modules/bookmark.js";
 import * as checkout from "@/store/modules/checkout.js";
+import * as userInfo from "@/store/modules/userInfo.js";
 
 Vue.use(Vuex);
 
@@ -15,7 +16,7 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "authPersist",
-      paths: ["authentication", "cart", "product", "checkout"]
+      paths: ["authentication", "cart", "product", "checkout", "userInfo"]
     })
   ],
   modules: {
@@ -25,7 +26,8 @@ export default new Vuex.Store({
     authentication,
     notification,
     bookmark,
-    checkout
+    checkout,
+    userInfo
   },
   state: {},
   mutations: {},

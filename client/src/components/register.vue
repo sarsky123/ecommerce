@@ -21,19 +21,38 @@
           <div class="row flex-column">
             <div class="col">
               <validation-provider
-                name="name"
+                name="FirstName"
                 rules="required"
                 :bails="false"
                 v-slot="{ errors }"
               >
-                <label class="custom-label" for="name">
-                  Name:
+                <label class="custom-label" for="FirstName">
+                  First Name:
                 </label>
                 <input
                   class="loginInput"
-                  v-model="name"
+                  v-model="name.FirstName"
                   type="text"
-                  name="name"
+                  name="FirstName"
+                  placeholder="Your Name"
+                  value
+                />
+                <span class="text-danger">{{ errors[0] }}</span>
+              </validation-provider>
+              <validation-provider
+                name="LastName"
+                rules="required"
+                :bails="false"
+                v-slot="{ errors }"
+              >
+                <label class="custom-label" for="LastName">
+                  Last Name:
+                </label>
+                <input
+                  class="loginInput"
+                  v-model="name.LastName"
+                  type="text"
+                  name="LastName"
                   placeholder="Your Name"
                   value
                 />
@@ -137,7 +156,10 @@ export default {
     return {
       email: "",
       password: "",
-      name: "",
+      name: {
+        FirstName: "",
+        LastName: ""
+      },
       confirmation: "",
       error: null
     };
@@ -157,6 +179,7 @@ export default {
     async register() {
       const isValid = await this.$refs.observer.validate();
       if (!isValid) {
+        console.log("invalid");
         const notification = {
           type: "danger",
           message: "Your information is not valid, please do it again!"
@@ -165,15 +188,19 @@ export default {
       } else {
         try {
           const response = await AuthenticationService.register({
+            FirstName: this.name.FirstName,
+            LastName: this.name.LastName,
             email: this.email,
             password: this.password
           });
+          console.log(response);
+
           if (response.status == 200) {
+            this.$store.dispatch("authentication/setUser", response.data.user);
             this.$store.dispatch(
               "authentication/setToken",
               response.data.token
             );
-            this.$store.dispatch("authentication/setUser", response.data.user);
             let token = response.data.token;
             localStorage.setItem("token", token);
             let user = response.data.user;

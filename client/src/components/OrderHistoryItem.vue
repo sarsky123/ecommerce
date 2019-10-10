@@ -61,7 +61,7 @@
         </div>
 
         <div class="col-12 col-md-4 OrderStatus">
-          <h3>Order Status</h3>
+          <h3 class="text-secondary">Order Status</h3>
           <div class="progress-indicator">
             <div class="progress-indicator-stat">
               <span>Confirmed</span><span>Shipped</span><span>Delivered</span>
@@ -71,7 +71,7 @@
               <div></div>
               <div></div>
             </div>
-            <div>Estimated Arrival: Fri, OCT 18</div>
+            <div class="theme-color">Estimated Arrival: Fri, OCT 18</div>
           </div>
           <button class="btn btn-track">Track package</button>
         </div>

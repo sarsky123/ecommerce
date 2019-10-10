@@ -1,4 +1,4 @@
-const {User} = require('../models')
+const {User, Profile} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
@@ -13,6 +13,8 @@ module.exports = {
     async register(req, res) {
         try {
             const user = await User.create(req.body)
+            const createProf = user.createProfile()
+            console.log(createProf + 'createProf is here !!!!!!!!!!!!!!');
             const userJson = user.toJSON()
             res.send({
                 user: userJson,
@@ -56,6 +58,42 @@ module.exports = {
         } catch (err) {
             res.status(500).send({
                 error: 'An error has occured trying to log in'
+            })
+        }
+    },
+    async update(req, res) {
+        try {
+            console.log(req.user.id + 'req.user.id req.user.id req.user.id');
+            
+            const user = req.user.id
+            const userFound = await User.findOne({
+                where: {
+                    id:user
+                },
+                include:{
+                    model:Profile
+                }
+            })
+            console.log(userFound + 'userFound userFound userFound');
+            
+            if (userFound) {
+                console.log(req.body);
+                
+                const result = userFound.update(req.body, {
+                    where: { 
+                        id: user 
+                    }
+                })
+
+                res.send(result)
+            } else {
+                throw Error()
+            }
+
+        } catch (err) {
+            console.log(err)
+            res.status(500).send({
+                error: 'an error has occured trying to create the profile object'
             })
         }
     }

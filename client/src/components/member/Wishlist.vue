@@ -93,7 +93,7 @@
           ></span>
         </div>
       </div>
-      <div class="d-flex flex-column w-100 text-center">
+      <div class="wrapper px-0 wishlist-container">
         <h3 class="wish-title">Your Wishlist</h3>
         <div class="whish-wrapper d-flex flex-row w-100 row">
           <div
@@ -257,7 +257,15 @@ export default {
   text-shadow: 1px 1px 1px #e3aac7, 1px 1px 1px #e3aac7, 1px 1px 1px #e3aac7;
   font-size: 18px;
   padding: 10px;
-  opacity: 0.5;
+  opacity: 0.7;
+}
+.wishlist-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #ccc;
+  margin: 0 auto;
 }
 .whish-wrapper {
   padding: 5px 0;

@@ -8,14 +8,14 @@
         align="center"
         class="border-0"
         tabs
-        active-nav-item-class="font-weight-bold bg-transparent"
+        active-nav-item-class="font-weight-bold bg-transparent border-dark border-bottom"
       >
         <b-nav-item
           ><router-link
             :to="{
               name: 'userLogin'
             }"
-            >Login In</router-link
+            >Login</router-link
           >
         </b-nav-item>
         <b-nav-item>
@@ -69,6 +69,27 @@ export default {
   .login-header,
   .register-text {
     display: none;
+  }
+}
+
+.nav-link {
+  &:hover {
+    a {
+      color: #cbd3da !important;
+      text-decoration: none !important;
+    }
+  }
+  a {
+    color: #999;
+  }
+  &:hover {
+    border: none !important;
+    border-bottom: 1px solid black !important;
+    color: #cbd3da !important;
+    text-decoration: none;
+  }
+  .router-link-exact-active {
+    color: #e3aaaa;
   }
 }
 </style>

@@ -77,6 +77,11 @@ export default {
 </script>
 <style src="./main.css" />
 <style>
+/*global*/
+.theme-color {
+  color: #e3aaaa;
+}
+
 .leave-enter-active,
 .leave-leave-active {
   transition: all 1.2s;

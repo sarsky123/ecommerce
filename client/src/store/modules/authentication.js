@@ -45,5 +45,12 @@ export const actions = {
 export const getters = {
   loggedIn(state) {
     return !!(state.user && state.token);
+  },
+  getUserName(state) {
+    const name = {
+      FirstName: state.user.FirstName,
+      LastName: state.user.LastName
+    };
+    return name;
   }
 };

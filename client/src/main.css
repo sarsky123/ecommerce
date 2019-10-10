@@ -768,6 +768,7 @@ ul {
 /*homepage-custom*/
 .homepage-custom {
   z-index: -1;
+  height: 60vh;
 }
 
 .homepage-custom .homepage-custom_parallax {
@@ -802,7 +803,7 @@ ul {
   top: 0;
   left: 0;
   background-color: #000;
-  background-image: url(./assets/img/hero-custom.jpg);
+  background-image: url(./assets/img/beauty-20.jpg);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

@@ -95,7 +95,7 @@
       </div>
     </div>
     <div class="anchor" name="home-carousel" id="home-carousel"></div>
-    <div class="w-100 bg-white pt-5 px-4">
+    <div class="w-100 bg-white py-5 px-4">
       <div
         class="carousel-header text-uppercase
         text-center"
@@ -178,7 +178,7 @@
             </div>
 
             <div class="slide-item">
-              <p class="font-weight-bold my-2">NEW!</p>
+              <p class="font-weight-bold my-2 text-uppercase">new release!</p>
               <p class="mb-0">
                 {{ product.Title }}
               </p>
@@ -195,6 +195,29 @@
         </carousel>
       </no-ssr>
     </div>
+    <div class="w-100 homepage-hero-3">
+      <div class="col-5">
+        <img src="../assets/img/beauty-19.jpg" alt="masked" />
+        <div class=" text-center">
+          <h5>New!</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+          <button class="btn btn-dark rounded-0">Shop Now</button>
+        </div>
+      </div>
+      <div class="col-5">
+        <img src="../assets/img/beauty-22.jpg" alt="masked" />
+        <div class=" text-center">
+          <h5>Autumn is coming</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </p>
+          <button class="btn btn-dark rounded-0">Shop Now</button>
+        </div>
+      </div>
+    </div>
+
     <div class="w-100 bg-white pt-5 px-4">
       <div
         class="carousel-header text-uppercase 
@@ -306,13 +329,11 @@
         </div>
       </div>
     </div>
-    <productInfo></productInfo>
   </div>
 </template>
 
 <script>
 import BookmarksService from "@/services/BookmarksService.js";
-import productInfo from "@/components/productInfo.vue";
 import { mapGetters, mapActions } from "vuex";
 import { vueWindowSizeMixin } from "vue-window-size";
 import NoSSR from "vue-no-ssr";
@@ -324,7 +345,6 @@ export default {
     };
   },
   components: {
-    productInfo,
     "no-ssr": NoSSR
   },
   created() {
@@ -586,6 +606,56 @@ export default {
   background-color: #e3aaaa !important;
   &:hover {
     color: #000 !important;
+  }
+}
+//hero3
+.homepage-hero-3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 80vh;
+  padding: 35px 0 35px;
+  background-color: white !important;
+  background: #7f7fd5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #aa4b6b,
+    #6b6b83,
+    #3b8d99
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, rgba(170, 75, 107, 0.3), white);
+  > div {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > div {
+      padding: 5px 20px;
+      margin-top: -35px;
+      width: 85%;
+      background-color: #e5e5e5;
+      color: black;
+      position: relative;
+      p {
+        font-weight: 200;
+        font-size: 10px;
+      }
+      > button {
+        position: absolute;
+        top: calc(100% - 13px);
+        width: 50%;
+        right: 25%;
+      }
+    }
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 400px;
+    object-fit: cover;
   }
 }
 

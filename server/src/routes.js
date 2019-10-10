@@ -3,8 +3,9 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 const isAuthenticated = require('./policies/isAuthenticated')
 const BookmarksController = require('./controllers/BookmarksController.js')
 const HistoriesController = require('./controllers/HistoriesControllers.js')
-
 const CheckoutControllers = require('./controllers/CheckoutControllers.js')
+const ProfileController = require('./controllers/ProfileController.js')
+
 
 module.exports = (app) => {
     app.post('/register',
@@ -12,6 +13,9 @@ module.exports = (app) => {
         AuthenticationController.register)
     app.post('/login',
         AuthenticationController.login)
+    app.post('/userUpdate',
+        isAuthenticated,
+        AuthenticationController.update)
 
     app.get('/bookmarks',
         isAuthenticated,
@@ -37,5 +41,12 @@ module.exports = (app) => {
     app.post('/checkout',
         isAuthenticated,
         CheckoutControllers.post)
+
+    app.get('/profile',
+        isAuthenticated,
+        ProfileController.index)
+    app.post('/profile',
+        isAuthenticated,
+        ProfileController.post)
 
 }

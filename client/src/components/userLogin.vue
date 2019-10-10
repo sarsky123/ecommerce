@@ -147,6 +147,7 @@ export default {
           this.$store.dispatch("authentication/setToken", response.data.token);
           this.$store.dispatch("authentication/setUser", response.data.user);
         } else {
+          console.log(response);
           throw Error();
         }
       } catch (error) {

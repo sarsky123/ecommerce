@@ -18,7 +18,9 @@ function hashPassword(user, options) {
 
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
-        email: {
+        FirstName: DataTypes.STRING,
+        LastName: DataTypes.STRING,
+        Email: {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false,
@@ -28,7 +30,10 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
-        password: DataTypes.STRING
+        Password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     }, {
         hooks: {
             beforeCreate: hashPassword
@@ -40,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     User.associate = function (models) {
+        User.hasOne(models.Profile)
     }
 
     return User
