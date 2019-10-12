@@ -82,6 +82,9 @@ export default {
   color: #e3aaaa;
 }
 
+.btn {
+  cursor: pointer !important;
+}
 .leave-enter-active,
 .leave-leave-active {
   transition: all 1.2s;

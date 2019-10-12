@@ -81,16 +81,7 @@ export default {
 section {
   margin-top: 150px;
 }
-.nav-link {
-  color: white;
-}
-.nav-link {
-  &:hover {
-    border: none;
-    border-bottom: 1px solid white !important;
-    color: #333 !important;
-  }
-}
+
 .detail-info {
   background: #e3aaaa;
   color: white;
@@ -98,6 +89,19 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .nav-link {
+    color: white;
+    border: none !important;
+    &:hover {
+      border-bottom: 2px solid #ccc !important;
+      color: #000 !important;
+    }
+
+    &.active {
+      border-bottom: 2px solid white !important;
+      color: #ccc !important;
+    }
   }
 }
 </style>

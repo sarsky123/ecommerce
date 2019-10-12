@@ -19,9 +19,8 @@ module.exports = {
             res.send(profile)
         } catch (err) {
             console.log(err);
-
             res.status(500).send({
-                error: 'an error has occured trying to fetch the Histories'
+                error: 'an error has occured trying to fetch the Profile'
             })
         }
     },

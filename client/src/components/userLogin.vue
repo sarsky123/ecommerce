@@ -139,13 +139,15 @@ export default {
     async loginMethod() {
       try {
         const response = await AuthenticationService.login({
-          email: this.email,
-          password: this.password
+          Email: this.email,
+          Password: this.password
         });
         if (response.status == 200) {
           console.log(response);
           this.$store.dispatch("authentication/setToken", response.data.token);
           this.$store.dispatch("authentication/setUser", response.data.user);
+          this.toggleMenu();
+          window.location.reload();
         } else {
           console.log(response);
           throw Error();
@@ -153,8 +155,6 @@ export default {
       } catch (error) {
         this.error = error.response.data.error;
       }
-      this.toggleMenu();
-      window.location.reload();
     },
     toggleRegister() {
       this.$emit("toggleRegister");

@@ -5,11 +5,11 @@
       <div class="col col-md-7 account-setting-container">
         <div>
           <h3>Your Account Setting</h3>
-          <div class="col">
+          <div class="col" v-if="updateUserInfo">
             <div class="row flex-row">
               <form
                 class="d-flex flex-row flex-wrap form-container "
-                @submit.prevent="userUpdate(Information)"
+                @submit.prevent="userUpdate(DataForForm.Information)"
               >
                 <div class="w-50">
                   <label class="custom-label" for="firstName">
@@ -17,7 +17,7 @@
                   </label>
                   <input
                     class="w-100"
-                    v-model="Information.FirstName"
+                    v-model.lazy="DataForForm.Information.FirstName"
                     type="text"
                     name="firstName"
                     placeholder="Your First Name"
@@ -30,7 +30,7 @@
                   </label>
                   <input
                     class="w-100"
-                    v-model="Information.LastName"
+                    v-model.lazy="DataForForm.Information.LastName"
                     type="text"
                     name="lastName"
                     placeholder="Your Last Name"
@@ -43,7 +43,7 @@
                   </label>
                   <input
                     class="w-100"
-                    v-model="Information.Email"
+                    v-model.lazy="DataForForm.Information.Email"
                     type="email"
                     name="email"
                     placeholder="mymail@lorem.com"
@@ -56,7 +56,7 @@
                   </label>
                   <input
                     class="w-100"
-                    v-model="Information.Phone.Phone"
+                    v-model.lazy="DataForForm.Information.Phone"
                     type="text"
                     name="phone"
                     placeholder="Your Phone Numbers"
@@ -69,7 +69,7 @@
                   </label>
                   <input
                     class="w-100"
-                    v-model="Information.Phone.CellPhone"
+                    v-model.lazy="DataForForm.Information.CellPhone"
                     type="text"
                     name="cellphone"
                     placeholder="Cell Phone"
@@ -77,7 +77,7 @@
                   />
                 </div>
                 <button
-                  class="w-100 bg-secondary text-white py-2 border-nonemt-5"
+                  class="w-100 bg-secondary text-white py-2 border-nonemt-5 text-uppercase"
                   type="submit"
                   name="button"
                 >
@@ -86,19 +86,37 @@
               </form>
             </div>
           </div>
+          <div class="w-100 default-column" v-else>
+            <div v-for="(userInfo, name) in AcutalData.Information" :key="name">
+              <span v-if="userInfo"> {{ name }} : {{ userInfo }} </span>
+            </div>
+            <b-button
+              class="w-100 my-3 algin-self-end"
+              @click="toggleUserInfo"
+              variant="outline-secondary"
+              >Edit User Information +</b-button
+            >
+          </div>
         </div>
       </div>
       <div class="col col-md-5 user-default">
         <div class="default-column">
           <h5>Default Shipping</h5>
+          <div v-if="!addDefaultAddress">
+            <div
+              v-for="(shipInfo, name) in AcutalData.ShippingInfo"
+              :key="name"
+            >
+              <span v-if="shipInfo"> {{ name }} : {{ shipInfo }} </span>
+            </div>
+            <b-button
+              class="w-100 my-3"
+              variant="outline-secondary"
+              @click="toggleAddress"
+              >Add Address Info +</b-button
+            >
+          </div>
 
-          <b-button
-            class="w-100 my-3"
-            variant="outline-secondary"
-            v-if="!addDefaultAddress"
-            @click="toggleAddress"
-            >Add Address Info +</b-button
-          >
           <div class="w-100 py-3" v-else>
             <div class="w-100">
               <label class="custom-label" for="Address">
@@ -106,7 +124,7 @@
               </label>
               <input
                 class="w-100 "
-                v-model="ShippingInfo.Address"
+                v-model.lazy="DataForForm.ShippingInfo.Address"
                 type="text"
                 name="Address"
                 placeholder="Your Address"
@@ -119,7 +137,7 @@
               </label>
               <input
                 class="w-100 "
-                v-model="ShippingInfo.City"
+                v-model.lazy="DataForForm.ShippingInfo.City"
                 type="text"
                 name="City"
                 placeholder="Gotham"
@@ -132,7 +150,7 @@
               </label>
               <input
                 class="w-100 "
-                v-model="ShippingInfo.Country"
+                v-model.lazy="DataForForm.ShippingInfo.Country"
                 type="text"
                 name="Country"
                 placeholder="Country"
@@ -145,7 +163,7 @@
               </label>
               <input
                 class="w-100 "
-                v-model="ShippingInfo.PostCode"
+                v-model.lazy="DataForForm.ShippingInfo.PostCode"
                 type="text"
                 name="PostCode"
                 placeholder="PostCode"
@@ -153,22 +171,34 @@
               />
             </div>
             <div class="w-100 d-flex flex-row mt-3">
-              <button class="ml-auto btn" @click="updateProfile(ShippingInfo)">
+              <button
+                class="ml-auto btn"
+                @click="
+                  updateProfile(DataForForm.ShippingInfo).then(toggleAddress())
+                "
+              >
                 Edit</button
-              ><button class="ml-3 btn" @click="toggleAddress">Close</button>
+              ><button class="ml-3 btn" @click="toggleAddress()">
+                Close
+              </button>
             </div>
           </div>
         </div>
         <div class="default-column">
           <h5>Default Payment</h5>
+          <div v-if="!addDefaultPayment">
+            <div v-for="(billingInfo, name) in AcutalData.Billing" :key="name">
+              <span v-if="billingInfo"> {{ name }} : {{ billingInfo }} </span>
+            </div>
+            <b-button
+              class="w-100 my-3"
+              variant="outline-secondary"
+              v-if="!addDefaultPayment"
+              @click="togglePayment"
+              >Add Payment Info +</b-button
+            >
+          </div>
 
-          <b-button
-            class="w-100 my-3"
-            variant="outline-secondary"
-            v-if="!addDefaultPayment"
-            @click="togglePayment"
-            >Add Payment Info +</b-button
-          >
           <div class="w-100 py-3" v-else>
             <div class="w-50">
               <label class="custom-label" for="NameOnCard">
@@ -176,7 +206,7 @@
               </label>
               <input
                 class="w-100"
-                v-model="Billing.NameOnCard"
+                v-model.lazy="DataForForm.Billing.NameOnCard"
                 type="text"
                 name="NameOnCard"
                 placeholder="Your NameOnCard"
@@ -189,7 +219,7 @@
               </label>
               <input
                 class="w-100"
-                v-model="Billing.CreditCardNumber"
+                v-model.lazy="DataForForm.Billing.CreditCardNumber"
                 type="text"
                 name="CreditCardNumber"
                 placeholder="Your CreditCardNumber"
@@ -204,7 +234,7 @@
                 </label>
                 <input
                   class="w-100"
-                  v-model="Billing.ExpiredDated"
+                  v-model.lazy="DataForForm.Billing.ExpiredDated"
                   type="text"
                   name="ExpiredDate"
                   placeholder="Card ExpiredDate"
@@ -217,7 +247,7 @@
                 </label>
                 <input
                   class="w-100"
-                  v-model="Billing.CVC"
+                  v-model.lazy="DataForForm.Billing.CVC"
                   type="text"
                   name="CVC"
                   placeholder="CVC"
@@ -226,9 +256,16 @@
               </div>
             </div>
             <div class="w-100 d-flex flex-row mt-3">
-              <button class="ml-auto btn" @click="updateProfile(Billing)">
+              <button
+                class="ml-auto btn"
+                @click="
+                  updateProfile(DataForForm.Billing).then(togglePayment())
+                "
+              >
                 Edit</button
-              ><button class="ml-3 btn" @click="togglePayment">Close</button>
+              ><button class="ml-3 btn" @click="togglePayment()">
+                Close
+              </button>
             </div>
           </div>
         </div>
@@ -245,49 +282,64 @@ import AuthenticationService from "../../services/AuthenticationService";
 export default {
   data() {
     return {
-      Information: {
-        FirstName: "",
-        LastName: "",
-        Email: "",
-        Phone: {
+      AcutalData: {
+        Information: {
+          FirstName: "",
+          LastName: "",
+          Email: "",
           Phone: "",
           CellPhone: ""
+        },
+        ShippingInfo: {
+          Address: "",
+          City: "",
+          Country: "",
+          PostCode: ""
+        },
+        Billing: {
+          NameOnCard: "",
+          CreditCardNumber: "",
+          ExpiredDate: "",
+          CVC: ""
         }
       },
-      ShippingInfo: {
-        Address: "",
-        City: "",
-        Country: "",
-        PostCode: ""
-      },
-      Billing: {
-        NameOnCard: "",
-        CreditCardNumber: "",
-        ExpiredDate: "",
-        CVC: ""
-      },
+      DataForForm: {},
       addDefaultAddress: false,
-      addDefaultPayment: false
+      addDefaultPayment: false,
+      updateUserInfo: false
     };
   },
   computed: {
-    ...mapGetters("authentication", ["getUserName"])
+    ...mapGetters("authentication", ["getUserName"]),
+    ...mapGetters("userInfo", ["getProfileSetting"])
   },
   mounted() {
     this.getYourProfile();
   },
+  watch: {},
   methods: {
     toggleAddress() {
       this.addDefaultAddress = !this.addDefaultAddress;
+      this.defaultForm();
     },
     togglePayment() {
       this.addDefaultPayment = !this.addDefaultPayment;
+      this.defaultForm();
+    },
+    toggleUserInfo() {
+      this.updateUserInfo = !this.updateUserInfo;
+      this.defaultForm();
+    },
+    defaultForm() {
+      this.DataForForm = JSON.parse(JSON.stringify(this.AcutalData));
     },
     async updateProfile(object) {
       try {
         const updateInfo = Object.assign(object, object[0]);
         const response = await ProfileService.post(updateInfo);
-        console.log(response);
+        if (response.status == 200) {
+          this.getYourProfile();
+        }
       } catch (err) {
         console.log(err);
       }
@@ -295,16 +347,58 @@ export default {
     async userUpdate(object) {
       try {
         const updateInfo = Object.assign(object, object[0]);
+        console.log(updateInfo);
         const response = await AuthenticationService.update(updateInfo);
-        console.log(response);
+        if (response.status == 200) {
+          this.getYourProfile();
+        }
       } catch (err) {
         console.log(err);
       }
     },
     async getYourProfile() {
+      var vm = this;
       try {
         const response = await ProfileService.get();
         console.log(response);
+        if (response.status == 200) {
+          response.data = { ...response.data, ...response.data.User };
+          await this.$store
+            .dispatch("userInfo/setProfile", response.data)
+            .then(() => {
+              var shallowCopy = {};
+              for (var prop in vm.AcutalData.Information) {
+                if (vm.getProfileSetting.hasOwnProperty(prop)) {
+                  shallowCopy[prop] = vm.getProfileSetting[prop];
+                }
+                console.log(shallowCopy);
+              }
+              console.log(shallowCopy);
+
+              vm.AcutalData.Information = Object.assign({}, shallowCopy);
+            })
+            .then(() => {
+              var shallowCopy = {};
+              for (var prop in vm.AcutalData.ShippingInfo) {
+                if (vm.getProfileSetting.hasOwnProperty(prop)) {
+                  shallowCopy[prop] = vm.getProfileSetting[prop];
+                }
+              }
+              vm.AcutalData.ShippingInfo = Object.assign({}, shallowCopy);
+            })
+            .then(() => {
+              var shallowCopy = {};
+              for (var prop in vm.AcutalData.Billing) {
+                if (vm.getProfileSetting.hasOwnProperty(prop)) {
+                  shallowCopy[prop] = vm.getProfileSetting[prop];
+                }
+              }
+              vm.AcutalData.Billing = Object.assign({}, shallowCopy);
+            })
+            .then(() => {
+              this.defaultForm();
+            });
+        }
       } catch (err) {
         console.log(err);
       }
@@ -321,6 +415,11 @@ export default {
   input {
     border: 1px solid #ccc;
   }
+  .account-setting-container {
+    h3 {
+      margin-bottom: 20px;
+    }
+  }
 }
 .form-container {
   padding: 30px 0;
@@ -336,17 +435,25 @@ export default {
   > div {
     margin-bottom: 35px;
   }
-  .default-column {
-    button {
-      border: 1px solid #e3aaaa;
-      color: #e3aaaa;
-      &:hover {
-        background-color: #eee;
-      }
+}
+.default-column {
+  display: flex;
+  flex-direction: column;
+  button {
+    border: 1px solid #e3aaaa;
+    color: #e3aaaa;
+    &:hover {
+      background-color: #eee;
     }
-    input {
-      margin-bottom: 15px;
-    }
+  }
+  input {
+    margin-bottom: 15px;
+  }
+  h5 {
+    margin-bottom: 20px;
+  }
+  div {
+    margin-bottom: 5px;
   }
 }
 .profile-container {
@@ -358,5 +465,9 @@ export default {
     padding: 5px 0;
     color: #e3aaaa;
   }
+}
+h3,
+h5 {
+  color: #aaa;
 }
 </style>

@@ -115,9 +115,6 @@ export default {
   max-height: 50vh;
   overflow: scroll;
 }
-.btn {
-  cursor: pointer !important;
-}
 #style-1::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: transparent;

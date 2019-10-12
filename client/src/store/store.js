@@ -16,7 +16,7 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "authPersist",
-      paths: ["authentication", "cart", "product", "checkout", "userInfo"]
+      paths: ["authentication", "cart", "product", "checkout"]
     })
   ],
   modules: {

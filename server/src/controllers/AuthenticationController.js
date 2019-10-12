@@ -28,10 +28,10 @@ module.exports = {
     },
     async login(req, res) {
         try {
-            const { email, password } = req.body
+            const { Email, Password } = req.body
             const user = await User.findOne({
                 where: {
-                    email: email
+                    Email: Email
                 }
             })
 
@@ -42,7 +42,7 @@ module.exports = {
             }
             
 
-            const isPasswordValid = await user.comparePassword(password, user.password)
+            const isPasswordValid = await user.comparePassword(Password, user.Password)
 
             
             if (!isPasswordValid) {
@@ -63,8 +63,6 @@ module.exports = {
     },
     async update(req, res) {
         try {
-            console.log(req.user.id + 'req.user.id req.user.id req.user.id');
-            
             const user = req.user.id
             const userFound = await User.findOne({
                 where: {

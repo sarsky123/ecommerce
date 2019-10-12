@@ -190,8 +190,8 @@ export default {
           const response = await AuthenticationService.register({
             FirstName: this.name.FirstName,
             LastName: this.name.LastName,
-            email: this.email,
-            password: this.password
+            Email: this.email,
+            Password: this.password
           });
           console.log(response);
 

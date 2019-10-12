@@ -625,22 +625,23 @@ export default {
     #6b6b83,
     #3b8d99
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, rgba(170, 75, 107, 0.3), white);
+  background: linear-gradient(to bottom, rgba(170, 75, 107, 0.2), white);
   > div {
     height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
     > div {
-      padding: 5px 20px;
+      padding: 8px 20px;
       margin-top: -35px;
       width: 85%;
-      background-color: #e5e5e5;
+      background-color: #e3a8a8;
       color: black;
       position: relative;
       p {
         font-weight: 200;
-        font-size: 10px;
+        font-size: 11px;
+        color: #e1e1e1;
       }
       > button {
         position: absolute;
