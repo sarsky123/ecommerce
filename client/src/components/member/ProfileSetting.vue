@@ -11,6 +11,13 @@
                 class="d-flex flex-row flex-wrap form-container "
                 @submit.prevent="userUpdate(DataForForm.Information)"
               >
+                <div class="d-flex flex-row w-100 m-0 justify-content-end">
+                  <span
+                    ><font-awesome-icon
+                      @click="toggleUserInfo()"
+                      :icon="['fas', 'times']"
+                  /></span>
+                </div>
                 <div class="w-50">
                   <label class="custom-label" for="firstName">
                     First Name:
@@ -76,8 +83,9 @@
                     value
                   />
                 </div>
+
                 <button
-                  class="w-100 bg-secondary text-white py-2 border-nonemt-5 text-uppercase"
+                  class="col-12 bg-secondary text-white py-2 border-nonemt-5 text-uppercase"
                   type="submit"
                   name="button"
                 >
@@ -347,10 +355,13 @@ export default {
     async userUpdate(object) {
       try {
         const updateInfo = Object.assign(object, object[0]);
-        console.log(updateInfo);
-        const response = await AuthenticationService.update(updateInfo);
+        const { CellPhone, Phone } = updateInfo;
+        const response = await AuthenticationService.update(updateInfo).then(
+          ProfileService.post({ CellPhone, Phone })
+        );
         if (response.status == 200) {
           this.getYourProfile();
+          this.toggleUserInfo();
         }
       } catch (err) {
         console.log(err);
@@ -360,7 +371,6 @@ export default {
       var vm = this;
       try {
         const response = await ProfileService.get();
-        console.log(response);
         if (response.status == 200) {
           response.data = { ...response.data, ...response.data.User };
           await this.$store
@@ -371,11 +381,10 @@ export default {
                 if (vm.getProfileSetting.hasOwnProperty(prop)) {
                   shallowCopy[prop] = vm.getProfileSetting[prop];
                 }
-                console.log(shallowCopy);
               }
-              console.log(shallowCopy);
-
-              vm.AcutalData.Information = Object.assign({}, shallowCopy);
+              vm.AcutalData.Information = JSON.parse(
+                JSON.stringify(shallowCopy)
+              );
             })
             .then(() => {
               var shallowCopy = {};
@@ -384,7 +393,9 @@ export default {
                   shallowCopy[prop] = vm.getProfileSetting[prop];
                 }
               }
-              vm.AcutalData.ShippingInfo = Object.assign({}, shallowCopy);
+              vm.AcutalData.ShippingInfo = JSON.parse(
+                JSON.stringify(shallowCopy)
+              );
             })
             .then(() => {
               var shallowCopy = {};
@@ -393,7 +404,7 @@ export default {
                   shallowCopy[prop] = vm.getProfileSetting[prop];
                 }
               }
-              vm.AcutalData.Billing = Object.assign({}, shallowCopy);
+              vm.AcutalData.Billing = JSON.parse(JSON.stringify(shallowCopy));
             })
             .then(() => {
               this.defaultForm();

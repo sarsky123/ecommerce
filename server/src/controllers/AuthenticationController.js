@@ -68,22 +68,16 @@ module.exports = {
                 where: {
                     id:user
                 },
-                include:{
-                    model:Profile
-                }
+                include: [
+                    { model: Profile }
+                ]
             })
-            console.log(userFound + 'userFound userFound userFound');
+            console.log(userFound);
             
             if (userFound) {
-                console.log(req.body);
-                
-                const result = userFound.update(req.body, {
-                    where: { 
-                        id: user 
-                    }
-                })
-
+                const result = await userFound.update(req.body)
                 res.send(result)
+                res.redirect('/profile')
             } else {
                 throw Error()
             }

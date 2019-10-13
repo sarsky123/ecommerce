@@ -67,6 +67,7 @@
                 <h5 class="stepInformation-title">
                   Customer Info
                 </h5>
+                <p @click="useDefaultInfo()">use default information</p>
                 <!--Step 1-->
                 <ValidationObserver
                   ref="observer"
@@ -91,7 +92,7 @@
                         </label>
                         <input
                           class="w-100"
-                          v-model="Information.Name.FirstName"
+                          v-model="Information.FirstName"
                           type="text"
                           name="firstName"
                           placeholder="Your First Name"
@@ -111,7 +112,7 @@
                         </label>
                         <input
                           class="w-100"
-                          v-model="Information.Name.LastName"
+                          v-model="Information.LastName"
                           type="text"
                           name="lastName"
                           placeholder="Your Last Name"
@@ -151,7 +152,7 @@
                         </label>
                         <input
                           class="w-100"
-                          v-model="Information.Phone.Phone"
+                          v-model="Information.Phone"
                           type="text"
                           name="phone"
                           placeholder="Your Phone Numbers"
@@ -171,7 +172,7 @@
                         </label>
                         <input
                           class="w-100"
-                          v-model="Information.Phone.CellPhone"
+                          v-model="Information.CellPhone"
                           type="text"
                           name="cellphone"
                           placeholder="Cell Phone"
@@ -489,6 +490,7 @@
 import CheckoutService from "@/services/CheckoutService.js";
 import cartObject from "../components/CheckoutCartObject";
 import { mapGetters } from "vuex";
+import ProfileService from "@/services/ProfileService";
 export default {
   data() {
     return {
@@ -496,12 +498,11 @@ export default {
       tax: "10",
       step: "1",
       Information: {
-        Name: { FirstName: "", LastName: "" },
+        FirstName: "",
+        LastName: "",
         Email: "",
-        Phone: {
-          Phone: "",
-          CellPhone: ""
-        }
+        Phone: "",
+        CellPhone: ""
       },
       ShippingInfo: {
         Address: "",
@@ -523,6 +524,7 @@ export default {
   computed: {
     ...mapGetters("cart", ["getProductsInCart"]),
     ...mapGetters("checkout", ["getCheckoutInfo"]),
+    ...mapGetters("userInfo", ["getProfileSetting"]),
     taxPrice() {
       var total = this.totalPrice;
       return ((total * this.tax) / 100).toFixed();
@@ -595,8 +597,38 @@ export default {
         this.step = "1";
       }
     },
+    async getYourProfile() {
+      try {
+        const response = await ProfileService.get();
+        if (response.status == 200) {
+          response.data = { ...response.data, ...response.data.User };
+          await this.$store.dispatch("userInfo/setProfile", response.data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async useDefaultInfo() {
+      await this.getYourProfile().then(() => {
+        for (let prop in this.Information) {
+          if (this.getProfileSetting.hasOwnProperty(prop)) {
+            this.Information[prop] = this.getProfileSetting[prop];
+          }
+        }
+        for (let prop in this.ShippingInfo) {
+          if (this.getProfileSetting.hasOwnProperty(prop)) {
+            this.ShippingInfo[prop] = this.getProfileSetting[prop];
+          }
+        }
+        for (let prop in this.Billing) {
+          if (this.getProfileSetting.hasOwnProperty(prop)) {
+            this.Billing[prop] = this.getProfileSetting[prop];
+          }
+        }
+      });
+    },
     DecreStep() {
-      this.step = "1";
+      this.step--;
     }
   }
 };
@@ -678,6 +710,13 @@ export default {
       color: white;
       padding: 15px;
       text-transform: uppercase;
+    }
+    p {
+      color: #e3aaaa;
+      text-decoration: underline;
+      text-transform: capitalize;
+      padding-top: 15px;
+      cursor: pointer;
     }
   }
 }

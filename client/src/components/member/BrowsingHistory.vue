@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 col">
+  <div class="w-100 col mx-auto">
     <table
       class="table table-striped my-3"
       v-if="getHistoryProducts.length > 0"
@@ -25,8 +25,8 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      <h5>No prvious browsing record</h5>
+    <div class="text-center pt-5" v-else>
+      <h5>No previous browsing record</h5>
     </div>
   </div>
 </template>

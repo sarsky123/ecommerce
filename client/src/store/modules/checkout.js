@@ -1,12 +1,11 @@
 export const state = {
   CheckoutInfo: {
     Information: {
-      Name: { FirstName: "", LastName: "" },
+      FirstName: "",
+      LastName: "",
       Email: "",
-      Phone: {
-        Phone: "",
-        CellPhone: ""
-      }
+      Phone: "",
+      CellPhone: ""
     },
     ShippingInfo: {
       Address: "",

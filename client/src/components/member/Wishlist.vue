@@ -239,10 +239,14 @@ export default {
   },
   watch: {
     bookmark() {
-      this.recentAdded = this.bookmark.slice(
-        this.bookmark.length - 4,
-        this.bookmark.length
-      );
+      if (this.bookmark.length > 3) {
+        this.recentAdded = this.bookmark.slice(
+          this.bookmark.length - 4,
+          this.bookmark.length
+        );
+      } else {
+        this.recentAdded = this.bookmark;
+      }
       this.recentAdded.reverse();
     }
   }
@@ -264,8 +268,9 @@ export default {
   flex-direction: column;
   width: 100%;
   text-align: center;
-  border: 1px solid #ccc;
   margin: 0 auto;
+  border: 1px solid #eee;
+  border-top: none;
 }
 .whish-wrapper {
   padding: 5px 0;

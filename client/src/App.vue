@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    >
     <main class="main-content">
       <Nav v-if="!searchIsOn" @searchOverlayIsOn="toggleSearch"></Nav>
 
@@ -8,7 +9,7 @@
         :leave-active-class="animationLeave"
         mode="out-in"
       >
-        <router-view :key="$route.fullPath"></router-view>
+        <router-view :key="$route.fullPath">></router-view>
       </transition>
       <div class="mobile-footer">
         <foot />
@@ -32,6 +33,7 @@ import cartCheckout from "./components/cartCheckout.vue";
 import foot from "@/components/footer.vue";
 import searchingOverlay from "@/components/searchingOverlay.vue";
 import notificationContainer from "@/components/notificationContainer.vue";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -41,12 +43,19 @@ export default {
     searchingOverlay,
     notificationContainer
   },
+  computed: {
+    ...mapGetters("cart", ["getPopupCart"]),
+    ifOverlayOpend() {
+      return !!(this.getPopupCart || this.searchIsOn);
+    }
+  },
   data() {
     return {
       searchIsOn: false,
       transition: true,
       animationActive: "",
-      animationLeave: ""
+      animationLeave: "",
+      overlayIsOn: !!(this.getPopupCart === true || this.searchIsOn === true)
     };
   },
   methods: {
@@ -71,6 +80,13 @@ export default {
         this.animationActive = "animated fadeInDown";
         this.animationLeave = "animated fadeOut";
       }
+    },
+    ifOverlayOpend() {
+      if (this.ifOverlayOpend === true) {
+        document.body.className = "noscroll";
+      } else {
+        document.body.className = "";
+      }
     }
   }
 };
@@ -81,7 +97,6 @@ export default {
 .theme-color {
   color: #e3aaaa;
 }
-
 .btn {
   cursor: pointer !important;
 }

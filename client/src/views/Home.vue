@@ -197,23 +197,23 @@
     </div>
     <div class="w-100 homepage-hero-3">
       <div class="col-5">
-        <img src="../assets/img/beauty-19.jpg" alt="masked" />
+        <img src="../assets/img/beauty-19.jpg" alt="pikaboo" />
         <div class=" text-center">
           <h5>New!</h5>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
-          <button class="btn btn-dark rounded-0">Shop Now</button>
+          <button class="btn btn-dark rounded-0 btn-hero3">Shop Now</button>
         </div>
       </div>
       <div class="col-5">
-        <img src="../assets/img/beauty-22.jpg" alt="masked" />
+        <img src="../assets/img/beauty-22.jpg" alt="oranged shirt" />
         <div class=" text-center">
           <h5>Autumn is coming</h5>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
-          <button class="btn btn-dark rounded-0">Shop Now</button>
+          <button class="btn btn-dark rounded-0 btn-hero3">Shop Now</button>
         </div>
       </div>
     </div>
@@ -638,6 +638,9 @@ export default {
       background-color: #e3a8a8;
       color: black;
       position: relative;
+      h5 {
+        text-shadow: 1px 1px 1px white;
+      }
       p {
         font-weight: 200;
         font-size: 11px;
@@ -657,6 +660,9 @@ export default {
     height: 100%;
     max-height: 400px;
     object-fit: cover;
+  }
+  .btn-hero3 {
+    box-shadow: 1px 1px 2px #555;
   }
 }
 

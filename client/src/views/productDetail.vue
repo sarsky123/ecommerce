@@ -4,9 +4,9 @@
       <div class="py-5">
         <productModal :products="product"></productModal>
       </div>
-      <div class=" py-2 detail-info pb-3 mb-3 col">
+      <div class="py-2 detail-info pb-3 mb-3">
         <b-tabs
-          content-class="mt-3 col py-3 text-light"
+          content-class="mt-3 col py-3 text-light mx-auto text-center"
           nav-link-class="text-light"
           active-nav-item-class="font-weight-bold  bg-transparent"
           justified
@@ -83,6 +83,7 @@ section {
 }
 
 .detail-info {
+  width: 100%;
   background: #e3aaaa;
   color: white;
   .nav-item {
