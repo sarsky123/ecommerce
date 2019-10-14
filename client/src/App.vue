@@ -9,7 +9,10 @@
         :leave-active-class="animationLeave"
         mode="out-in"
       >
-        <router-view :key="$route.fullPath">></router-view>
+        <router-view
+          :key="$route.fullPath"
+          @overlayOpened="toggleOverlay()"
+        ></router-view>
       </transition>
       <div class="mobile-footer">
         <foot />
@@ -24,6 +27,15 @@
       ></searchingOverlay>
       <!--notification-->
       <notificationContainer />
+
+      <div
+        id="eventPopup"
+        class="popupOverlay high-pior"
+        @click.self="toggleOverlay()"
+        v-if="eventPopupIsOpend"
+      >
+        <eventPopup @closeEventPopup="toggleOverlay()" />
+      </div>
     </main>
   </div>
 </template>
@@ -33,6 +45,7 @@ import cartCheckout from "./components/cartCheckout.vue";
 import foot from "@/components/footer.vue";
 import searchingOverlay from "@/components/searchingOverlay.vue";
 import notificationContainer from "@/components/notificationContainer.vue";
+import eventPopup from "@/components/EventPopup";
 import { mapGetters } from "vuex";
 
 export default {
@@ -41,12 +54,13 @@ export default {
     cartCheckout,
     foot,
     searchingOverlay,
-    notificationContainer
+    notificationContainer,
+    eventPopup
   },
   computed: {
     ...mapGetters("cart", ["getPopupCart"]),
     ifOverlayOpend() {
-      return !!(this.getPopupCart || this.searchIsOn);
+      return !!(this.getPopupCart || this.searchIsOn || this.eventPopupIsOpend);
     }
   },
   data() {
@@ -55,12 +69,16 @@ export default {
       transition: true,
       animationActive: "",
       animationLeave: "",
-      overlayIsOn: !!(this.getPopupCart === true || this.searchIsOn === true)
+      overlayIsOn: !!(this.getPopupCart === true || this.searchIsOn === true),
+      eventPopupIsOpend: false
     };
   },
   methods: {
     toggleSearch() {
       this.searchIsOn = !this.searchIsOn;
+    },
+    toggleOverlay() {
+      this.eventPopupIsOpend = !this.eventPopupIsOpend;
     }
   },
   watch: {

@@ -128,8 +128,13 @@
                   </router-link>
                 </div>
                 <div class="col bg-secondary text-capitalize text-center p-3">
-                  <font-awesome-icon :icon="['far', 'heart']" />
-                  whishlist
+                  <router-link
+                    :to="{ name: 'wishlist' }"
+                    class="text-dark text-decoration-none"
+                  >
+                    <font-awesome-icon :icon="['far', 'heart']" />
+                    wishlist
+                  </router-link>
                 </div>
               </div>
             </div>

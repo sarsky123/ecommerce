@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="search-overlay" @click.self="closeSearch">
+    <div class="popupOverlay" @click.self="closeSearch">
       <div class="search-bar">
         <div class="w-100 p-3 bg-white d-flex">
           <font-awesome-icon
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-.search-overlay {
+.popupOverlay {
   overflow-y: scroll;
   position: fixed;
   top: 0;

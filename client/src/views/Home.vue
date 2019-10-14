@@ -93,6 +93,8 @@
           </div>
         </div>
       </div>
+
+      <Observer @intersect="intersected"></Observer>
     </div>
     <div class="anchor" name="home-carousel" id="home-carousel"></div>
     <div class="w-100 bg-white py-5 px-4">
@@ -195,22 +197,22 @@
         </carousel>
       </no-ssr>
     </div>
-    <div class="w-100 homepage-hero-3">
-      <div class="col-5">
+    <div class="w-100 homepage-hero-3 flex-wrap">
+      <div class="col-10 col-md-5">
         <img src="../assets/img/beauty-19.jpg" alt="pikaboo" />
         <div class=" text-center">
-          <h5>New!</h5>
-          <p>
+          <h5>Brand New!</h5>
+          <p class="d-none d-sm-block">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
           <button class="btn btn-dark rounded-0 btn-hero3">Shop Now</button>
         </div>
       </div>
-      <div class="col-5">
+      <div class="col-10 col-md-5">
         <img src="../assets/img/beauty-22.jpg" alt="oranged shirt" />
         <div class=" text-center">
           <h5>Autumn is coming</h5>
-          <p>
+          <p class="d-none d-sm-block">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
           <button class="btn btn-dark rounded-0 btn-hero3">Shop Now</button>
@@ -337,6 +339,8 @@ import BookmarksService from "@/services/BookmarksService.js";
 import { mapGetters, mapActions } from "vuex";
 import { vueWindowSizeMixin } from "vue-window-size";
 import NoSSR from "vue-no-ssr";
+import Observer from "../components/misc/Observer";
+
 export default {
   data() {
     return {
@@ -345,7 +349,8 @@ export default {
     };
   },
   components: {
-    "no-ssr": NoSSR
+    "no-ssr": NoSSR,
+    Observer
   },
   created() {
     this.fetchBookmark();
@@ -406,6 +411,10 @@ export default {
     },
     ifBookMarked(p) {
       return this.bookmark.indexOf(p.ProductID) > -1;
+    },
+    intersected() {
+      console.log("intersected");
+      this.$emit("overlayOpened");
     }
   },
   computed: {
@@ -615,7 +624,6 @@ export default {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 80vh;
   padding: 35px 0 35px;
   background-color: white !important;
   background: #7f7fd5; /* fallback for old browsers */
@@ -631,6 +639,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
     > div {
       padding: 8px 20px;
       margin-top: -35px;
@@ -701,5 +710,9 @@ export default {
 }
 .cover-search {
   font-size: 20px;
+}
+//misc
+.high-pior {
+  z-index: 100;
 }
 </style>
