@@ -267,7 +267,8 @@ export default {
       handler: async function() {
         var vm = this;
         await vm.$store
-          .dispatch("product/setSearching", vm.searchContent)
+          .dispatch("product/clearFilter")
+          .then(vm.$store.dispatch("product/setSearching", vm.searchContent))
           .then(vm.$store.dispatch("product/fetchFilteredProduct"));
       }
     },
