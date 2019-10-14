@@ -32,6 +32,7 @@ export const mutations = {
   SET_FILTERCONDITION(state, condition) {
     state.filterCondition = condition;
   },
+
   SET_BRAND(state, condition) {
     state.filterBrand = condition;
   },
@@ -40,6 +41,9 @@ export const mutations = {
   },
   SET_PRODUCT_FILTERED(state, payload) {
     state.filteredProduct = payload;
+  },
+  PUSH_PRODUCT_FILTERED(state, payload) {
+    state.filteredProduct.push(payload);
   },
   SET_PRODUCT_ORDER(state, order) {
     state.productOrder = order;
@@ -80,6 +84,7 @@ export const actions = {
         order: "fields.Price"
       })
       .then(res => {
+        console.log(res);
         let contentful = res;
         let products = contentful.items;
 
@@ -104,6 +109,53 @@ export const actions = {
       })
       .then(products => {
         commit("SET_PRODUCT_FILTERED", products);
+        NProgress.done();
+      })
+      .catch(error => console.log(error));
+  },
+  async fetchProductTenByTen({ commit, getters }, limitCount) {
+    NProgress.start();
+    const apiClient = contentful.createClient({
+      space: "d1c4u2kmipnr",
+      accessToken: "7TjtAOZ-I8BkPvGsU-UvvB6QusdRMcjV4LjF1o3vre0"
+    });
+    await apiClient
+      .getEntries({
+        content_type: "ecommerce",
+        query: getters.getSearch,
+        "fields.Category": getters.getfilterCondition,
+        "fields.Title": getters.getFilterBrand,
+        order: "fields.Price",
+        sys: { type: "Array" },
+        skip: limitCount * 10,
+        limit: 10,
+        total: 1256
+      })
+      .then(res => {
+        let contentful = res;
+        let products = contentful.items;
+
+        products = products.map(item => {
+          const { Title, Name, Category, Onsale, Gender } = item.fields;
+          const ProductID = item.sys.id;
+          const Image = "https:" + item.fields.Image.fields.file.url + "?w=500";
+          const Price = item.fields.Price.toFixed(2);
+          return {
+            Title,
+            Price,
+            ProductID,
+            Image,
+            Name,
+            Category,
+            Onsale,
+            Gender
+          };
+        });
+
+        return products;
+      })
+      .then(products => {
+        commit("PUSH_PRODUCT_FILTERED", products);
         NProgress.done();
       })
       .catch(error => console.log(error));

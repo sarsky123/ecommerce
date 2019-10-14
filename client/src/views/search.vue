@@ -115,6 +115,7 @@
               :key="index"
               :product="product"
             ></catalog>
+            <observer @intersect="fetchNextTen()" />
           </div>
         </div>
       </div>
@@ -137,6 +138,7 @@
 <script>
 import catalog from "@/components/catalog.vue";
 import filterOverlay from "@/components/filterOverlay.vue";
+import observer from "@/components/misc/Observer.vue";
 import { mapGetters } from "vuex";
 export default {
   data() {
@@ -173,7 +175,8 @@ export default {
   },
   components: {
     catalog,
-    filterOverlay
+    filterOverlay,
+    observer
   },
   computed: {
     ...mapGetters("product", [
@@ -237,7 +240,8 @@ export default {
     },
     addFilterBrand(payload) {
       this.filterBrand = payload;
-    }
+    },
+    fetchNextTen() {}
   },
 
   watch: {
@@ -245,7 +249,7 @@ export default {
       handler: function() {
         var vm = this;
         vm.$store.dispatch("product/filterProduct", vm.filterCondition);
-        vm.$store.dispatch("product/fetchFilteredProduct");
+        vm.$store.dispatch("product/fetchProductTenByTen");
       }
     },
 
@@ -253,7 +257,7 @@ export default {
       handler: function() {
         var vm = this;
         vm.$store.dispatch("product/filterBrand", vm.filterBrand);
-        vm.$store.dispatch("product/fetchFilteredProduct");
+        vm.$store.dispatch("product/fetchProductTenByTen");
       }
     },
     getFilteredProducts: {
@@ -268,7 +272,7 @@ export default {
         var vm = this;
         await vm.$store
           .dispatch("product/setSearching", vm.searchContent)
-          .then(vm.$store.dispatch("product/fetchFilteredProduct"));
+          .then(vm.$store.dispatch("product/fetchProductTenByTen"));
       }
     },
     orderFilter: {
