@@ -7,9 +7,7 @@
         <div class="flex-fill" id="style-1">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
-            obcaecati quos, soluta voluptas necessitatibus pariatur vitae
-            quisquam, sed debitis reprehenderit nesciunt assumenda, illo optio
-            fugiat.
+            obcaecati quos.
           </p>
         </div>
         <span class="">

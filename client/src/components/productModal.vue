@@ -192,19 +192,25 @@ export default {
     this.fetchBookmark();
   },
   async mounted() {
-    if (!this.loggedIn && this.products) {
+    if (!this.loggedIn || !this.products) {
       return;
     }
-    const postHistory = await HistoryService.post(this.products.ProductID);
-    console.log(postHistory.data);
-
     try {
+      const postHistory = await HistoryService.post(this.products.ProductID);
+      console.log(postHistory.data);
+      console.log("history is posted");
       const bookmarks = (await BookmarksService.index({
         ProductID: this.products.ProductID
       })).data;
       if (bookmarks.length) {
+        console.log(bookmarks);
+
         const indexedBookmark = bookmarks[0];
-        this.bookmark = !!(this.getBookmarks.indexOf(indexedBookmark) > -1);
+        this.bookmark = !!(
+          this.getBookmarks.indexOf(indexedBookmark.ProductID) > -1
+        );
+        console.log(this.bookmark);
+        console.log("this is mounted");
       }
     } catch (err) {
       console.log(err);

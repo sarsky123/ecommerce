@@ -249,7 +249,7 @@ export default {
       handler: function() {
         var vm = this;
         vm.$store.dispatch("product/filterProduct", vm.filterCondition);
-        vm.$store.dispatch("product/fetchProductTenByTen");
+        vm.$store.dispatch("product/fetchFilteredProduct");
       }
     },
 
@@ -257,7 +257,7 @@ export default {
       handler: function() {
         var vm = this;
         vm.$store.dispatch("product/filterBrand", vm.filterBrand);
-        vm.$store.dispatch("product/fetchProductTenByTen");
+        vm.$store.dispatch("product/fetchFilteredProduct");
       }
     },
     getFilteredProducts: {
@@ -273,6 +273,7 @@ export default {
         await vm.$store
           .dispatch("product/clearFilter")
           .then(vm.$store.dispatch("product/setSearching", vm.searchContent))
+          .then(vm.$store.dispatch("product/fetchFilteredProduct"));
       }
     },
     orderFilter: {

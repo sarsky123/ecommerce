@@ -17,6 +17,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import VueWindowSize from "vue-window-size";
 import VueCarousel from "vue-carousel";
 import auth0SPA from "@auth0/auth0-spa-js";
+import "normalize.css";
 import {
   ValidationProvider,
   ValidationObserver,

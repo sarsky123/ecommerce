@@ -303,7 +303,6 @@
             </div>
 
             <div class="slide-item">
-              <p class="font-weight-bold my-2">NEW!</p>
               <p class="mb-0">
                 {{ product.Title }}
               </p>
@@ -326,6 +325,32 @@
           <div class="mega-button">
             <div class="mega-button-content">
               <h4>Lorem ipsum dolor sit amet.</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="beforefooter">
+      <div class="col bg-white">
+        <div class="p-5 w-100 text-center">
+          <h3 class="mb-4">@Lorem, ipsum.</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, fuga!
+          </p>
+          <div
+            class="d-flex flex-row justify-content-between my-4 flex-wrap col"
+          >
+            <div class="col-6 col-md-3  mb-3">
+              <img src="../assets/img/beauty-5.jpg" alt="mirror" />
+            </div>
+            <div class="col-6 col-md-3   mb-3">
+              <img src="../assets/img/beauty-21.jpg" alt="jump" />
+            </div>
+            <div class="col-6 col-md-3  mb-3">
+              <img src="../assets/img/beauty-1.jpg" alt="squat" />
+            </div>
+            <div class="col-6 col-md-3  mb-3">
+              <img src="../assets/img/beauty-2.jpg" alt="sleepy" />
             </div>
           </div>
         </div>
@@ -577,7 +602,6 @@ export default {
 
 @media screen and (max-width: 576px) {
   .homepage-custom {
-    display: none;
   }
 }
 .grid__image {
@@ -672,6 +696,14 @@ export default {
   }
   .btn-hero3 {
     box-shadow: 1px 1px 2px #555;
+  }
+}
+//beforefooter
+.beforefooter {
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 }
 

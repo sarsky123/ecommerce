@@ -147,7 +147,7 @@
         </div>
       </div>
     </footer>
-    <div class="mobile-footer mt-4 ">
+    <div class="mobile-footer ">
       <div class="col bg-white d-flex justify-content-center sign-up-425">
         <b-button
           squared
