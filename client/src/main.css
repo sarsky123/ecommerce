@@ -633,16 +633,20 @@ ul {
 }
 
 .main-content .homepage-hero .Hero-Image {
-  background-image: url(./assets/img/dandelion.jpg);
   display: block;
-  background-size: cover;
-  background-position-y: 46%;
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: absolute;
   right: 0;
   z-index: 1;
+
+}
+
+.main-content .homepage-hero .Hero-Image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .main-content .homepage-hero-content {
@@ -799,18 +803,14 @@ ul {
   padding: 15px;
 }
 
-.homepage-custom .homepage-custom_parallax:before {
+.homepage-custom .homepage-custom_parallax>img:first-child {
   content: "";
   display: block;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background-color: #000;
-  background-image: url(./assets/img/beauty-20.jpg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+  object-fit: cover;
   z-index: -1;
   -webkit-box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);

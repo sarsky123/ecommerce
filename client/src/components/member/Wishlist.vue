@@ -198,8 +198,10 @@ export default {
       let data = (await BookmarksService.index()).data.map(
         data => data.ProductID
       );
+      console.log(data);
+      const shallowCopyData = data.slice();
       this.bookmark = this.getProducts.filter(gp => {
-        return data.indexOf(gp.ProductID) > -1;
+        return shallowCopyData.indexOf(gp.ProductID) > -1;
       });
     } catch (err) {
       console.log(err);

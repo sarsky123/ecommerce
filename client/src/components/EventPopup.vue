@@ -12,7 +12,7 @@
         </div>
         <span class="">
           <button class="btn btn-dark text-capitalize rounded-0">
-            go sign up
+            <span @click="pushTo('login')">go sign up</span>
           </button>
         </span>
       </div>
@@ -25,7 +25,16 @@
               @click="closeEventPopup"
             ></font-awesome-icon
           ></span>
-          <img src="../assets/img/beauty-17.jpg" alt="masked" />
+          <img
+            src="../assets/img/beauty-17-w750.jpg"
+            alt="masked"
+            srcset="
+              ../assets/img/beauty-17-w750.jpg 750w,
+              ../assets/img/beauty-17-w500.jpg 500w,
+              ../assets/img/beauty-17-w300.jpg 300w
+            "
+            sizes="30vw"
+          />
         </div>
       </div>
     </div>
@@ -33,10 +42,24 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters("authentication", ["loggedIn"])
+  },
   methods: {
     closeEventPopup() {
       this.$emit("closeEventPopup");
+    },
+    pushTo(toRoute) {
+      if (!this.loggedIn) {
+        this.$router.push({
+          name: toRoute
+        });
+      } else {
+        this.$router.push("/member");
+      }
+      this.closeEventPopup();
     }
   }
 };

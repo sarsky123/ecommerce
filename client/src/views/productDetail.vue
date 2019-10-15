@@ -71,6 +71,7 @@ export default {
     }
     try {
       const postHistory = await HistoryService.post(this.product.ProductID);
+      console.log(postHistory);
     } catch (err) {
       console.log(err);
     }
