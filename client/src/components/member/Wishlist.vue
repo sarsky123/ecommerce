@@ -245,7 +245,7 @@ export default {
           this.bookmark.length
         );
       } else {
-        this.recentAdded = this.bookmark;
+        this.recentAdded = JSON.parse(JSON.stringify(this.bookmark));
       }
       this.recentAdded.reverse();
     }

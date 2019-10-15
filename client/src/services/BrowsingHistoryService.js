@@ -6,7 +6,7 @@ export default {
   },
   post(history) {
     return Api().post("histories", {
-      ProductID: history
+      historyProduct: history
     });
   }
 };

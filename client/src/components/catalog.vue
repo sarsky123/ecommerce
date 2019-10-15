@@ -97,7 +97,6 @@ export default {
   mounted() {
     //binding store data to local scale so that we could apply watch into it
     this.cart = this.getProductsInCart;
-    this.fetchBookmark();
   },
   methods: {
     ...mapActions("cart", ["addProduct"]),
@@ -149,13 +148,6 @@ export default {
         console.log(err);
       }
     },
-
-    async fetchBookmark() {
-      const bookmark = await BookmarksService.index();
-      if (bookmark.status === 200) {
-        this.$store.dispatch("bookmark/setBookmark", bookmark.data);
-      }
-    },
     ifBookMarked(p) {
       return !!(this.bookmark.indexOf(p.ProductID) > -1);
     }
@@ -172,7 +164,6 @@ export default {
       }
     },
     getBookmarks: {
-      immediate: true,
       handler: function() {
         this.bookmark = this.getBookmarks;
       }

@@ -87,7 +87,6 @@
 import { mapGetters, mapActions } from "vuex";
 import BookmarksService from "@/services/BookmarksService";
 
-import HistoryService from "../services/BrowsingHistoryService";
 export default {
   props: {
     products: Object
@@ -196,21 +195,14 @@ export default {
       return;
     }
     try {
-      const postHistory = await HistoryService.post(this.products.ProductID);
-      console.log(postHistory.data);
-      console.log("history is posted");
       const bookmarks = (await BookmarksService.index({
         ProductID: this.products.ProductID
       })).data;
       if (bookmarks.length) {
-        console.log(bookmarks);
-
         const indexedBookmark = bookmarks[0];
         this.bookmark = !!(
           this.getBookmarks.indexOf(indexedBookmark.ProductID) > -1
         );
-        console.log(this.bookmark);
-        console.log("this is mounted");
       }
     } catch (err) {
       console.log(err);

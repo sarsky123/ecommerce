@@ -115,7 +115,6 @@
               :key="index"
               :product="product"
             ></catalog>
-            <observer @intersect="fetchNextTen()" />
           </div>
         </div>
       </div>
@@ -136,6 +135,7 @@
 </template>
 
 <script>
+import BookmarksService from "@/services/BookmarksService.js";
 import catalog from "@/components/catalog.vue";
 import filterOverlay from "@/components/filterOverlay.vue";
 import observer from "@/components/misc/Observer.vue";
@@ -172,6 +172,9 @@ export default {
     searchContent: {
       type: String
     }
+  },
+  mounted() {
+    this.fetchBookmark();
   },
   components: {
     catalog,
@@ -241,7 +244,12 @@ export default {
     addFilterBrand(payload) {
       this.filterBrand = payload;
     },
-    fetchNextTen() {}
+    async fetchBookmark() {
+      const bookmark = await BookmarksService.index();
+      if (bookmark.status === 200) {
+        this.$store.dispatch("bookmark/setBookmark", bookmark.data);
+      }
+    }
   },
 
   watch: {

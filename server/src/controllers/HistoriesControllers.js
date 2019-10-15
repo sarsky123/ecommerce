@@ -29,14 +29,14 @@ module.exports = {
     async post(req, res) {
         try {
             const user = req.user.id
-            const { ProductID } = req.body
-
-            console.log(ProductID);
+            const {historyProduct} = req.body
+            console.log(historyProduct);
+            console.log('historyProduct IS RIGHT HERE');
             
             
             const history = await Histories.create({
                 historyUser: user,
-                historyProduct: ProductID
+                historyProduct: historyProduct
             })
             res.send(history)
         } catch (err) {

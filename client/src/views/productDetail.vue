@@ -45,6 +45,7 @@
 
 <script>
 import productModal from "@/components/productModal.vue";
+import HistoryService from "../services/BrowsingHistoryService";
 import { mapGetters } from "vuex";
 export default {
   components: {
@@ -60,8 +61,19 @@ export default {
       product: {}
     };
   },
-  async mounted() {
+  created() {
     this.product = this.getProductById(this.ProductID);
+  },
+  async mounted() {
+    if (!this.loggedIn || !this.product) {
+      console.log("rejected");
+      return;
+    }
+    try {
+      const postHistory = await HistoryService.post(this.product.ProductID);
+    } catch (err) {
+      console.log(err);
+    }
   },
 
   computed: {
