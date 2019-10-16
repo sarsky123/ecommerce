@@ -69,8 +69,7 @@ export default {
       return;
     }
     try {
-      const postHistory = await HistoryService.post(this.product.ProductID);
-    
+      await HistoryService.post(this.product.ProductID);
     } catch (err) {
       console.log(err);
     }

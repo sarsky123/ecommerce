@@ -2,7 +2,9 @@
   <div class="search-page w-100">
     <div class="search-page-header">
       <div class="search-hero d-flex w-100  clearfix">
-        <div class="search-hero-row w-100 d-flex flex-column flex-md-row">
+        <div
+          class="search-hero-row w-100 d-flex flex-column flex-md-row align-items-center"
+        >
           <div
             class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center"
           >
@@ -27,7 +29,19 @@
           </div>
           <div class="col-12 col-md-6 ">
             <div class="d-none d-md-flex col-md-12 col-lg-10 landing-image">
-              <div class="landing-image-inner"></div>
+              <div class="landing-image-inner">
+                <img
+                  src="../assets/img/store-hero-w750.jpg"
+                  alt="masked"
+                  srcset="
+                    ../assets/img/store-hero-w1000.jpg 1000w,
+                    ../assets/img/store-hero-w750.jpg   750w,
+                    ../assets/img/store-hero-500w.jpg   500w,
+                    ../assets/img/store-hero-300w.jpg   300w
+                  "
+                  sizes="30vw"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -406,13 +420,17 @@ export default {
   width: 100%;
   height: 100%;
   margin: 0;
-  padding: 10px;
+  padding: 15px !important;
+  max-height: 500px;
   .landing-image-inner {
+    display: block;
     width: 100%;
-    height: 100%;
-    background-image: url(../assets/img/store-hero-small.jpg);
-    object-fit: cover;
-    background-position: center;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
   &:before {
     content: "";

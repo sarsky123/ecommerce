@@ -44,7 +44,7 @@
         <div class="row flex-fill flex-row">
           <div class="col-7">
             <img
-              src="../assets/img/beauty-3.jpg"
+              src="../assets/img/beauty-3-w750.jpg"
               alt="masked"
               srcset="
                 ../assets/img/beauty-3-w750.jpg 750w,
@@ -56,7 +56,7 @@
           </div>
           <div class="col-5">
             <img
-              src="../assets/img/beauty-15.jpg"
+              src="../assets/img/beauty-15-w750.jpg"
               alt="rosehand"
               srcset="
                 ../assets/img/beauty-15-w750.jpg 750w,
@@ -70,7 +70,7 @@
         <div class="row flex-fill">
           <div class="d-none  d-md-block col-4">
             <img
-              src="../assets/img/beauty-4.jpg"
+              src="../assets/img/beauty-4-w750.jpg"
               alt="pridy grill"
               srcset="
                 ../assets/img/beauty-4-w750.jpg 750w,
