@@ -185,19 +185,6 @@ input {
   letter-spacing: 1px;
 }
 
-.btn {
-  display: inline-block;
-  padding: 8px 10px;
-  margin: 0;
-  font-weight: normal;
-  text-align: center;
-  vertical-align: middle;
-  background-color: #000;
-  color: #fff;
-  line-height: 1.3em;
-  font-size: 1.3em;
-}
-
 .footer-quicklinks {
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   text-transform: uppercase;
