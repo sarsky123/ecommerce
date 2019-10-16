@@ -25,8 +25,6 @@
         v-if="searchIsOn"
         @closeSearch="toggleSearch"
       ></searchingOverlay>
-      <!--notification-->
-      <notificationContainer />
 
       <div
         id="eventPopup"
@@ -36,6 +34,8 @@
       >
         <eventPopup @closeEventPopup="toggleOverlay()" />
       </div>
+      <!--notification-->
+      <notificationContainer />
     </main>
   </div>
 </template>

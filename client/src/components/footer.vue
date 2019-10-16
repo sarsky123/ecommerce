@@ -311,6 +311,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sign-up {
+  color: #17a2b8 !important;
+  border-color: #17a2b8 !important;
+}
 .homepage-event > div:first-child {
   max-width: 1440px;
   padding-right: 50px;
@@ -321,6 +325,7 @@ export default {
     text-shadow: 0px 0px 1px #000;
   }
 }
+
 .collapsed > .when-opened,
 :not(.collapsed) > .when-closed {
   display: none;

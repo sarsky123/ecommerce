@@ -46,12 +46,9 @@ export default {
 
 <style lang="scss">
 .notification-bar {
-  text-rendering: optimizeLegibility;
-
   letter-spacing: 0.01em;
   margin: auto;
   max-width: 320px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   border-radius: 2px;
 }
 .notification-error {

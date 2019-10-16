@@ -858,4 +858,7 @@ export default {
 .high-pior {
   z-index: 100;
 }
+.VueCarousel-navigation-button {
+  padding: 0 !important;
+}
 </style>

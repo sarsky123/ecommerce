@@ -36,7 +36,6 @@ export default {
   font-size: 21px;
   font-weight: 400;
   line-height: 5px;
-
-  transition: bottom 0.5s cubic-bezier(0.42, 0, 0.58, 1);
+  border: none;
 }
 </style>
