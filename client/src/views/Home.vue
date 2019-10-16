@@ -406,9 +406,11 @@
         </div>
       </div>
     </div>
-    <div class="beforefooter">
-      <div class="col bg-white">
-        <div class="p-5 w-100 text-center">
+    <div class="beforefooter w-100">
+      <div class="w-100 bg-white">
+        <div
+          class="p-5 w-100 text-center d-flex flex-column align-items-center"
+        >
           <h3 class="mb-4">@Lorem, ipsum.</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero, fuga!

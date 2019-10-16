@@ -11,7 +11,6 @@ import login_register from "@/views/login.vue";
 import userLogin from "@/components/userLogin.vue";
 import userRegister from "@/components/register.vue";
 import callback from "@/components/callback.vue";
-import shop from "@/views/shop.vue";
 import member from "@/views/member.vue";
 import search from "@/views/search.vue";
 import NProgress from "nprogress";
@@ -115,12 +114,7 @@ const router = new Router({
         }
       ]
     },
-    {
-      path: "/shop",
-      name: "shop",
-      component: shop,
-      props: true
-    },
+
     {
       path: "/checkoutPage",
       name: "checkoutPage",

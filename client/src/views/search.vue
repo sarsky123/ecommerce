@@ -138,7 +138,6 @@
 import BookmarksService from "@/services/BookmarksService.js";
 import catalog from "@/components/catalog.vue";
 import filterOverlay from "@/components/filterOverlay.vue";
-import observer from "@/components/misc/Observer.vue";
 import { mapGetters } from "vuex";
 export default {
   data() {
@@ -178,8 +177,7 @@ export default {
   },
   components: {
     catalog,
-    filterOverlay,
-    observer
+    filterOverlay
   },
   computed: {
     ...mapGetters("product", [
