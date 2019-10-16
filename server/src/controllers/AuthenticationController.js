@@ -14,7 +14,6 @@ module.exports = {
         try {
             const user = await User.create(req.body)
             const createProf = user.createProfile()
-            console.log(createProf + 'createProf is here !!!!!!!!!!!!!!');
             const userJson = user.toJSON()
             res.send({
                 user: userJson,
@@ -72,7 +71,6 @@ module.exports = {
                     { model: Profile }
                 ]
             })
-            console.log(userFound);
             
             if (userFound) {
                 const result = await userFound.update(req.body)

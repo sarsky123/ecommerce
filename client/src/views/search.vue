@@ -227,11 +227,9 @@ export default {
 
     clearFilter(i) {
       this.searchQuery.splice(i, 1);
-      console.log("closer is clicked");
     },
     clearSearch() {
       this.$router.push("/store");
-      console.log("clearsearch is clicked");
     },
     toggleFilter() {
       this.filterIsOn = !this.filterIsOn;

@@ -191,14 +191,12 @@ export default {
   },
   async mounted() {
     if (!this.loggedIn) {
-      console.log("mounted access denied");
       return;
     }
     try {
       let data = (await BookmarksService.index()).data.map(
         data => data.ProductID
       );
-      console.log(data);
       const shallowCopyData = data.slice();
       this.bookmark = this.getProducts.filter(gp => {
         return shallowCopyData.indexOf(gp.ProductID) > -1;
@@ -223,7 +221,6 @@ export default {
       });
     },
     addProductToCart(product) {
-      console.log("button is been clicked");
       var vm = this;
       if (!this.getProductById(product.ProductID)) {
         vm.addProduct(product);

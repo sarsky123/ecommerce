@@ -45,7 +45,6 @@ export default {
     try {
       const fetchHistory = await HistoryService.get();
       this.BrowsingHistory = fetchHistory.data;
-      console.log(fetchHistory);
     } catch (err) {
       console.log(err);
     }

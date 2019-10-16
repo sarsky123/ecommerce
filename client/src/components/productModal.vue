@@ -177,7 +177,6 @@ export default {
       if (bookmark.status === 200) {
         this.$store.dispatch("bookmark/setBookmark", bookmark.data);
       }
-      console.log("bookmark is fetched from server");
     }
   },
 

@@ -18,7 +18,6 @@ export const state = {
 export const mutations = {
   ADD_PRODUCT(state, product) {
     state.products.push(product);
-    console.log("product is added");
   },
   SET_PRODUCT(state, product) {
     state.product = product;

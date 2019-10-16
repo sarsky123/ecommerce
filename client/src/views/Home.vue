@@ -534,7 +534,6 @@ export default {
       try {
         var resp = await BookmarksService.delete(p.ProductID);
         if (resp.status === 200) {
-          console.log(resp.data);
           this.$store.dispatch("bookmark/deleteBookmark", resp.data.ProductID);
         }
       } catch (err) {
@@ -546,13 +545,11 @@ export default {
       if (bookmark.status === 200) {
         this.$store.dispatch("bookmark/setBookmark", bookmark.data);
       }
-      console.log("bookmark is fetched from server");
     },
     ifBookMarked(p) {
       return this.bookmark.indexOf(p.ProductID) > -1;
     },
     intersected() {
-      console.log("intersected");
       this.$emit("overlayOpened");
     }
   },
@@ -596,7 +593,7 @@ export default {
 }
 .icon-arrow-down {
   > a {
-    padding-right: calc(4cw+24px);
+    padding-right: calc(4vw+24px);
     display: block;
   }
 }

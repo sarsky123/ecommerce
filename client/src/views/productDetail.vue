@@ -66,12 +66,11 @@ export default {
   },
   async mounted() {
     if (!this.loggedIn || !this.product) {
-      console.log("rejected");
       return;
     }
     try {
       const postHistory = await HistoryService.post(this.product.ProductID);
-      console.log(postHistory);
+    
     } catch (err) {
       console.log(err);
     }

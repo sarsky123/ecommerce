@@ -18,7 +18,6 @@ module.exports = {
                 where: where
             })
                 
-            console.log('index bookmarks is here '+ bookmarks);
             res.send(bookmarks)
             
         } catch (err) {
@@ -43,7 +42,6 @@ module.exports = {
                     error: 'you already have this set as a bookmark'
                 })
             }
-            console.log('this is ProductID '+ ProductID)
             
             const newBookmark = await Bookmark.create({
                 UserID: userID,
