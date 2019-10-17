@@ -2,18 +2,22 @@
   "name": "server",
   "version": "1.0.0",
   "description": "express server",
-  "main": "server.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "nodemon src/app.js --exec ",
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint src/**/*.js  --fix",
-    "seed": "node seed"
+    "seed": "node seed",
+    "restart": "pm2 startOrRestart ecosystem.config.js",
+    "deploy": "pm2 deploy ecosystem.config.js production",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": "https://sarsky123:oasis123@bitbucket.org/sarsky123/ecommerce-serverside.git",
   "author": "Yu",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.6",
     "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.5",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -38,6 +42,7 @@
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "nodemon": "^1.19.2"
+    "nodemon": "^1.19.2",
+    "pm2": "^4.1.2"
   }
 }
