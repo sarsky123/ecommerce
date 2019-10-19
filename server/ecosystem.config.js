@@ -1,7 +1,7 @@
 module.exports = {
     apps: [{
         name: 'Ecommerce-server-side',
-        script: '/src/app.js'
+        script: 'app.js'
     }],
     deploy: {
         production: {
@@ -11,7 +11,7 @@ module.exports = {
             ref: 'origin/master',
             repo: 'https://sarsky123:oasis123@bitbucket.org/sarsky123/ecommerce-serverside.git',
             path: '/home/ubuntu/server',
-            'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
+            'post-deploy': 'npm install && npm rebuild && pm2 startOrRestart ecosystem.config.js'
         }
     }
 }

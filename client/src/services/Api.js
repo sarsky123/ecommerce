@@ -4,7 +4,7 @@ var Token = localStorage.getItem("token");
 
 export default () => {
   return axios.create({
-    baseURL: `http://localhost:8081/`,
+    baseURL: process.env.VUE_APP_APIBASEURL,
     headers: {
       Authorization: `Bearer ${Token}`
     }
