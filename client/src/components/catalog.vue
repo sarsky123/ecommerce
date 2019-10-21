@@ -57,10 +57,8 @@
       </router-link>
     </div>
     <div class="figcaption under">
-      <p class="uppercase vendor__link">
-        <b
-          ><a href="javascript:void(0)">{{ product.Title }}</a></b
-        >
+      <p class="uppercase">
+        <b>{{ product.Title }}</b>
       </p>
       <p
         class="h6 name_wrapper link"
@@ -180,6 +178,11 @@ export default {
   cursor: pointer;
   &:hover {
     text-decoration: underline !important;
+  }
+}
+.figcaption > p {
+  &:first-child {
+    cursor: unset;
   }
 }
 </style>

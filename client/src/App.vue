@@ -28,7 +28,7 @@
 
       <div
         id="eventPopup"
-        class="popupOverlay high-pior"
+        class="evenPopupOverlay high-pior"
         @click.self="toggleOverlay()"
         v-if="eventPopupIsOpend"
       >
@@ -151,6 +151,23 @@ button:focus {
   outline: 0 !important;
   outline-style: none !important;
   outline-width: 0 !important;
+}
+.evenPopupOverlay {
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(210, 210, 210, 0.8);
+  z-index: 5;
+  width: 100%;
+}
+.evenPopupOverlay > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 /* Pure Css Loader for spinner purpose*/
 </style>

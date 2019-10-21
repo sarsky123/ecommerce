@@ -13,6 +13,7 @@
               type="text"
               placeholder="Insert your search"
               v-model="searchContent"
+              ref="search"
             />
           </form>
         </div>
@@ -38,7 +39,13 @@ export default {
         params: { searchContent: this.searchContent }
       });
       this.closeSearch();
+    },
+    focusInput() {
+      this.$refs.search.focus();
     }
+  },
+  mounted() {
+    this.focusInput();
   }
 };
 </script>
@@ -54,6 +61,11 @@ export default {
   background-color: rgba(210, 210, 210, 0.8);
   z-index: 5;
   width: 100%;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .search-bar-icon {
   font-size: 20px;

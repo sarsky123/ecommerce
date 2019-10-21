@@ -18,19 +18,19 @@
                 }"
                 v-if="!AuthCheck()"
               >
-                Login In</router-link
+                Login</router-link
               >
 
               <a href="#" v-else @click.prevent="logOut()"> &nbsp;Log Out</a>
-              <span v-if="!AuthCheck()">
-                &nbsp; · &nbsp;
-                <router-link
-                  :to="{
-                    name: 'userRegister'
-                  }"
-                  >Register In</router-link
-                >
-              </span>
+
+              <span v-if="!AuthCheck()">&nbsp; · &nbsp;</span>
+              <router-link
+                v-if="!AuthCheck()"
+                :to="{
+                  name: 'userRegister'
+                }"
+                >Register</router-link
+              >
             </p>
           </div>
         </div>
@@ -145,9 +145,6 @@
                   <a href="/" class="link">Store</a>
                 </li>
               </router-link>
-              <li>
-                <a href="#" class="link">NEW EVENT</a>
-              </li>
               <li>
                 <router-link
                   :to="{

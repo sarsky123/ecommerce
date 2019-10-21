@@ -1,12 +1,17 @@
 <template>
   <div>
     <footer class="site-footer-wrapper" role="contentinfo">
-      <div class="col bg-white d-flex justify-content-center sign-up-425">
+      <div class="col bg-white d-flex justify-content-center">
         <b-button
           squared
-          variant="outline-info"
-          class=" text-capitalize  px-4 py-2 mb-4 w-100 mx-5"
-          >sign up for the event</b-button
+          class="text-capitalize  px-4 py-2 mb-4 w-100 mx-5 sign-up-425"
+          ><router-link
+            :to="{
+              name: 'userLogin'
+            }"
+            tag="span"
+            >sign up for the event</router-link
+          ></b-button
         >
       </div>
       <div class="homepage-event bg-secondary">
@@ -14,10 +19,15 @@
           <div class="col pr-0">
             <b-button
               squared
-              variant="outline-info"
               class="float-left text-capitalize px-4 py-2 sign-up"
               @click.prevent="auth0Login()"
-              >sign up for the event</b-button
+              ><router-link
+                :to="{
+                  name: 'userLogin'
+                }"
+                tag="span"
+                >sign up for the event</router-link
+              ></b-button
             >
             <div class="float-right item-parent">
               <ul
@@ -31,14 +41,6 @@
                       name: 'store'
                     }"
                     >stores</router-link
-                  >
-                </li>
-                <li>
-                  <router-link
-                    :to="{
-                      name: 'store'
-                    }"
-                    >event</router-link
                   >
                 </li>
               </ul>
@@ -148,12 +150,17 @@
       </div>
     </footer>
     <div class="mobile-footer ">
-      <div class="col bg-white d-flex justify-content-center sign-up-425">
+      <div class="col bg-white d-flex justify-content-center">
         <b-button
           squared
-          variant="outline-info"
-          class=" text-capitalize  px-4 py-2 mb-4 w-100 mx-5"
-          >sign up for the event</b-button
+          class="sign-up-425 bg-white text-capitalize  px-4 py-2 mb-4 w-100 mx-5"
+          ><router-link
+            :to="{
+              name: 'userLogin'
+            }"
+            tag="span"
+            >sign up for the event</router-link
+          ></b-button
         >
       </div>
       <div class="homepage-event bg-secondary">
@@ -161,9 +168,15 @@
           <div class="col pr-0">
             <b-button
               squared
-              variant="outline-info"
               class="float-left text-capitalize px-4 py-2 sign-up"
-              >sign up for the event</b-button
+            >
+              <router-link
+                :to="{
+                  name: 'userLogin'
+                }"
+                tag="span"
+                >sign up for the event</router-link
+              ></b-button
             >
             <div class="float-right item-parent">
               <ul
@@ -171,8 +184,7 @@
                 m-0
                 "
               >
-                <li>stores</li>
-                <li>event</li>
+                <li>store</li>
               </ul>
             </div>
           </div>
@@ -285,7 +297,7 @@
           </div>
         </div>
       </div>
-      <div class="copyright w-100 bg-white ">
+      <div class="copyright w-100 bg-white">
         <div class="row m-0">
           <div class="col bg-white pb-5 mx-0">
             <p class="copyright">
@@ -312,6 +324,13 @@ export default {
 
 <style lang="scss" scoped>
 .sign-up {
+  color: #e3aaaa !important;
+  border-color: #e3aaaa !important;
+  &:hover {
+    background-color: #cccc !important;
+  }
+}
+.sign-up-425 {
   color: #e3aaaa !important;
   border-color: #e3aaaa !important;
   &:hover {

@@ -1,5 +1,5 @@
 <template>
-  <div class="home-wrapper">
+  <div class="home-wrapper clearfix">
     <div class="homepage-hero " id="homepageHero">
       <div class="Hero-Image">
         <img
@@ -81,16 +81,22 @@
             />
           </div>
           <div class="col d-flex flex-column">
-            <div class="row row2-1 align-items-center  h-50">
+            <div class="row row2-1 no-gutters align-items-center  h-50">
               <div
                 class="col text-center d-flex flex-column align-items-center justify-content-center"
               >
-                <div class="w-75 mx-auto">
-                  <h3 class="mb-4 mx-auto text-capitalize">viva la vida</h3>
-                  <p class="text-lighter mb-3 w-80 ">
+                <div
+                  class="d-flex h-100 flex-column align-items-center justify-content-around"
+                >
+                  <h3 class="mb-sm-4 mb-2 mx-auto text-capitalize">
+                    viva la vida
+                  </h3>
+                  <p class="mb-sm-4 mb-2 mx-auto text-lighter">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   </p>
-                  <button class="btn gridHero-button mt-4 px-3 py-2 mx-auto">
+                  <button
+                    class="mb-3 btn gridHero-button px-2 py-1 px-sm-3 py-sm-2 mx-auto"
+                  >
                     <router-link
                       class="text-decoration-none text-light"
                       :to="{ name: 'store' }"
@@ -103,7 +109,7 @@
                 <img src="../assets/img/beauty-18-w750.jpg" />
               </div>
             </div>
-            <div class="row align-items-center h-50">
+            <div class="row align-items-center h-50 no-gutters">
               <div class="col">
                 <img
                   src="../assets/img/beauty-16-w750.jpg"
@@ -119,13 +125,15 @@
               <div
                 class="col text-center d-flex flex-column align-items-center justify-content-center"
               >
-                <div class="w-75 mx-auto">
-                  <h3 class="mb-4 text-wrap">Sesonal Sale</h3>
-                  <p class="text-lighter mb-3" text-wrap>
+                <div
+                  class="d-flex h-100 w-80 flex-column align-items-center justify-content-around"
+                >
+                  <h3 class="mb-sm-4 mb-2text-wrap">Sesonal Sale</h3>
+                  <p class="text-lighter mb-sm-4 mb-2" text-wrap>
                     Lorem ipsum dolor sit amet consectetur.
                   </p>
                   <button
-                    class="btn gridHero-button justify-content-center d-flex w-30 mx-auto mt-3 px-3 py-2"
+                    class="btn gridHero-button justify-content-center d-flex w-30 px-2 py-1 px-sm-3 py-sm-2 mx-auto"
                   >
                     <router-link
                       class="text-decoration-none text-light w-30"
@@ -260,7 +268,13 @@
           <p class="d-none d-sm-block">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
-          <button class="btn btn-dark rounded-0 btn-hero3">Shop Now</button>
+          <button class="btn btn-dark rounded-0 btn-hero3">
+            <router-link
+              class="text-decoration-none text-light w-30"
+              :to="{ name: 'store' }"
+              >Shop Now</router-link
+            >
+          </button>
         </div>
       </div>
       <div class="col-10 col-md-5">
@@ -279,7 +293,13 @@
           <p class="d-none d-sm-block">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </p>
-          <button class="btn btn-dark rounded-0 btn-hero3">Shop Now</button>
+          <button class="btn btn-dark rounded-0 btn-hero3">
+            <router-link
+              class="text-decoration-none text-light w-30"
+              :to="{ name: 'store' }"
+              >Shop Now</router-link
+            >
+          </button>
         </div>
       </div>
     </div>
@@ -409,7 +429,7 @@
     <div class="beforefooter w-100">
       <div class="w-100 bg-white">
         <div
-          class="p-5 w-100 text-center d-flex flex-column align-items-center clearfix"
+          class="p-5 w-100 text-center d-flex flex-column align-items-center h-100"
         >
           <h3 class="mb-4">@Lorem, ipsum.</h3>
           <p>
@@ -567,10 +587,12 @@ export default {
     windowWidth: function() {
       if (this.windowWidth > 960) {
         this.perpage = 4;
-      } else if (this.windowWidth < 576) {
+      } else if (this.windowWidth > 576) {
+        this.perpage = 3;
+      } else if (this.windowWidth > 376) {
         this.perpage = 2;
       } else {
-        this.perpage = 3;
+        this.perpage = 1;
       }
     },
     getBookmarks: {
@@ -602,7 +624,6 @@ export default {
 }
 .row2-1 {
   max-height: 300px;
-  overflow: hidden;
 }
 
 .arrow:hover {

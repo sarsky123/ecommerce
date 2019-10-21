@@ -1,20 +1,17 @@
 <template>
-  <div>
+  <div @click.self="closeEventPopup">
     <div class="eventPopupContainer row appear-animation">
       <div class="col-7 h-100 d-flex flex-column justify-content-between">
         <h3>3 Years Anniversary</h3>
-        <h5>Sign Up To Claim Your Reward</h5>
+        <h5>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nemo, et?
+        </h5>
         <div class="flex-fill" id="style-1">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
             obcaecati quos.
           </p>
         </div>
-        <span class="">
-          <button class="btn btn-dark text-capitalize rounded-0">
-            <span @click="pushTo('login')">go sign up</span>
-          </button>
-        </span>
       </div>
 
       <div class="col-5 d-flex flex-column pl-0 eventPopup-thumbnail-container">
@@ -74,11 +71,7 @@ export default {
   background: #e3aaaa;
   height: 350px;
   z-index: 105;
-  position: absolute;
   width: 80%;
-
-  top: 20%;
-  left: 10%;
   animation: "appear-animation" 2s forwards ease;
 
   h3 {

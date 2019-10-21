@@ -2,7 +2,7 @@
   <div>
     <div class="row pt-5">
       <div class="col">
-        <h2>STORES</h2>
+        <h2>STORE</h2>
       </div>
     </div>
     <div class="w-100"></div>
