@@ -179,7 +179,6 @@ export default {
     async register() {
       const isValid = await this.$refs.observer.validate();
       if (!isValid) {
-        console.log("invalid");
         const notification = {
           type: "danger",
           message: "Your information is not valid, please do it again!"
@@ -193,7 +192,6 @@ export default {
             Email: this.email,
             Password: this.password
           });
-          console.log(response);
 
           if (response.status == 200) {
             this.$store.dispatch("authentication/setUser", response.data.user);

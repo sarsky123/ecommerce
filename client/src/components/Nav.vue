@@ -55,6 +55,7 @@
               <a
                 class="search flex-fill d-inline-block"
                 @click.prevent="toggleSearch()"
+                v-if="!(this.windowWidth > 960)"
               >
                 <font-awesome-icon :icon="['fas', 'search']" />
               </a>
@@ -62,7 +63,7 @@
 
             <div class="logo-wrapper">
               <h1
-                class="header-logo"
+                class="header-logo m-0"
                 itemscope
                 itemtype="http://schema.org/Organization"
               >
@@ -144,19 +145,22 @@
                   <a href="/" class="link">Store</a>
                 </li>
               </router-link>
-              <li><a href="#">NEW EVENT</a></li>
+              <li>
+                <a href="#" class="link">NEW EVENT</a>
+              </li>
               <li>
                 <router-link
                   :to="{
                     name: 'customer-service'
                   }"
+                  class="link"
                   >CONTACT</router-link
                 >
               </li>
               <li class="cart-text-link">
                 <a
                   href="javascript:void(0)"
-                  class="cartToggle menuCart"
+                  class="cartToggle menuCart link"
                   @click.prevent="showPopupCart()"
                 >
                   cart
@@ -196,13 +200,14 @@
                     :to="{
                       name: 'customer-service'
                     }"
-                    >CONTACT</router-link
+                  >
+                    <p class="link">CONTACT</p></router-link
                   >
                 </li>
                 <li class="cart-text-link">
                   <a
                     href="javascript:void(0)"
-                    class="cartToggle menuCart"
+                    class="cartToggle menuCart link"
                     @click.prevent="showPopupCart()"
                   >
                     cart
@@ -326,6 +331,11 @@ export default {
         document.documentElement.style.overflow = "auto";
         return;
       }
+    },
+    $route(to, from) {
+      if (to.path !== from.path) {
+        this.closeLoginMenu();
+      }
     }
   }
 };
@@ -334,6 +344,9 @@ export default {
 <style lang="scss" scoped>
 .link {
   margin-bottom: 0;
+  &:hover {
+    text-decoration: underline !important;
+  }
 }
 .search {
   line-height: 1;

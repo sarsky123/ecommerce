@@ -45,7 +45,7 @@
       </b-nav>
     </div>
     <div>
-      <router-view class="col"></router-view>
+      <router-view class="col mx-auto"></router-view>
     </div>
   </div>
 </template>

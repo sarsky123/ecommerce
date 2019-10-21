@@ -62,7 +62,10 @@
           ><a href="javascript:void(0)">{{ product.Title }}</a></b
         >
       </p>
-      <p class="h6 name_wrapper">
+      <p
+        class="h6 name_wrapper link"
+        @click="pushTo('product-detail', product.ProductID)"
+      >
         {{ product.Name }}
       </p>
       <p class="price_wrapper">
@@ -172,4 +175,11 @@ export default {
 };
 </script>
 
-<style lang="css"></style>
+<style lang="scss">
+.link {
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline !important;
+  }
+}
+</style>

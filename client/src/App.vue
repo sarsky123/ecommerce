@@ -83,14 +83,12 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (to.path.includes("contact-us")) {
-        this.animationActive = "animated fadeInRight faster";
-        this.animationLeave = "animated fadeOutLeft faster";
-      } else if (
+      if (
         to.name == "searchContent" ||
         from.name == "searchContent" ||
         to.path.includes("home-carousel") ||
-        to.path.includes("member")
+        to.path.includes("member") ||
+        to.path.includes("contact-us")
       ) {
         this.animationActive = "";
         this.animationLeave = "";

@@ -409,7 +409,7 @@
     <div class="beforefooter w-100">
       <div class="w-100 bg-white">
         <div
-          class="p-5 w-100 text-center d-flex flex-column align-items-center"
+          class="p-5 w-100 text-center d-flex flex-column align-items-center clearfix"
         >
           <h3 class="mb-4">@Lorem, ipsum.</h3>
           <p>
@@ -492,9 +492,9 @@ export default {
     Observer
   },
   created() {
-    this.fetchBookmark();
     this.$store.dispatch("product/fetchProducts");
     this.$store.dispatch("product/fetchFilteredProduct");
+    this.fetchBookmark();
   },
   mounted() {
     if (this.windowWidth > 960) {
@@ -541,6 +541,9 @@ export default {
       }
     },
     async fetchBookmark() {
+      if (!this.loggedIn) {
+        return;
+      }
       const bookmark = await BookmarksService.index();
       if (bookmark.status === 200) {
         this.$store.dispatch("bookmark/setBookmark", bookmark.data);

@@ -18,13 +18,6 @@
                 obcaecati soluta ea ut quam laudantium corrupti fugit. Nihil,
                 cum.
               </p>
-              <button
-                class="btn btn-dark d-flex flex-column align-items-center"
-              >
-                <span class="text-uppercase">
-                  Shop Now
-                </span>
-              </button>
             </div>
           </div>
           <div class="col-12 col-md-6 ">
@@ -255,6 +248,9 @@ export default {
       this.filterBrand = payload;
     },
     async fetchBookmark() {
+      if (!this.loggedIn) {
+        return;
+      }
       const bookmark = await BookmarksService.index();
       if (bookmark.status === 200) {
         this.$store.dispatch("bookmark/setBookmark", bookmark.data);

@@ -146,7 +146,6 @@ export default {
     async removeBookmark(p) {
       try {
         var resp = await BookmarksService.delete(p.ProductID);
-        console.log(resp);
         if (resp.status === 200) {
           this.$store.dispatch("bookmark/deleteBookmark", resp.data.ProductID);
         }
@@ -187,7 +186,9 @@ export default {
     ...mapGetters("bookmark", ["getBookmarks"])
   },
   created() {
-    this.fetchBookmark();
+    if (this.loggedIn) {
+      this.fetchBookmark();
+    }
   },
   async mounted() {
     if (!this.loggedIn || !this.products) {

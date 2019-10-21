@@ -312,8 +312,11 @@ export default {
 
 <style lang="scss" scoped>
 .sign-up {
-  color: #17a2b8 !important;
-  border-color: #17a2b8 !important;
+  color: #e3aaaa !important;
+  border-color: #e3aaaa !important;
+  &:hover {
+    background-color: #cccc !important;
+  }
 }
 .homepage-event > div:first-child {
   max-width: 1440px;
