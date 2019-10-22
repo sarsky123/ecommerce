@@ -80,7 +80,6 @@ export const actions = {
         order: "fields.Price"
       })
       .then(res => {
-        console.log(res);
         let contentful = res;
         let products = contentful.items;
 

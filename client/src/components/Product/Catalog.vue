@@ -20,7 +20,7 @@
             />
           </div>
           <div class="d-flex flex-row algin-items-center hover-cover_bar">
-            <span v-if="loggedIn" class="mr-3">
+            <span v-if="loggedIn == true" class="mr-3">
               <font-awesome-icon
                 v-if="ifBookMarked(product)"
                 @click="removeBookmark(product)"
@@ -143,6 +143,9 @@ export default {
       }
     },
     ifBookMarked(p) {
+      if (!this.loggedIn) {
+        return;
+      }
       return !!(this.bookmark.indexOf(p.ProductID) > -1);
     }
   },

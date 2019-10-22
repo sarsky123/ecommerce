@@ -143,13 +143,11 @@ export default {
           Password: this.password
         });
         if (response.status == 200) {
-          console.log(response);
           this.$store.dispatch("authentication/setToken", response.data.token);
           this.$store.dispatch("authentication/setUser", response.data.user);
           this.toggleMenu();
           window.location.reload();
         } else {
-          console.log(response);
           throw Error();
         }
       } catch (error) {
