@@ -1,18 +1,18 @@
 import Vue from "vue";
 import Router from "vue-router";
 import home from "@/views/Home.vue";
-import productDetail from "@/views/productDetail.vue";
-import contact from "@/views/contact.vue";
-import privacy from "@/components/privacy.vue";
-import customerService from "@/components/customerService.vue";
-import ourstore from "@/components/ourstore.vue";
-import termOfUse from "@/components/termOfUse.vue";
-import login_register from "@/views/login.vue";
-import userLogin from "@/components/userLogin.vue";
-import userRegister from "@/components/register.vue";
+import productDetail from "@/views/ProductDetail.vue";
+import contact from "@/views/Contact.vue";
+import privacy from "@/components/Contact/Privacy.vue";
+import customerService from "@/components/Contact/CustomerService.vue";
+import ourstore from "@/components/Contact/Ourstore.vue";
+import termOfUse from "@/components/Contact/TermOfUse.vue";
+import login_register from "@/views/Login.vue";
+import userLogin from "@/components/Authentication/UserLogin.vue";
+import userRegister from "@/components/Authentication/Register.vue";
 import callback from "@/components/callback.vue";
-import member from "@/views/member.vue";
-import search from "@/views/search.vue";
+import member from "@/views/Member.vue";
+import search from "@/views/Search.vue";
 import NProgress from "nprogress";
 import Order from "@/components/member/Order";
 import BrowsingHistory from "@/components/member/BrowsingHistory";
@@ -107,7 +107,7 @@ const router = new Router({
           component: userLogin
         },
         {
-          path: "/login/register",
+          path: "/register",
           name: "userRegister",
           component: userRegister,
           props: true

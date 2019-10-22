@@ -145,8 +145,8 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import Spinner from "./Spinner.vue";
-import AuthenticationService from "../services/AuthenticationService.js";
+import Spinner from "./../misc/Spinner.vue";
+import AuthenticationService from "../../services/AuthenticationService.js";
 
 export default {
   components: {

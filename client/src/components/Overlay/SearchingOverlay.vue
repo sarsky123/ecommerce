@@ -59,7 +59,7 @@ export default {
   left: 0;
   bottom: 0;
   background-color: rgba(210, 210, 210, 0.8);
-  z-index: 5;
+  z-index: 10;
   width: 100%;
   > div {
     display: flex;

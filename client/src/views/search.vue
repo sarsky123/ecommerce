@@ -143,8 +143,8 @@
 
 <script>
 import BookmarksService from "@/services/BookmarksService.js";
-import catalog from "@/components/catalog.vue";
-import filterOverlay from "@/components/filterOverlay.vue";
+import catalog from "@/components/Product/Catalog.vue";
+import filterOverlay from "@/components/Overlay/FilterOverlay.vue";
 import { mapGetters } from "vuex";
 export default {
   data() {

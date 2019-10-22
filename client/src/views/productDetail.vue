@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import productModal from "@/components/productModal.vue";
+import productModal from "@/components/Product/ProductModal.vue";
 import HistoryService from "../services/BrowsingHistoryService";
 import { mapGetters } from "vuex";
 export default {

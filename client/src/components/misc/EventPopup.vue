@@ -23,12 +23,12 @@
             ></font-awesome-icon
           ></span>
           <img
-            src="../assets/img/beauty-17-w750.jpg"
+            src="../../assets/img/beauty-17-w750.jpg"
             alt="masked"
             srcset="
-              ../assets/img/beauty-17-w750.jpg 750w,
-              ../assets/img/beauty-17-w500.jpg 500w,
-              ../assets/img/beauty-17-w300.jpg 300w
+              ../../assets/img/beauty-17-w750.jpg 750w,
+              ../../assets/img/beauty-17-w500.jpg 500w,
+              ../../assets/img/beauty-17-w300.jpg 300w
             "
             sizes="30vw"
           />

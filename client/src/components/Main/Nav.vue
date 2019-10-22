@@ -243,8 +243,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import { vueWindowSizeMixin } from "vue-window-size";
-import login from "@/components/userLogin.vue";
-import register from "@/components/register.vue";
+import login from "@/components/Authentication/UserLogin.vue";
+import register from "@/components/Authentication/Register.vue";
 export default {
   data() {
     return {

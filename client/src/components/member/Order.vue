@@ -10,7 +10,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import orderHistoryItem from "../OrderHistoryItem";
+import orderHistoryItem from "../member/OrderHistoryItem";
 export default {
   computed: {
     ...mapGetters("product", ["getProducts"])

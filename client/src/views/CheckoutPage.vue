@@ -488,7 +488,7 @@
 
 <script>
 import CheckoutService from "@/services/CheckoutService.js";
-import cartObject from "../components/CheckoutCartObject";
+import cartObject from "../components/Checkout/CheckoutCartObject.vue";
 import { mapGetters } from "vuex";
 import ProfileService from "@/services/ProfileService";
 export default {
@@ -629,6 +629,13 @@ export default {
     },
     DecreStep() {
       this.step--;
+    }
+  },
+  watch: {
+    getProductsInCart() {
+      if (this.getProductsInCart.length == 0) {
+        this.$router.push("/");
+      }
     }
   }
 };

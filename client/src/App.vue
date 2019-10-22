@@ -40,12 +40,12 @@
   </div>
 </template>
 <script>
-import Nav from "./components/Nav.vue";
-import cartCheckout from "./components/cartCheckout.vue";
-import foot from "@/components/footer.vue";
-import searchingOverlay from "@/components/searchingOverlay.vue";
-import notificationContainer from "@/components/notificationContainer.vue";
-import eventPopup from "@/components/EventPopup";
+import Nav from "./components/Main/Nav.vue";
+import cartCheckout from "./components/Checkout/CartCheckout.vue";
+import foot from "@/components/Main/Footer.vue";
+import searchingOverlay from "@/components/Overlay/SearchingOverlay.vue";
+import notificationContainer from "@/components/Notification/NotificationContainer.vue";
+import eventPopup from "@/components/misc/EventPopup.vue";
 import { mapGetters } from "vuex";
 
 export default {

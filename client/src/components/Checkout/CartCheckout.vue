@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import cart from "@/components/cart.vue";
+import cart from "@/components/Checkout/Cart.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
