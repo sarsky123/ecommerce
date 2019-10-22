@@ -15,7 +15,9 @@
               </div>
             </div>
 
-            <div class="grid__item col cart__item__title text-capitalize  p-0">
+            <div
+              class="grid__item col cart__item__title text-capitalize  p-0 pl-2 text-center"
+            >
               <h5 class="item-Name">
                 {{ item.Name }}
               </h5>

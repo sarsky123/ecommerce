@@ -1,10 +1,12 @@
 <template>
-  <div class="col m-2 orderHistoryBox">
+  <div class="col my-2 orderHistoryBox">
     <div class="cart__row my-3 border border-dark  ">
       <div class="orderHistoryItem-header col py-2 ">
         <div class="d-flex flex-row align-items-center flex-fill mr-3">
-          <h5>Order Number #{{ orderItem.ProductID }}</h5>
-          <div class="ml-auto">
+          <h5 class="d-none d-sm-block">
+            Order Number #{{ orderItem.ProductID }}
+          </h5>
+          <div class="mr-auto ml-sm-auto">
             <span>Order Total ${{ orderItem.Price * Amount }}</span>
           </div>
         </div>

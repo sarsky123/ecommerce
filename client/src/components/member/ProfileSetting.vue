@@ -1,7 +1,7 @@
 <template>
   <div class="col profile-container">
     <h3>Welcome Back! {{ getUserName.FirstName }}</h3>
-    <div class="col row d-flex flex-column flex-md-row align-items-start">
+    <div class="w-100 d-flex flex-column flex-md-row align-items-start">
       <div class="col col-md-7 account-setting-container">
         <div>
           <h3>Your Account Setting</h3>

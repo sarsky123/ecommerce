@@ -42,19 +42,12 @@
           </div>
         </div>
       </div>
-      <router-link
-        class="d-b w-100 h-100"
-        :to="{
-          name: 'product-detail',
-          params: { ProductID: product.ProductID }
-        }"
-      >
-        <img
-          :src="product.Image"
-          class="grid__image"
-          alt="product.name + '#' + product.id"
-        />
-      </router-link>
+
+      <img
+        :src="product.Image"
+        class="grid__image"
+        alt="product.name + '#' + product.id"
+      />
     </div>
     <div class="figcaption under">
       <p class="uppercase">

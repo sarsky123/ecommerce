@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="search-filter">
-      <div class="row border mb-3">
+      <div class="row border m-0 w-100">
         <b-dropdown
           @toggle="toggleFilter()"
           text="Refine"

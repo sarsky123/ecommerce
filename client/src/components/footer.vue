@@ -40,6 +40,7 @@
                     :to="{
                       name: 'store'
                     }"
+                    class="col"
                     >stores</router-link
                   >
                 </li>
@@ -165,7 +166,7 @@
       </div>
       <div class="homepage-event bg-secondary">
         <div class="row col py-4">
-          <div class="col pr-0">
+          <div class="col px-0">
             <b-button
               squared
               class="float-left text-capitalize px-4 py-2 sign-up"
@@ -178,13 +179,13 @@
                 >sign up for the event</router-link
               ></b-button
             >
-            <div class="float-right item-parent">
+            <div class="item-parent w-100">
               <ul
-                class="float-left d-flex flex-row text-white event-item
+                class="d-flex flex-row text-white event-item
                 m-0
                 "
               >
-                <li>store</li>
+                <li class="ml-auto">store</li>
               </ul>
             </div>
           </div>
@@ -339,7 +340,6 @@ export default {
 }
 .homepage-event > div:first-child {
   max-width: 1440px;
-  padding-right: 50px;
   margin: 0 auto;
   a {
     text-decoration: none;

@@ -30,7 +30,7 @@
           Edinburgh<br />
           EH2 2AD<br />
           Tel: +44 (0)131 524 8388<br />
-          Email: contact.edinburgh@harveynichols.com
+          Email: edinburgh@harveynichols.com
         </p>
       </div>
     </div>
@@ -58,7 +58,7 @@
           Edinburgh<br />
           EH2 2AD<br />
           Tel: +44 (0)131 524 8388<br />
-          Email: contact.edinburgh@harveynichols.com
+          Email: edinburgh@harveynichols.com
         </p>
       </div>
     </div>
@@ -82,6 +82,7 @@ export default {};
     font-size: 12px;
     margin: 1rem 0;
     line-height: 1.5rem;
+    overflow: auto;
   }
 }
 </style>

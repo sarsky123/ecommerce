@@ -5,7 +5,7 @@
         Checkout
       </h3>
       <div
-        class="checkoutContent w-100 d-flex flex-md-row row flex-column-reverse"
+        class="checkoutContent w-100 d-flex flex-md-row flex-column-reverse m-0"
       >
         <div class="col-12 col-md-7">
           <div
@@ -461,7 +461,7 @@
         </div>
         <!--Order Summary-->
         <div class="col-12 col-md-5">
-          <div class="ml-2 checkoutTotal pb-4 mb-5 align-self-center col-12">
+          <div class="checkoutTotal pb-4 mb-5 align-self-center col-12">
             <h5 class="text-uppercase py-4">order summary</h5>
             <div>
               <div class="orderContent" id="style-2">
@@ -637,11 +637,13 @@ export default {
 <style lang="scss" scoped>
 .checkoutPage {
   padding-top: 120px;
+
   .checkoutForm {
     padding: 0 15px 15px 15px;
   }
   @media screen and (max-width: 768px) {
     padding-bottom: 50px;
+    padding: 0;
   }
 }
 //checkout info

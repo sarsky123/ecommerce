@@ -585,11 +585,11 @@ export default {
   mixins: [vueWindowSizeMixin],
   watch: {
     windowWidth: function() {
-      if (this.windowWidth > 960) {
+      if (this.windowWidth > 1279) {
         this.perpage = 4;
-      } else if (this.windowWidth > 576) {
+      } else if (this.windowWidth > 976) {
         this.perpage = 3;
-      } else if (this.windowWidth > 376) {
+      } else if (this.windowWidth > 576) {
         this.perpage = 2;
       } else {
         this.perpage = 1;

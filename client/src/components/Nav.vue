@@ -10,6 +10,7 @@
                   name: 'member'
                 }"
                 tag="a"
+                v-if="AuthCheck()"
                 >Manage Account</router-link
               >&nbsp; ·
               <router-link

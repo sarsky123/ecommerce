@@ -6,18 +6,17 @@
       </div>
       <div class="py-2 detail-info pb-3 mb-3">
         <b-tabs
-          content-class="mt-3 col py-3 text-light mx-auto text-center"
-          nav-link-class="text-light"
+          content-class="mt-3 col py-3 text-light mx-auto text-center "
           active-nav-item-class="font-weight-bold  bg-transparent"
           justified
         >
-          <b-tab title="PRODUCT DETAILS" title-item-class="text-light"
+          <b-tab title="PRODUCT DETAILS" title-link-class="text-light px-0"
             ><p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa
               amet temporibus in enim minima nobis.
             </p></b-tab
           >
-          <b-tab title="FABRIC & CARE" title-link-class="text-light"
+          <b-tab title="FABRIC & CARE" title-link-class="text-light px-0"
             ><p>
               FABRIC & CARE Lorem ipsum dolor sit amet consectetur adipisicing
               elit. Recusandae odit laboriosam doloribus esse illum perferendis
@@ -25,13 +24,13 @@
               nostrum hic iste? Quibusdam laboriosam doloribus vero!
             </p></b-tab
           >
-          <b-tab title="BRAND BIO" title-link-class="text-light"
+          <b-tab title="BRAND BIO" title-link-class="text-light px-0"
             ><p>
               BRAND BIO Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Quod ex reiciendis aut quaerat molestias quia.
             </p></b-tab
           >
-          <b-tab title="DELIVERY" title-link-class="text-light"
+          <b-tab title="DELIVERY" title-link-class="text-light px-0"
             ><p>
               DELIVERY Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Maxime soluta quo aliquid quas minus vero.
@@ -104,6 +103,9 @@ section {
   }
   .nav-link {
     color: white;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
     border: none !important;
     &:hover {
       border-bottom: 2px solid #ccc !important;

@@ -19,13 +19,6 @@
           <p>Please call: Lorem ipsum dolor sit amet.</p>
         </div>
         <div class="w-100"></div>
-        <div class="col">
-          <h3>Email</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
-            necessitatibus.
-          </p>
-        </div>
       </div>
       <div class="col-5">
         <h3>Post</h3>
@@ -33,6 +26,15 @@
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
           voluptate!
         </p>
+      </div>
+      <div class="col">
+        <div class="col">
+          <h3>Email</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo,
+            necessitatibus.
+          </p>
+        </div>
       </div>
     </div>
   </div>

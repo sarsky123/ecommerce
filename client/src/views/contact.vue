@@ -15,7 +15,7 @@
             :to="{
               path: '/contact-us'
             }"
-            >CUSTOMER SERVICES</router-link
+            >SERVICES</router-link
           ></b-nav-item
         >
         <b-nav-item
@@ -23,7 +23,7 @@
             :to="{
               path: '/contact-us/ourstore'
             }"
-            >OUR STORE</router-link
+            >STORE</router-link
           ></b-nav-item
         >
         <b-nav-item
@@ -39,13 +39,13 @@
             :to="{
               path: '/contact-us/privacy'
             }"
-            >PRIVACY POLICY</router-link
+            >PRIVACY</router-link
           ></b-nav-item
         >
       </b-nav>
     </div>
     <div>
-      <router-view class="col mx-auto"></router-view>
+      <router-view class="w-100 mx-auto"></router-view>
     </div>
   </div>
 </template>

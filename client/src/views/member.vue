@@ -71,7 +71,7 @@ export default {};
       cursor: pointer;
       margin-right: 10px;
       display: flex;
-      margin: 0 auto;
+      margin: 0 auto 0 0;
       flex-direction: row;
       align-items: center;
     }
@@ -83,7 +83,7 @@ export default {};
     }
     p {
       margin: 0;
-      margin-left: 5px;
+      margin-left: 10px;
     }
   }
 }
